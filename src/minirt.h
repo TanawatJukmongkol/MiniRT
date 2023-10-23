@@ -6,35 +6,64 @@
 /*   By: tjukmong <tjukmong@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:30:53 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/09/05 00:53:04 by Tanawat J.       ###   ########.fr       */
+/*   Updated: 2023/10/23 16:26:07 by Tanawat J.       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "../lib/mlx/mlx.h"
-#include "../lib/mlx/mlx_int.h"
 #include "../lib/libft/libft.h"
+#include "../include/math.h"
+#include "../include/graphics.h"
 #include <X11/X.h>
+#include <math.h>
 
-typedef struct s_canvas
+#define FIXED_BIT_FRAC 8
+
+enum t_obj
 {
-	void	*ptr;
-	void	*buff;
-	int		px_bits;
-	int		ln_bytes;
-	int		endian;
-}				t_canvas;
+	// pos, normal, FOV
+	camera,
+	// pos, brightness, color
+	point_light,
+	// pos, size (diameter), color
+	sphere,
+	// pos, normal, color
+	plane_infinite,
+	// pos, size (diameter), height
+	cylinder
+};
 
-typedef struct s_mlx
+typedef struct s_object
 {
-	char		*title;
-	void		*mlx;
-	void		*win;
-	int			width;
-	int			height;
-	t_canvas	canvas;
-}				t_mlx;
+	enum t_obj	type;
+	t_color		color;
+	t_vec3		pos;
+	t_vec3		normal;
+	t_fixed_pt	fov;
+	t_fixed_pt	size;
+	t_fixed_pt	height;
+	t_fixed_pt	brightness;
+}				t_object;
 
-int				init_canvas(t_mlx *window, char *title, int w, int h);
-void			update_canvas(t_mlx *window);
-unsigned int	rgba_to_hex(int r, int g, int b, int alpha);
-void			putpixel(t_mlx *window, int x, int y, int unsigned color);
+typedef struct s_world
+{
+	t_fixed_pt	amb_brightness;
+	t_color		ambient;
+	t_object	*objs;
+}				t_world;
+
+/*
+	t_world
+		|- amb_brightness
+		|- ambient
+		|- obj -> {
+			t_shape {type: camera, pos: t_vec3 {x,y,z}, normal: t_vec3{x,y,z}, fov: t_fixed_pt},
+			t_shape {type: point_ligh, pos: t_vec3 {x,y,z}, size: t_fixed_pt, color: t_color},
+			...,
+			NULL
+		}
+*/
+
+/*
+	GRAPHICAL PIPELINE
+	[File parsing] -< RGBA to OkLAB >-> [Render] -< OkLAB to Hex >-> [ Draw ]
+*/
+

@@ -6,7 +6,7 @@
 /*   By: tjukmong <tjukmong@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:29:43 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/09/05 01:04:16 by Tanawat J.       ###   ########.fr       */
+/*   Updated: 2023/10/23 23:32:20 by Tanawat J.       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,3 +66,4 @@ int	main(void)
 	mlx_loop(w.mlx);
 	return (0);
 }
+
