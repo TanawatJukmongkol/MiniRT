@@ -6,7 +6,7 @@
 /*   By: tjukmong <tjukmong@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:29:43 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/11/23 04:42:30 by Tanawat J.       ###   ########.fr       */
+/*   Updated: 2023/11/23 05:42:09 by Tanawat J.       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,12 @@ void	fragment_renderer(t_glob *g, int chunk_nbr, t_color frag(t_mlx *ctx, t_worl
 	h = g->mlx.height >> 5;
 	y = h * chunk_nbr;
 	h += y;
-	while (++y < h)
+	while (y < h)
 	{
 		x = 0;
 		while (x < g->mlx.width)
 		{
-			vec_set(&r.origin, vec3(0, 0, 0));
+			vec_set(&r.origin, vec3(x, y, 0));
 			vec_set(&r.direction, get_pixel_dirr(g, x, y));
 			putpixel(&g->mlx, x, y, frag(&g->mlx,
 						&g->world, r));
@@ -83,35 +83,32 @@ void	fragment_renderer(t_glob *g, int chunk_nbr, t_color frag(t_mlx *ctx, t_worl
 	}
 }
 
+// 1) color_invrt(&obj);
+// 2) color_sub(&light, obj);
+// 3) color_mult_norm(&light, normal);
+
 t_color	fragment(t_mlx *ctx, t_world *w, t_ray r)
 {
 	t_color	c_light;
+	// t_color	c_obj;
 	(void)ctx;
 	(void)w;
 	(void)r;
-	// t_color	c_obj;
-	/*
-	(void)w;
-	set_color(&c_light, rgb(255, 255, 255));
 
-	set_color(&c_obj, rgb(
-		cos((float)r.origin.x / ctx->width * PI) * 255 * ((float)r.origin.y / ctx->height),
-		sin((float)r.origin.x / ctx->width * PI) * 255 * ((float)r.origin.y / ctx->height),
-		cos((float)r.origin.x / ctx->width * PI + PI) * 255 * ((float)r.origin.y / ctx->height)
-	));
-	color_invrt(&c_obj);
-	color_sub(&c_light, c_obj);
-
-	color_mult_norm(&c_light, 0.8 + ((float)rand() / RAND_MAX) / 42);
-	*/
-
-	printf("%f\n", fixed_to_double(r.direction.y));
 	set_color(&c_light, rgb(
+		fixed_to_double(r.origin.x) / ctx->width * 255,
+		fixed_to_double(r.origin.y) / ctx->width * 255,
+		25
+	));
+
+	// printf("%f ", fixed_to_double(r.origin.x));
+	/*set_color(&c_light, rgb(
 		fixed_to_double(vec_norm(r.direction).y) * 255,
 		0,
 		0)
-	);
-	// printf("%x", rgb_to_hex(c_light));
+	);*/
+
+	printf("%08x ", rgb_to_hex(c_light));
 	return c_light;
 }
 

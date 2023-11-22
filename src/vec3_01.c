@@ -6,7 +6,7 @@
 /*   By: tjukmong <tjukmong@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:30:44 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/11/22 23:07:59 by Tanawat J.       ###   ########.fr       */
+/*   Updated: 2023/11/23 05:06:29 by Tanawat J.       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,9 @@ t_fixed_pt	q_rsqrt(t_fixed_pt num)
 
 void	vec_set(t_vec3 *dst, t_vec3 v)
 {
-	ft_memcpy(dst, &v, 3);
+	dst->x = v.x;
+	dst->y = v.y;
+	dst->z = v.z;
 }
 
 t_vec3	vec3(double x, double y, double z)

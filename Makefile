@@ -1,6 +1,6 @@
 
 NAME		= miniRT
-SRCS		= minirt.c fixed_point.c graphics.c graphics_util.c
+SRCS		= minirt.c fixed_point.c graphics.c graphics_util.c vec3_01.c
 LIBS		= mlx libft
 
 SRC_DIR		= ./src
@@ -8,7 +8,6 @@ LIB_DIR		= ./lib
 BUILD_DIR	= ./build
 
 MLX_REPO	= https://github.com/42Paris/minilibx-linux.git
-#MLX_REPO = https://github.com/Rubzy0422/minilibx.git
 
 CC			= gcc
 CFLAGS		= -g -Wall -Werror -Wextra
@@ -49,6 +48,7 @@ mlx-clean:
 	make clean -C $(LIB_DIR)/mlx
 
 mlx-remove:
+	@ rm -rf $(BUILD_DIR)
 	@ echo -e "\x1b[35;1m--[ REMOVING MLX ]--\x1b[0m"
 	rm -rf $(LIB_DIR)/mlx
 
