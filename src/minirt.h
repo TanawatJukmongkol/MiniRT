@@ -6,7 +6,7 @@
 /*   By: tjukmong <tjukmong@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:30:53 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/10/23 16:26:07 by Tanawat J.       ###   ########.fr       */
+/*   Updated: 2023/11/22 20:24:31 by Tanawat J.       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../lib/libft/libft.h"
@@ -15,9 +15,7 @@
 #include <X11/X.h>
 #include <math.h>
 
-#define FIXED_BIT_FRAC 8
-
-enum t_obj
+enum e_obj
 {
 	// pos, normal, FOV
 	camera,
@@ -33,22 +31,29 @@ enum t_obj
 
 typedef struct s_object
 {
-	enum t_obj	type;
-	t_color		color;
-	t_vec3		pos;
-	t_vec3		normal;
-	t_fixed_pt	fov;
-	t_fixed_pt	size;
-	t_fixed_pt	height;
-	t_fixed_pt	brightness;
+	enum e_obj	type;		// Object identification
+	t_color		abs_color;	// Color absorptiveness (inverted color)
+	t_vec3		pos;		// Position
+	t_fixed_pt	fov;		// Field of view
+	t_fixed_pt	size;		// Diameter (or other if have bonus)
+	t_fixed_pt	height;		// Height
+	t_fixed_pt	brightness;	// Brightness
 }				t_object;
 
 typedef struct s_world
 {
-	t_fixed_pt	amb_brightness;
-	t_color		ambient;
-	t_object	*objs;
+	t_fixed_pt	amb_brightness;	// Ambient light brightness
+	t_color		ambient;		// Ambient color
+	t_object	cam;			// Camera
+	t_object	*objs;			// Object list
+	size_t		obj_count;		// Number of ojects
 }				t_world;
+
+typedef struct s_glob
+{
+	t_mlx	mlx;
+	t_world	world;
+}				t_glob;
 
 /*
 	t_world

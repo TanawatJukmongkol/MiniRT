@@ -6,7 +6,7 @@
 /*   By: tjukmong <tjukmong@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:28:25 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/09/03 01:28:39 by tjukmong         ###   ########.fr       */
+/*   Updated: 2023/11/22 21:29:45 by Tanawat J.       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	set_null_mlx(t_mlx *window)
 	window->win = NULL;
 	window->canvas.ptr = NULL;
 	window->canvas.buff = NULL;
+	window->frame = 0;
 }
 
 int	init_canvas(t_mlx *window, char *title, int w, int h)
@@ -28,6 +29,7 @@ int	init_canvas(t_mlx *window, char *title, int w, int h)
 	window->width = w;
 	window->height = h;
 	window->mlx = mlx_init();
+	window->aspect_ratio = (double)w / h;
 	if (!window->mlx)
 		return (-1);
 	window->win = mlx_new_window(window->mlx,
@@ -46,7 +48,8 @@ int	init_canvas(t_mlx *window, char *title, int w, int h)
 	return (0);
 }
 
-void	update_canvas(t_mlx *window)
+int	update_canvas(t_mlx *window)
 {
-	mlx_put_image_to_window(window->mlx, window->win, window->canvas.ptr, 0, 0);
+	return (mlx_put_image_to_window(window->mlx, window->win, window->canvas.ptr, 0, 0));
 }
+
