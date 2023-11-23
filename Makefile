@@ -1,6 +1,6 @@
 
 NAME		= miniRT
-SRCS		= minirt.c fixed_point.c graphics.c graphics_util.c vec3_01.c
+SRCS		= minirt.c fixed_point.c graphics.c graphics_util.c vec3_01.c ft_destroy_display.c ft_loop_end.c
 LIBS		= mlx libft
 
 SRC_DIR		= ./src
@@ -10,13 +10,7 @@ BUILD_DIR	= ./build
 MLX_REPO	= https://github.com/42Paris/minilibx-linux.git
 
 CC			= gcc
-CFLAGS		= -g -Wall -Werror -Wextra
-INCLUDE_OBJ	= ${addprefix -I,${LIBS_DIR}} \
-			  -I/usr/include
-INCLUDE_SRC	= ${addprefix -L,${LIBS_DIR}} \
-			  -L/usr/lib -lXext -lX11 -lm -lz \
-			  -l:libft.a \
-			  -lmlx
+CFLAGS		= -g -Wall -Werror -Wextra 
 
 SRC			= ${addprefix ${BUILD_DIR}/,${SRCS}}
 LIBS_DIR	= ${addprefix ${LIB_DIR}/,${LIBS}}
@@ -35,6 +29,26 @@ ifeq ($(UNAME_S),Linux)
 	@ echo "Cloning MLX from official git repo..."
 	@ git clone $(MLX_REPO) $(LIB_DIR)/mlx
 	@ echo -e "\x1b[32;1m-------[ DONE ]-------\x1b[0m"
+INCLUDE_OBJ	= ${addprefix -I,${LIBS_DIR}} \
+			-I/usr/include
+INCLUDE_SRC	= ${addprefix -L,${LIBS_DIR}} \
+			-L/usr/lib -lXext -lX11 -lm -lz \
+			-lmlx -lft
+else ifeq ($(UNAME_S),Darwin)
+	@ echo -e "\x1b[35;1m--[ INSTALLING MLX ]--\x1b[0m"
+	@ echo "Downloading MLX from official CDN..."
+	@ curl https://cdn.intra.42.fr/document/document/22377/minilibx_opengl.tgz -o $(LIB_DIR)/mlx.zip
+	@ echo "Extracting MLX..."
+	@ mkdir -p $(LIB_DIR)/mlx
+	@ tar -xzvf $(LIB_DIR)/mlx.zip -C $(LIB_DIR)/mlx --strip-components 1
+	@ echo "Removing MLX zip file..."
+	@ rm $(LIB_DIR)/mlx.zip
+	@ echo -e "\x1b[32;1m-------[ DONE ]-------\x1b[0m"
+INCLUDE_OBJ	= ${addprefix -I,${LIBS_DIR}} \
+			-I/usr/include
+INCLUDE_SRC	= ${addprefix -L,${LIBS_DIR}} \
+			-framework OpenGL -framework AppKit \
+			-lmlx -lft
 else
 	@ $(error "Unsupported OS detected. (${UNAME_S})")
 endif

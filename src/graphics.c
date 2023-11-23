@@ -6,7 +6,7 @@
 /*   By: tjukmong <tjukmong@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:28:25 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/11/22 21:29:45 by Tanawat J.       ###   ########.fr       */
+/*   Updated: 2023/11/23 13:35:22 by tjukmong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,6 @@ int	init_canvas(t_mlx *window, char *title, int w, int h)
 
 int	update_canvas(t_mlx *window)
 {
-	return (mlx_put_image_to_window(window->mlx, window->win, window->canvas.ptr, 0, 0));
+	return (mlx_put_image_to_window(
+			window->mlx, window->win, window->canvas.ptr, 0, 0));
 }
-

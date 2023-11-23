@@ -6,13 +6,16 @@
 /*   By: tjukmong <tjukmong@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:30:53 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/11/22 20:24:31 by Tanawat J.       ###   ########.fr       */
+/*   Updated: 2023/11/23 15:26:20 by tjukmong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "../lib/libft/libft.h"
+
 #include "../include/math.h"
 #include "../include/graphics.h"
-#include <X11/X.h>
+#include "../include/static_def.h"
+// #include <X11/X.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include <math.h>
 
 enum e_obj
@@ -67,8 +70,6 @@ typedef struct s_glob
 		}
 */
 
-/*
-	GRAPHICAL PIPELINE
-	[File parsing] -< RGBA to OkLAB >-> [Render] -< OkLAB to Hex >-> [ Draw ]
-*/
-
+// MLX weak linking (Apple)
+int	ft_loop_end(t_glob *g);
+int	ft_destroy_display(t_glob *g);

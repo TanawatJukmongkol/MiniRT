@@ -6,7 +6,7 @@
 /*   By: tjukmong <tjukmong@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:29:43 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/11/23 05:42:09 by Tanawat J.       ###   ########.fr       */
+/*   Updated: 2023/11/23 15:27:54 by tjukmong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ t_color	fragment(t_mlx *ctx, t_world *w, t_ray r)
 		0)
 	);*/
 
-	printf("%08x ", rgb_to_hex(c_light));
+	// printf("%08x ", rgb_to_hex(c_light));
 	return c_light;
 }
 
@@ -125,12 +125,12 @@ int	ev_destroy(t_glob *g)
 {
 	if (!g->mlx.mlx)
 		exit(-1);
-	mlx_loop_end(g->mlx.mlx);
+	ft_loop_end(g);
 	if (g->mlx.canvas.ptr)
 		mlx_destroy_image(g->mlx.mlx, g->mlx.canvas.ptr);
 	if (g->mlx.win)
 		mlx_destroy_window(g->mlx.mlx, g->mlx.win);
-	mlx_destroy_display(g->mlx.mlx);
+	ft_destroy_display(g);
 	free(g->mlx.mlx);
 	exit(0);
 	return (0);
@@ -138,7 +138,7 @@ int	ev_destroy(t_glob *g)
 
 int ev_keypressed(int keycode, t_glob *g)
 {
-	if (keycode == XK_Escape)
+	if (keycode == 0)
 		ev_destroy(g);
 	return 0;
 }
@@ -153,10 +153,9 @@ int	main(void)
 	vec_set(&g.world.cam.pos, vec3(0, 0, 0));
 
 	srand(141337);
-	mlx_hook(g.mlx.win, DestroyNotify, 0L, ev_destroy, &g);
+	mlx_hook(g.mlx.win, STATIC_DESTROY, 0L, ev_destroy, &g);
 	mlx_key_hook(g.mlx.win, ev_keypressed, &g);
 	mlx_loop_hook(g.mlx.mlx, draw, &g);
 	mlx_loop(g.mlx.mlx);
 	return (0);
 }
-
