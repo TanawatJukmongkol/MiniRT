@@ -2,8 +2,9 @@
 #ifndef GRAPHICS_H
 # define GRAPHICS_H
 
+// #include <OpenGL/gl.h>
 #include "../lib/mlx/mlx.h"
-#include "../lib/mlx/mlx_int.h"
+// #include "../lib/mlx/mlx_int.h"
 #include "math.h"
 
 typedef struct s_canvas
