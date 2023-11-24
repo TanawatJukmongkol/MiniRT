@@ -6,7 +6,7 @@
 /*   By: tjukmong <tjukmong@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:29:43 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/11/23 15:27:54 by tjukmong         ###   ########.fr       */
+/*   Updated: 2023/11/24 15:19:48 by tjukmong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,48 +14,43 @@
 
 t_vec3	get_pixel_dirr(t_glob *g, int x, int y)
 {
-	double	focal = 1;
-	double	vh = 2;
-	double	vw = vh * g->mlx.aspect_ratio;
-	double	frac_w = 1.0 / g->mlx.width;
-	double	frac_h = 1.0 / g->mlx.height;
+	t_vec3	px_centr;
+	t_vec3	dirr;
+	// Viewport u, v
+	t_vec3	uv_o;
 	t_vec3	u;
 	t_vec3	v;
+	// Delta u, v
 	t_vec3	du;
 	t_vec3	dv;
-	t_vec3	upper_left;
-	t_vec3	uv0;
+	// Get scene viewport size
+	double	focal = 1.0;
+	double	vh = 1.0;
+	double	vw = vh * g->mlx.aspect_ratio;
 
+	// vec_set(&dirr, vec3(x, y, 0));
 	vec_set(&u, vec3(vw, 0, 0));
 	vec_set(&v, vec3(0, -vh, 0));
-	vec_set(&du, vec_cross(u, vec3(frac_w, frac_w, frac_w)));
-	vec_set(&dv, vec_cross(v, vec3(frac_h, frac_h, frac_h)));
-	vec_set(&upper_left,
-		vec_sub (
+	vec_set(&du, vec_mult(u, (double)1 / g->mlx.width));
+	vec_set(&dv, vec_mult(v, (double)1 / g->mlx.height));
+	vec_set(&uv_o,
+		vec_sub(
 			vec_sub(
 				vec_sub(g->world.cam.pos, vec3(0, 0, focal)),
-				vec_cross(u, vec3(0.5, 0.5, 0.5))
-			),
-			vec_cross(u, vec3(0.5, 0.5, 0.5))
-		)
-	);
-	vec_set(&uv0,
-		vec_add (upper_left,
-			vec_cross(
-				vec_add(du, dv),
-				vec3(0.5, 0.5, 0.5)
+				vec_mult(u, 0.5)
+				),
+			vec_mult(v, 0.5)
 			)
-		)
-	);
-	return vec_sub(
-		vec_add (
-			uv0, vec_add(
-				vec_cross(du, vec3(x,x,x)),
-				vec_cross(dv, vec3(y,y,y))
-			)
-		),
-		g->world.cam.pos
-	);
+		);
+	vec_set(&uv_o, vec_add(uv_o, vec_mult(vec_add(du, dv), 0.5)));
+
+	vec_set(&px_centr, vec_add(vec_add(uv_o, vec_mult(u, x)), vec_mult(v, y)));
+
+	vec_set(&dirr, vec_sub(px_centr, g->world.cam.pos));
+
+	// printf("u:%lf, v:%lf\n", fixed_to_double(px_centr.x), fixed_to_double(px_centr.y));
+
+	return dirr;
 }
 
 void	fragment_renderer(t_glob *g, int chunk_nbr, t_color frag(t_mlx *ctx, t_world *world, t_ray ray))
@@ -73,10 +68,9 @@ void	fragment_renderer(t_glob *g, int chunk_nbr, t_color frag(t_mlx *ctx, t_worl
 		x = 0;
 		while (x < g->mlx.width)
 		{
-			vec_set(&r.origin, vec3(x, y, 0));
+			vec_set(&r.origin, vec3(0, 0, 0));
 			vec_set(&r.direction, get_pixel_dirr(g, x, y));
-			putpixel(&g->mlx, x, y, frag(&g->mlx,
-						&g->world, r));
+			putpixel(&g->mlx, x, y, frag(&g->mlx, &g->world, r));
 			x++;
 		}
 		y++;
@@ -87,6 +81,21 @@ void	fragment_renderer(t_glob *g, int chunk_nbr, t_color frag(t_mlx *ctx, t_worl
 // 2) color_sub(&light, obj);
 // 3) color_mult_norm(&light, normal);
 
+int	hit_sphere(t_vec3 pos, double rad, t_ray r)
+{
+	t_vec3	oc;
+	double	a;
+	double	b;
+	double	c;
+
+	vec_set(&oc, vec_sub(r.origin, pos));
+	a = fixed_to_double(vec_dot(r.direction, r.direction));
+	b = 2.0 * fixed_to_double(vec_dot(oc, r.direction));
+	c = fixed_to_double(vec_dot(oc, oc)) - rad * rad;
+	printf("<%f,%f,%f>\n", a, b, c);
+	return (b * b - 4 * a * c >= 0);
+}
+
 t_color	fragment(t_mlx *ctx, t_world *w, t_ray r)
 {
 	t_color	c_light;
@@ -95,20 +104,19 @@ t_color	fragment(t_mlx *ctx, t_world *w, t_ray r)
 	(void)w;
 	(void)r;
 
-	set_color(&c_light, rgb(
-		fixed_to_double(r.origin.x) / ctx->width * 255,
-		fixed_to_double(r.origin.y) / ctx->width * 255,
-		25
-	));
+	if (hit_sphere(vec3(0, 0, -1), 0.5, r))
+		set_color(&c_light, rgb(255, 255, 255));
+	else
+	{
+		set_color(&c_light, rgb(
+			255 * fixed_to_double(r.direction.x)  / ctx->width,
+			-255 * fixed_to_double(r.direction.y) / ctx->height,
+			200
+		));
+	}
 
-	// printf("%f ", fixed_to_double(r.origin.x));
-	/*set_color(&c_light, rgb(
-		fixed_to_double(vec_norm(r.direction).y) * 255,
-		0,
-		0)
-	);*/
+	// printf("%f\n", 255 * fixed_to_double(r.direction.x) / 999);
 
-	// printf("%08x ", rgb_to_hex(c_light));
 	return c_light;
 }
 

@@ -6,7 +6,7 @@
 /*   By: tjukmong <tjukmong@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:30:44 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/11/23 05:06:29 by Tanawat J.       ###   ########.fr       */
+/*   Updated: 2023/11/24 14:24:04 by tjukmong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,14 +65,25 @@ t_vec3	vec_sub(t_vec3 v1, t_vec3 v2)
 	return (v);
 }
 
+t_vec3	vec_mult(t_vec3 v, double num)
+{
+	static t_vec3	prod;
+
+	prod.x = double_to_fixed(fixed_to_double(v.x) * num);
+	prod.y = double_to_fixed(fixed_to_double(v.y) * num);
+	prod.z = double_to_fixed(fixed_to_double(v.z) * num);
+	return (prod);
+}
+
 t_fixed_pt	vec_dot(t_vec3 v1, t_vec3 v2)
 {
-	static t_fixed_pt	prod;
+	double	prod;
 
-	prod += fixed_mult(v1.x, v2.x);
-	prod += fixed_mult(v1.y, v2.y);
-	prod += fixed_mult(v1.z, v2.z);
-	return (prod);
+	prod  = 0.0;
+	prod += fixed_to_double(v1.x) * fixed_to_double(v2.x);
+	prod += fixed_to_double(v1.y) * fixed_to_double(v2.y);
+	prod += fixed_to_double(v1.z) * fixed_to_double(v2.z);
+	return (double_to_fixed(prod));
 }
 
 t_vec3	vec_cross(t_vec3 v1, t_vec3 v2)
@@ -87,17 +98,16 @@ t_vec3	vec_cross(t_vec3 v1, t_vec3 v2)
 
 t_vec3	vec_norm(t_vec3 vec)
 {
-	static t_vec3	v;
+	double			x;
+	double			y;
+	double			z;
 	double			m;
 
-	m = sqrt(fixed_to_double(
-			fixed_mult(vec.x, vec.x) +
-			fixed_mult(vec.y, vec.y) +
-			fixed_mult(vec.x, vec.z)));
-	v.x /= m;
-	v.y /= m;
-	v.z /= m;
-	return (v);
+	x = fixed_to_double(vec.x);
+	y = fixed_to_double(vec.y);
+	z = fixed_to_double(vec.z);
+	m = sqrt((x * x) + (y * y) + (z * z));
+	return (vec3(x/m, y/m, z/m));
 }
 
 // Get point at t.
