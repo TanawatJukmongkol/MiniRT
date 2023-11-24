@@ -1,10 +1,5 @@
 *
 
 !include/*.h
-!lib/*/*.c
-!lib/*/*.h
-!lib/*/Makefile
-!src/*.c
-!src/*.h
-!src/Makefile
-lib/mlx
+!lib
+!src
