@@ -3,7 +3,7 @@
 # define MATH_H
 
 # ifndef FIXED_BIT_FRAC
-#  define FIXED_BIT_FRAC 16
+#  define FIXED_BIT_FRAC 18
 # endif
 
 #define PI		3.141592653

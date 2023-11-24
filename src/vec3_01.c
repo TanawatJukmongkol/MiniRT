@@ -6,7 +6,7 @@
 /*   By: tjukmong <tjukmong@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:30:44 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/11/24 14:24:04 by tjukmong         ###   ########.fr       */
+/*   Updated: 2023/11/25 04:29:16 by tjukmong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ t_vec3	vec_cross(t_vec3 v1, t_vec3 v2)
 
 t_vec3	vec_norm(t_vec3 vec)
 {
+	static t_vec3	v;
 	double			x;
 	double			y;
 	double			z;
@@ -107,7 +108,9 @@ t_vec3	vec_norm(t_vec3 vec)
 	y = fixed_to_double(vec.y);
 	z = fixed_to_double(vec.z);
 	m = sqrt((x * x) + (y * y) + (z * z));
-	return (vec3(x/m, y/m, z/m));
+
+	vec_set(&v, vec3(x / m, y / m, z / m));
+	return (v);
 }
 
 // Get point at t.
@@ -117,4 +120,3 @@ t_vec3	ray_at(t_ray ray, double t)
 	return vec_add(ray.origin, vec_cross(
 				vec3(t, t, t), ray.direction)); 
 }
-
