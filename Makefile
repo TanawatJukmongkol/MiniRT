@@ -10,7 +10,7 @@ BUILD_DIR	= ./build
 MLX_REPO	= https://github.com/42Paris/minilibx-linux.git
 
 CC			= gcc
-CFLAGS		= -g -Wall -Werror -Wextra 
+CFLAGS		= -g -Wall -Werror -Wextra
 
 SRC			= ${addprefix ${BUILD_DIR}/,${SRCS}}
 LIBS_DIR	= ${addprefix ${LIB_DIR}/,${LIBS}}
@@ -48,7 +48,7 @@ INCLUDE_OBJ	= ${addprefix -I,${LIBS_DIR}} \
 			-I/usr/include
 INCLUDE_SRC	= ${addprefix -L,${LIBS_DIR}} \
 			-framework OpenGL -framework AppKit \
-			-lmlx -lft -l:get_next_line.a
+			-lmlx -lft ${LIB_DIR}/gnl/get_next_line.a
 else
 	@ $(error "Unsupported OS detected. (${UNAME_S})")
 endif
