@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:29:43 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/11/24 14:29:35 by tsirirak         ###   ########.fr       */
+/*   Updated: 2023/11/24 15:39:30 by Tanawat J.       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,15 +194,13 @@ int check_file(int argc, char **argv)
 	}
 	check_read_file(fd);
 	close(fd);
-
+	return 1;
 }
 
 int main(int argc, char **argv)
 {
 	check_file(argc, argv);
-
-
-
+	return 0;
 }
 
 // int	main(void)

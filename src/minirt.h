@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:30:53 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/11/24 10:27:30 by tsirirak         ###   ########.fr       */
+/*   Updated: 2023/11/24 15:32:07 by Tanawat J.       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "../include/graphics.h"
 #include "../include/static_def.h"
 #include "../lib/libft/libft.h"
+#include "../lib/gnl/get_next_line.h"
 // #include <X11/X.h>
 #include <stdio.h>
 #include <stdlib.h>

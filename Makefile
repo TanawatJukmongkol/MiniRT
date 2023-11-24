@@ -1,7 +1,7 @@
 
 NAME		= miniRT
 SRCS		= minirt.c fixed_point.c graphics.c graphics_util.c vec3_01.c ft_destroy_display.c ft_loop_end.c
-LIBS		= mlx libft
+LIBS		= mlx libft gnl
 
 SRC_DIR		= ./src
 LIB_DIR		= ./lib
@@ -33,7 +33,7 @@ INCLUDE_OBJ	= ${addprefix -I,${LIBS_DIR}} \
 			-I/usr/include
 INCLUDE_SRC	= ${addprefix -L,${LIBS_DIR}} \
 			-L/usr/lib -lXext -lX11 -lm -lz \
-			-lmlx -lft
+			-lmlx -lft -l:get_next_line.a
 else ifeq ($(UNAME_S),Darwin)
 	@ echo -e "\x1b[35;1m--[ INSTALLING MLX ]--\x1b[0m"
 	@ echo "Downloading MLX from official CDN..."
@@ -48,7 +48,7 @@ INCLUDE_OBJ	= ${addprefix -I,${LIBS_DIR}} \
 			-I/usr/include
 INCLUDE_SRC	= ${addprefix -L,${LIBS_DIR}} \
 			-framework OpenGL -framework AppKit \
-			-lmlx -lft
+			-lmlx -lft -l:get_next_line.a
 else
 	@ $(error "Unsupported OS detected. (${UNAME_S})")
 endif
@@ -74,14 +74,22 @@ libft-clean:
 	@ echo -e "\x1b[35;1m--[ CLEANING LIBFT ]--\x1b[0m"
 	make clean -C $(LIB_DIR)/libft
 
+gnl:
+	@ echo -e "\x1b[35;1m--[ COMPILEING GNL ]--\x1b[0m"
+	@ make -C ${LIB_DIR}/gnl
+
+gnl-clean:
+	@ echo -e "\x1b[35;1m--[ CLEANING GNL ]--\x1b[0m"
+	make clean -C $(LIB_DIR)/gnl
+
 ${BUILD_DIR}:
-	@ make mlx libft
+	@ make mlx libft gnl
 	mkdir -p ${BUILD_DIR}
 
 ${BUILD_DIR}/%.o:${SRC_DIR}/%.c
 	$(CC) ${INCLUDE_OBJ} -c -o $@ $^ $(CFLAGS)
 
-clean: libft-clean mlx-clean
+clean: libft-clean mlx-clean gnl-clean
 	@ echo -e "\x1b[35;1m--[ CLEANING MINIRT ]--\x1b[0m"
 	rm -rf $(BUILD_DIR)
 
