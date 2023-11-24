@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tjukmong <tjukmong@student.42bangkok.co    +#+  +:+       +#+        */
+/*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:29:43 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/11/23 15:27:54 by tjukmong         ###   ########.fr       */
+/*   Updated: 2023/11/24 14:29:35 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,19 +143,81 @@ int ev_keypressed(int keycode, t_glob *g)
 	return 0;
 }
 
-int	main(void)
+int checkdot_rt(char *str)
 {
-	t_glob	g;
-
-	if (init_canvas(&g.mlx, "MiniRT", 1000, 800) < 0)
-		ev_destroy(&g);
-
-	vec_set(&g.world.cam.pos, vec3(0, 0, 0));
-
-	srand(141337);
-	mlx_hook(g.mlx.win, STATIC_DESTROY, 0L, ev_destroy, &g);
-	mlx_key_hook(g.mlx.win, ev_keypressed, &g);
-	mlx_loop_hook(g.mlx.mlx, draw, &g);
-	mlx_loop(g.mlx.mlx);
+	if (ft_strrchr(str, '.') == NULL)
+	{
+		printf("file error\n");
+		exit(1);
+	}
+	if (ft_strncmp(ft_strrchr(str, '.'), ".rt", 10))
+	{
+		printf("file error\n");
+		exit(1);
+	}
+	printf("file .rt is ok\n");
 	return (0);
 }
+
+void check_read_file(int fd)
+{
+	char *line;
+
+	line = get_next_line(fd);
+	if (line == NULL)
+	{
+		printf("file empty\n");
+		exit(0);
+	}
+}
+
+int check_file(int argc, char **argv)
+{
+	int	fd;
+
+	if (argc != 2)
+	{
+		printf ("argc error\n");
+		return (0);
+	}
+	printf("argv[1] %s\n",argv[1]);
+	if (checkdot_rt(argv[1]) != 0)
+	{
+		printf("file error\n");
+		return (0);
+	}
+	fd = open(argv[1], O_RDONLY);
+	if (fd < 0)
+	{
+		printf("file error cannot open\n");
+		return (0);
+	}
+	check_read_file(fd);
+	close(fd);
+
+}
+
+int main(int argc, char **argv)
+{
+	check_file(argc, argv);
+
+
+
+}
+
+// int	main(void)
+// {
+// 	t_glob	g;
+
+// 	if (init_canvas(&g.mlx, "MiniRT", 1000, 800) < 0)
+// 		ev_destroy(&g);
+
+// 	vec_set(&g.world.cam.pos, vec3(0, 0, 0));//
+
+// 	srand(141337);
+// 	mlx_hook(g.mlx.win, STATIC_DESTROY, 0L, ev_destroy, &g);
+// 	mlx_key_hook(g.mlx.win, ev_keypressed, &g);
+// 	// mlx_loop_hook(g.mlx.mlx, draw, &g);
+// 	mlx_loop(g.mlx.mlx);
+// 	return (0);
+// }

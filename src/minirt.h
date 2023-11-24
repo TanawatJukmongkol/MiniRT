@@ -3,20 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tjukmong <tjukmong@student.42bangkok.co    +#+  +:+       +#+        */
+/*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:30:53 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/11/23 15:26:20 by tjukmong         ###   ########.fr       */
+/*   Updated: 2023/11/24 10:27:30 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/math.h"
 #include "../include/graphics.h"
 #include "../include/static_def.h"
+#include "../lib/libft/libft.h"
 // #include <X11/X.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <fcntl.h>
 
 enum e_obj
 {
