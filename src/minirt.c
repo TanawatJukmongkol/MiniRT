@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:29:43 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/11/24 15:39:30 by Tanawat J.       ###   ########.fr       */
+/*   Updated: 2023/11/24 23:16:54 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,7 +159,31 @@ int checkdot_rt(char *str)
 	return (0);
 }
 
-void check_read_file(int fd)
+int check_comment(char *str)
+{
+	int i = 0;
+	while (str[i])
+	{
+		i++;
+		if (str[i] == '\0')
+			return (0);
+	}
+	return (1);
+}
+
+int check_element(char *)
+{
+	int i = 0;
+	while (str[i])
+	{
+		if (str[i] == '#')
+			return(0);
+		else ()
+		i++;
+	}
+}
+
+void check_file_Second(int fd)
 {
 	char *line;
 
@@ -168,6 +192,12 @@ void check_read_file(int fd)
 	{
 		printf("file empty\n");
 		exit(0);
+	}
+	while (line)
+	{
+		check_element(line);
+		line = get_next_line(fd);
+
 	}
 }
 
@@ -193,6 +223,7 @@ int check_file(int argc, char **argv)
 		return (0);
 	}
 	check_read_file(fd);
+
 	close(fd);
 	return 1;
 }
