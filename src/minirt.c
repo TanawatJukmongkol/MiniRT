@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:29:43 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/11/24 23:16:54 by tsirirak         ###   ########.fr       */
+/*   Updated: 2023/11/25 15:50:11 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,90 +143,6 @@ int ev_keypressed(int keycode, t_glob *g)
 	return 0;
 }
 
-int checkdot_rt(char *str)
-{
-	if (ft_strrchr(str, '.') == NULL)
-	{
-		printf("file error\n");
-		exit(1);
-	}
-	if (ft_strncmp(ft_strrchr(str, '.'), ".rt", 10))
-	{
-		printf("file error\n");
-		exit(1);
-	}
-	printf("file .rt is ok\n");
-	return (0);
-}
-
-int check_comment(char *str)
-{
-	int i = 0;
-	while (str[i])
-	{
-		i++;
-		if (str[i] == '\0')
-			return (0);
-	}
-	return (1);
-}
-
-int check_element(char *)
-{
-	int i = 0;
-	while (str[i])
-	{
-		if (str[i] == '#')
-			return(0);
-		else ()
-		i++;
-	}
-}
-
-void check_file_Second(int fd)
-{
-	char *line;
-
-	line = get_next_line(fd);
-	if (line == NULL)
-	{
-		printf("file empty\n");
-		exit(0);
-	}
-	while (line)
-	{
-		check_element(line);
-		line = get_next_line(fd);
-
-	}
-}
-
-int check_file(int argc, char **argv)
-{
-	int	fd;
-
-	if (argc != 2)
-	{
-		printf ("argc error\n");
-		return (0);
-	}
-	printf("argv[1] %s\n",argv[1]);
-	if (checkdot_rt(argv[1]) != 0)
-	{
-		printf("file error\n");
-		return (0);
-	}
-	fd = open(argv[1], O_RDONLY);
-	if (fd < 0)
-	{
-		printf("file error cannot open\n");
-		return (0);
-	}
-	check_read_file(fd);
-
-	close(fd);
-	return 1;
-}
 
 int main(int argc, char **argv)
 {

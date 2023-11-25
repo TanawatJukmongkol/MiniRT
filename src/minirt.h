@@ -6,10 +6,12 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:30:53 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/11/24 15:32:07 by Tanawat J.       ###   ########.fr       */
+/*   Updated: 2023/11/25 15:56:44 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef SO_LONG_H
+# define SO_LONG_H
 #include "../include/math.h"
 #include "../include/graphics.h"
 #include "../include/static_def.h"
@@ -20,6 +22,17 @@
 #include <stdlib.h>
 #include <math.h>
 #include <fcntl.h>
+
+
+typedef struct s_element
+{
+	int		a;
+	int		c;
+	int		pl;
+	int		sp;
+	int		cy;
+}				t_element;
+
 
 enum e_obj
 {
