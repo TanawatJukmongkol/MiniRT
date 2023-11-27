@@ -32,8 +32,8 @@ ifeq ($(UNAME_S),Linux)
 INCLUDE_OBJ	= ${addprefix -I,${LIBS_DIR}} \
 			-I/usr/include
 INCLUDE_SRC	= ${addprefix -L,${LIBS_DIR}} \
-			-L/usr/lib -lXext -lX11 -lm -lz \
-			-lmlx -lft
+			-lmlx -lft \
+			-L/usr/lib -lXext -lX11 -lm -lz
 else ifeq ($(UNAME_S),Darwin)
 	@ echo -e "\x1b[35;1m--[ INSTALLING MLX ]--\x1b[0m"
 	@ echo "Downloading MLX from official CDN..."

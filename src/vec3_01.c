@@ -6,7 +6,7 @@
 /*   By: tjukmong <tjukmong@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:30:44 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/11/25 04:29:16 by tjukmong         ###   ########.fr       */
+/*   Updated: 2023/11/26 14:11:16 by tjukmong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,5 @@ t_vec3	vec_norm(t_vec3 vec)
 // P(t) = A + tb
 t_vec3	ray_at(t_ray ray, double t)
 {
-	return vec_add(ray.origin, vec_cross(
-				vec3(t, t, t), ray.direction)); 
+	return (vec_add(ray.origin, vec_mult(ray.direction, t)));
 }

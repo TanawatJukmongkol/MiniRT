@@ -6,7 +6,7 @@
 /*   By: tjukmong <tjukmong@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:29:43 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/11/25 05:47:17 by tjukmong         ###   ########.fr       */
+/*   Updated: 2023/11/27 11:54:50 by tjukmong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,9 @@ t_vec3	get_pixel_dirr(t_glob *g, int x, int y)
 	t_vec3	dv;
 	// Get scene viewport size
 	double	focal = 1.0;
-	double	vh = 1.0;
+	double	vh = tan(fixed_to_double(g->world.cam.fov) * 0.5 * ONE_RAD);
 	double	vw = vh * g->mlx.aspect_ratio;
 
-	// vec_set(&dirr, vec3(x, y, 0));
 	vec_set(&u, vec3(vw, 0, 0));
 	vec_set(&v, vec3(0, -vh, 0));
 	vec_set(&du, vec_mult(u, 1.0 / g->mlx.width));
@@ -61,7 +60,7 @@ void	fragment_renderer(
 	int		h;
 	t_ray	r;
 
-	h = g->mlx.height >> 5;
+	h = g->mlx.height >> 2;
 	y = h * chunk_nbr;
 	h += y;
 	while (y < h)
@@ -69,12 +68,12 @@ void	fragment_renderer(
 		x = 0;
 		while (x < g->mlx.width)
 		{
-			vec_set(&r.origin, vec3(0, 0, 0));
+			vec_set(&r.origin, g->world.cam.pos);
 			vec_set(&r.direction, vec_norm(get_pixel_dirr(g, x, y)));
 			// Anti alias
-			vec_set(&r.direction, vec_mult(
-					r.direction, 1 - (
-						(float)rand() / RAND_MAX / 42)));
+			// vec_set(&r.direction, vec_mult(
+			// 		r.direction, 1 - (
+			// 			(float)rand() / RAND_MAX / 42)));
 			putpixel(&g->mlx, x, y, frag(&g->mlx, &g->world, r));
 			x++;
 		}
@@ -82,26 +81,23 @@ void	fragment_renderer(
 	}
 }
 
-int	hit_sphere(t_vec3 pos, double rad, t_ray r)
+double	hit_sphere(t_vec3 pos, double rad, t_ray r)
 {
-	t_vec3	r_norm;
 	t_vec3	oc;
-	double	a;
-	double	b;
-	double	c;
+	double	sq[3];
+	double	discrim;
+	double	res;
 
-	vec_set(&r_norm, vec_norm(r.direction));
 	vec_set(&oc, vec_sub(r.origin, pos));
 
-	a = fixed_to_double(vec_dot(r_norm, r_norm));
-	b = 2.0 * fixed_to_double(vec_dot(oc, r_norm));
-	c = fixed_to_double(vec_dot(oc, oc)) - rad * rad;
-	// printf("<%f,%f,%f>\n",
-	// 	fixed_to_double(r_norm.x) ,
-	// 	fixed_to_double(r_norm.y),
-	// 	fixed_to_double(r_norm.z)
-	// 	);
-	return ((b * b) - (4 * a * c) >= 0);
+	sq[0] = fixed_to_double(vec_dot(r.direction, r.direction));
+	sq[1] = 2.0 * fixed_to_double(vec_dot(oc, r.direction));
+	sq[2] = fixed_to_double(vec_dot(oc, oc)) - rad * rad;
+	discrim = (sq[1] * sq[1]) - (4 * sq[0] * sq[2]);
+	res = -sq[1] - sqrt(discrim) / (2.0 * sq[0]);
+	if (discrim >= 0 && res > 0)
+		return (res);
+	return (-1);
 }
 
 // 1) color_invrt(&obj);
@@ -112,29 +108,37 @@ t_color	fragment(t_mlx *ctx, t_world *w, t_ray r)
 {
 	t_color	c_light;
 	// t_color	c_obj;
-	(void)ctx;
-	(void)w;
-	(void)r;
+	t_vec3	normal;
+	double t, t2;
+	(void)(ctx);
+	(void)(w);
 
-	if (hit_sphere(vec3(0, 0, -1), 0.2, r))
-		set_color(&c_light, rgb(255, 255, 255));
-	else
+	t = hit_sphere(vec3(0.5, 0, -1), 0.5, r);
+	t2 = hit_sphere(vec3(-0.5, 0, -1), 0.5, r);
+	set_color(&c_light, rgb(
+		255 * fixed_to_double(r.direction.x),
+		-255 * fixed_to_double(r.direction.y),
+		0 // -255 * fixed_to_double(r.direction.z)
+	));
+	if (t != -1 && t > t2)
 	{
-		set_color(&c_light, rgb(
-			255 * fixed_to_double(r.direction.x),
-			-255 * fixed_to_double(r.direction.y),
-			80
-		));
+		vec_set(&normal, vec_norm(vec_sub(ray_at(r, t), vec3(0,0,-1))));
+		set_color(&c_light, rgb(fixed_to_double(normal.x) * 255, fixed_to_double(normal.y) * 255, fixed_to_double(normal.y) * 255));
 	}
-
+	if (t2 != -1 && t < t2)
+	{
+		vec_set(&normal, vec_norm(vec_sub(ray_at(r, t2), vec3(0,0,-1))));
+		set_color(&c_light, rgb(fixed_to_double(normal.x) * 255, fixed_to_double(normal.y) * 255, fixed_to_double(normal.y) * 255));
+	}
 	return c_light;
 }
 
 int	draw(t_glob *g)
 {
-	if (g->mlx.frame >= 32)
+	if (g->mlx.frame >= 16)
 		return (update_canvas(&g->mlx));
-	fragment_renderer(g, g->mlx.frame % 32, fragment);
+	mlx_string_put(g->mlx.mlx, g->mlx.win, 10, 10, rgb_to_hex(rgb(255,255,255)), "Loading...");
+	fragment_renderer(g, (g->mlx.frame % 7) % 4, fragment);
 	g->mlx.frame++;
 	return (update_canvas(&g->mlx));
 }
@@ -153,14 +157,30 @@ int	ev_destroy(t_glob *g)
 	exit(0);
 	return (0);
 }
- 
-#include <X11/X.h>
 
 int ev_keypressed(int keycode, t_glob *g)
 {
 	// printf("keycode: %d\n", keycode);
 	if (keycode == KEY_ESC)
 		ev_destroy(g);
+	if (keycode == KEY_A)
+		g->world.cam.pos.x -= double_to_fixed(0.1);
+	if (keycode == KEY_D)
+		g->world.cam.pos.x += double_to_fixed(0.1);
+	if (keycode == KEY_W)
+		g->world.cam.pos.y += double_to_fixed(0.1);
+	if (keycode == KEY_S)
+		g->world.cam.pos.y -= double_to_fixed(0.1);
+	if (keycode == KEY_UP)
+		g->world.cam.pos.z -= double_to_fixed(0.1);
+	if (keycode == KEY_DOWN)
+		g->world.cam.pos.z += double_to_fixed(0.1);
+	if (keycode == KEY_RIGHT)
+		g->world.cam.fov -= double_to_fixed(5);
+	if (keycode == KEY_LEFT)
+		g->world.cam.fov += double_to_fixed(5);
+	if (g->mlx.frame >= 5)
+		g->mlx.frame -= 5;
 	return 0;
 }
 
@@ -171,7 +191,8 @@ int	main(void)
 	if (init_canvas(&g.mlx, "MiniRT", 1000, 800) < 0)
 		ev_destroy(&g);
 
-	vec_set(&g.world.cam.pos, vec3(0, 0, 0));
+	g.world.cam.fov = double_to_fixed(90);
+	vec_set(&g.world.cam.pos, vec3(0, 0, 1));
 
 	srand(141337);
 	mlx_hook(g.mlx.win, STATIC_DESTROY, 0L, ev_destroy, &g);
