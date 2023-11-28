@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:30:53 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/11/25 15:56:44 by tsirirak         ###   ########.fr       */
+/*   Updated: 2023/11/26 19:15:11 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,3 +89,12 @@ typedef struct s_glob
 // MLX weak linking (Apple)
 int	ft_loop_end(t_glob *g);
 int	ft_destroy_display(t_glob *g);
+
+int check_file(int argc, char **argv);
+int check_in_file(int fd);
+int check_element(char *line);
+int check_element_second(t_element ele);
+int check_comment(char *str);
+int checkdot_rt(char *str);
+
+#endif

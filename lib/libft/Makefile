@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tjukmong <tjukmong@student.42.fr>          +#+  +:+       +#+         #
+#    By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/27 21:14:32 by tjukmong          #+#    #+#              #
-#    Updated: 2022/09/24 13:33:46 by tjukmong         ###   ########.fr        #
+#    Updated: 2023/11/28 14:01:10 by tsirirak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,8 @@ SRC			= ft_memset.c ft_bzero.c ft_memcpy.c ft_memmove.c\
 			ft_atoi.c ft_calloc.c ft_strdup.c ft_substr.c\
 			ft_strjoin.c ft_strtrim.c ft_split.c ft_itoa.c\
 			ft_strmapi.c ft_putchar_fd.c ft_putstr_fd.c\
-			ft_putendl_fd.c ft_putnbr_fd.c ft_striteri.c
+			ft_putendl_fd.c ft_putnbr_fd.c ft_striteri.c\
+			ft_split_space.c
 
 BONUS	= ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsize_bonus.c\
 			ft_lstlast_bonus.c ft_lstadd_back_bonus.c ft_lstdelone_bonus.c\
