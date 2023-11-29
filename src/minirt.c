@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:29:43 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/11/25 15:50:11 by tsirirak         ###   ########.fr       */
+/*   Updated: 2023/11/29 16:34:50 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,8 @@ int ev_keypressed(int keycode, t_glob *g)
 
 int main(int argc, char **argv)
 {
-	check_file(argc, argv);
+	if (check_file(argc, argv) == 0)
+		return (0);
 	return 0;
 }
 

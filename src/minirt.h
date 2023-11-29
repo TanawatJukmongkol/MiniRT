@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:30:53 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/11/26 19:15:11 by tsirirak         ###   ########.fr       */
+/*   Updated: 2023/11/29 23:15:16 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,10 @@ int	ft_destroy_display(t_glob *g);
 
 int check_file(int argc, char **argv);
 int check_in_file(int fd);
-int check_element(char *line);
-int check_element_second(t_element ele);
+int check_element(char *line, t_element *ele);
+int check_element_a(char *line, int num_a);
 int check_comment(char *str);
 int checkdot_rt(char *str);
+int check_float(char *line);
 
 #endif
