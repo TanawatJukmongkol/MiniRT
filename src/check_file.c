@@ -222,6 +222,7 @@ int check_element(char *line, t_element *ele)
 		else if (*line == '\t' || *line == ' ' || *line == '\n')
 			line++;
 		else{
+			// printf("meow\n\n\n");
 			return (0);//ตัวอื่นๆที่ไม่ใช่ element หรือ space ให้ออกหมด จบโปรแกรม
 		}
 	}
@@ -251,12 +252,17 @@ int check_in_file(int fd)
 			free(line);
 			line = get_next_line(fd);
 		}
-		if (check_element(line, &ele) == 0) //ถ้าไม่มีตัวไหนเลยหรือมีเกิน ให้จบโปรแกรมไปเลย
+
+		if (check_element(line, &ele) == 0)
+		{ //ถ้าไม่มีตัวไหนเลยหรือมีเกิน ให้จบโปรแกรมไปเลย
+	printf("sdfsdfdsnjonierubnkj vsdfn\n");
 			return (0);
+		}
 		free(line);
 		line = get_next_line(fd);
 
 	}
+	free(line);
 	return (1);
 }
 
@@ -280,6 +286,8 @@ int check_file(int argc, char **argv)
 		printf("File error cannot open\n");
 		return (0);
 	}
+	// printf("sdciueidhuids  %d\n",check_in_file(fd));
+	// printf("sdciueidhuids  %d\n",check_in_file(fd));
 	if (check_in_file(fd) == 0)//ใส่้ใน ข้อมูล
 	{
 		printf("In file error\n");
