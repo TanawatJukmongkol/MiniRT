@@ -66,6 +66,65 @@ int check_float(char *line)
 	return (0);
 }
 
+double	ft_atof_dot(const char *nptr, double nbr)
+{
+	double	dot;
+
+	dot = 0.1;
+	while (*nptr && *nptr >= '0' && *nptr <= '9')
+	{
+		nbr = nbr + dot * (*nptr - '0');
+		dot = dot/10;
+		nptr++;
+	}
+	return (nbr);
+}
+
+double	ft_atof(const char *nptr)
+{
+	double	nbr;
+	double	sign;
+
+	nbr = 0;
+	sign = 1;
+	while (*nptr == ' ' || (*nptr >= '\a' && *nptr <= '\r'))
+		nptr++;
+	if (*nptr == '-')
+	{
+		sign = -1;
+		nptr++;
+	}
+	else if (*nptr == '+')
+		nptr++;
+	while (*nptr)
+	{
+		if (*nptr >= '0' && *nptr <= '9')
+			nbr = (nbr * 10) + (*nptr - '0');
+		else
+			break ;
+		nptr++;
+	}
+	if (*nptr == '.')
+	{
+		nptr++;
+		nbr = ft_atof_dot(nptr, nbr);
+	}
+	return (sign * nbr);
+}
+
+int check_int(char *str)
+{
+	int i = 0;
+
+	while (str[i])
+	{
+		if (str[i] <= 0 || str[i] >= 9)
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 int check_spiltrgb(char *line)
 {
 	char **rgb;
@@ -108,7 +167,6 @@ int check_element_a(char *line, int num_a)
 	}
 	while (*line == ' ' || *line == '\t')
 	{
-		printf("Hello,\n");
 		line++;
 	}
 	if (*line >= '0' && *line <= '9')
@@ -134,6 +192,7 @@ int check_element(char *line, t_element *ele)
 			{
 				return (0);
 			}
+			break;
 		}
         // else if (*line == 'C')
         // {

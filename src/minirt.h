@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:30:53 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/11/29 23:15:16 by tsirirak         ###   ########.fr       */
+/*   Updated: 2023/12/04 22:26:42 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,5 +97,7 @@ int check_element_a(char *line, int num_a);
 int check_comment(char *str);
 int checkdot_rt(char *str);
 int check_float(char *line);
+double	ft_atof(const char *nptr);
+double	ft_atof_dot(const char *nptr, double nbr);
 
 #endif
