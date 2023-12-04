@@ -59,11 +59,9 @@ int check_float(char *line)
 		line++;
 		i++;
 	}
-	if (*line == ' ' || *line == '\t' || *line == '\n' || *line  == '\0')
-	{
-		return (i);
-	}
-	return (0);
+	if (dot == 0)
+		return (0);
+	return (i);
 }
 
 double	ft_atof_dot(const char *nptr, double nbr)
@@ -133,13 +131,14 @@ int check_spiltrgb(char *line)
 	rgb = ft_split(line, ',');
 	while (rgb[i])
 	{
-		if (check_float(rgb[i]) == 0)
+		if (check_float(rgb[i]) != 0)
 		{
+			printf("check_float\n");
 			return (0);
 		}
 		if (ft_atoi(rgb[i]) < 0 || ft_atoi(rgb[i]) > 255)
 		{
-			printf("atoi\n");
+			printf("check_0-255\n");
 			return (0);
 		}
 		i++;
@@ -164,13 +163,10 @@ int check_element_a(char *line, int num_a)
 			return (0);
 		}
 		line = line + check_float(line);
-	}
-	while (*line == ' ' || *line == '\t')
-	{
-		line++;
-	}
-	if (*line >= '0' && *line <= '9')
-	{
+		while (*line == ' ' || *line == '\t')
+		{
+			line++;
+		}
 		if (check_spiltrgb(line) == 1)
 		{
 			return (1);
@@ -188,9 +184,9 @@ int check_element(char *line, t_element *ele)
 		{
 			ele->a++;
 			line++;
-			if (check_element_a(line, ele->a) == 0)
+			if (check_element_a(line, ele->a) == 1)
 			{
-				return (0);
+				return (1);
 			}
 			break;
 		}
