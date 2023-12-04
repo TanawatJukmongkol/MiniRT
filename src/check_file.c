@@ -74,8 +74,20 @@ int check_spiltrgb(char *line)
 	rgb = ft_split(line, ',');
 	while (rgb[i])
 	{
-		printf("rgb[%d] = %s\n",i ,rgb[i]);
+		if (check_float(rgb[i]) == 0)
+		{
+			return (0);
+		}
+		if (ft_atoi(rgb[i]) < 0 || ft_atoi(rgb[i]) > 255)
+		{
+			printf("atoi\n");
+			return (0);
+		}
 		i++;
+	}
+	if (i == 3)
+	{
+		return (1);
 	}
 	return (0);
 }
@@ -89,19 +101,24 @@ int check_element_a(char *line, int num_a)
 	{
 		if (check_float(line) == 0)
 		{
+			printf("check_float in check_element_a\n");
 			return (0);
 		}
 		line = line + check_float(line);
 	}
-	printf("*line = %c  ทำไมตรงนี้ไม่ขยับตาม line ใน check_float ที่โดน ++ ไป\n", *line);
 	while (*line == ' ' || *line == '\t')
 	{
 		printf("Hello,\n");
 		line++;
 	}
 	if (*line >= '0' && *line <= '9')
-		check_spiltrgb(line);
-	return 1;
+	{
+		if (check_spiltrgb(line) == 1)
+		{
+			return (1);
+		}
+	}
+	return (0);
 }
 
 int check_element(char *line, t_element *ele)
