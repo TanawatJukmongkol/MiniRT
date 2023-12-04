@@ -29,31 +29,6 @@ int check_comment(char *str)
 	return (0);
 }
 
-int check_float(char *line)
-{
-	int dot = 0;
-	while ((*line >= '0' && *line <= '9') || *line == '.')
-	{
-		if (*line == '.')
-		{
-			dot++;
-			if (dot >= 2)
-			{
-				printf("dot---- \n");
-				return (0);
-			}
-		}
-		printf("*line_incheck_float = %c\n", *line);
-		line++;
-	}
-	if (*line == ' ' || *line == '\t' || *line == '\n' || *line  == '\0')
-	{
-		printf("****line_incheck_float = %c\n", *line);
-		return (1);
-	}
-	return (0);
-}
-
 int count_split(char **str)
 {
 	int  i = 0;
@@ -65,22 +40,67 @@ int count_split(char **str)
 	return (i);
 }
 
+int check_float(char *line)
+{
+	int dot = 0;
+	int i = 0;
+
+	while ((*line >= '0' && *line <= '9') || *line == '.')
+	{
+		if (*line == '.')
+		{
+			dot++;
+			if (dot >= 2)
+			{
+				printf("dot---- \n");
+				return (0);
+			}
+		}
+		line++;
+		i++;
+	}
+	if (*line == ' ' || *line == '\t' || *line == '\n' || *line  == '\0')
+	{
+		return (i);
+	}
+	return (0);
+}
+
+int check_spiltrgb(char *line)
+{
+	char **rgb;
+	int i = 0;
+
+	rgb = ft_split(line, ',');
+	while (rgb[i])
+	{
+		printf("rgb[%d] = %s\n",i ,rgb[i]);
+		i++;
+	}
+	return (0);
+}
+
+
 int check_element_a(char *line, int num_a)
 {
-
 	while (*line == ' ' || *line == '\t')
 		line++;
-	if ((*line >= '0' || *line <= '9') && num_a <= 1)
+	if ((*line >= '0' && *line <= '9') && num_a <= 1)
 	{
 		if (check_float(line) == 0)
 		{
 			return (0);
 		}
+		line = line + check_float(line);
 	}
 	printf("*line = %c  ทำไมตรงนี้ไม่ขยับตาม line ใน check_float ที่โดน ++ ไป\n", *line);
 	while (*line == ' ' || *line == '\t')
+	{
+		printf("Hello,\n");
 		line++;
-	ft_split(line, ',');
+	}
+	if (*line >= '0' && *line <= '9')
+		check_spiltrgb(line);
 	return 1;
 }
 
@@ -89,7 +109,6 @@ int check_element(char *line, t_element *ele)
 
 	while (*line != '\0' && *line != '\n')
 	{
-		printf("line === %s\n",line);
         if (*line == 'A' && ele->a == 0)
 		{
 			ele->a++;
