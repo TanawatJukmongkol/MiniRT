@@ -175,12 +175,12 @@ int check_element_a(char *line, int num_a)
 	return (0);
 }
 
-int check_element(char *line, t_element *ele)
+int check_element(char *line, t_element *ele) //เช็คบรรทัด
 {
 
 	while (*line != '\0' && *line != '\n')
 	{
-        if (*line == 'A' && ele->a == 0)
+        if (*line == 'A')
 		{
 			ele->a++;
 			line++;
@@ -245,7 +245,7 @@ int check_in_file(int fd)
 		printf("file empty\n");
 		return(0);
 	}
-	while (line)
+	while (line) //วนเช็คในทุกบรรทัด
 	{
 		if ((check_comment(line) == 1))//เป็นคอมเม้น ไปบรรทัดใหม่
 		{
@@ -255,7 +255,6 @@ int check_in_file(int fd)
 
 		if (check_element(line, &ele) == 0)
 		{ //ถ้าไม่มีตัวไหนเลยหรือมีเกิน ให้จบโปรแกรมไปเลย
-	printf("sdfsdfdsnjonierubnkj vsdfn\n");
 			return (0);
 		}
 		free(line);
