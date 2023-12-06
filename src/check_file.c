@@ -45,7 +45,7 @@ int check_float(char *line)
 	int dot = 0;
 	int i = 0;
 
-	while ((*line >= '0' && *line <= '9') || *line == '.')
+	while ((*line >= '0' && *line <= '9') || *line == '.' || *line == '\0')
 	{
 		if (*line == '.')
 		{
@@ -56,12 +56,14 @@ int check_float(char *line)
 				return (0);
 			}
 		}
+		else if (*line == '\0')
+			return (1);
 		line++;
 		i++;
 	}
 	if (dot == 0)
 		return (0);
-	return (i);
+	return (0);
 }
 
 double	ft_atof_dot(const char *nptr, double nbr)
@@ -110,32 +112,129 @@ double	ft_atof(const char *nptr)
 	return (sign * nbr);
 }
 
+
 int check_int(char *str)
 {
 	int i = 0;
 
 	while (str[i])
 	{
-		if (str[i] <= 0 || str[i] >= 9)
+		if (str[i] < '0' || str[i] > '9')
 			return (0);
 		i++;
 	}
 	return (1);
 }
 
+int count_dot(char *str)
+{
+	int i = 0;
+	int dot = 0;
+
+	while (str[i])
+	{
+		if (str[i] == '.')
+			dot++;
+		i++;
+	}
+	return (dot);
+}
+
+int count_minus(char *str)
+{
+	int i = 0;
+	int minus = 0;
+
+	while (str[i])
+	{
+		if (str[i] == '-')
+			minus++;
+		i++;
+	}
+	return (minus);
+}
+int count_comma(char *str)
+{
+	int i = 0;
+	int comma = 0;
+
+	while (str[i])
+	{
+		if (str[i] == ',')
+			comma++;
+		i++;
+	}
+	return (comma);
+}
+
+int check_number(char *str)
+{
+	int i = 0;
+	int n = 1;
+	int dot = 0;
+
+	if (count_minus(str) >= 2 || count_dot(str) >= 2 || str[0] == '.' || str[ft_strlen(str) - 1] == '.')
+			return (0);
+	else if (str[0] == '-')
+	{
+		i = 1;
+		while (str[i])
+		{
+			if ((str[i] >= '0' && str[i] <= '9') || str[i] == '.')
+				i++;
+			else
+				return (0);
+		}
+		if (i <= 1)
+			return (0);
+		return (1);
+	}
+	else if (check_int(str) == 1 || check_float(str) == 1)
+	{
+		printf("check int float = %d -> str = %s\n", check_float(str), str);
+			// printf("str = %d\n", check_float(str));
+		return (1);
+	}
+
+	return (0);
+
+}
+
+int	check_spiltxyz(char *line)
+{
+	char **xyz;
+	int i = 0;
+	int j;
+
+	xyz = ft_split(line, ',');
+	if (count_comma(line) > 2)
+		return (0);
+	while (xyz[i])
+	{
+		if (check_number(xyz[i]) == 0)
+		{
+			return (0);
+		}
+		i++;
+	}
+	if (i == 3)
+		return (1);
+	return (0);
+}
+
+
 int check_spiltrgb(char *line)
 {
 	char **rgb;
 	int i = 0;
 
+	if (count_comma(line) >= 3)
+		return (0);
 	rgb = ft_split(line, ',');
 	while (rgb[i])
 	{
-		if (check_float(rgb[i]) != 0)
-		{
-			printf("check_float\n");
+		if (check_int(rgb[i]) == 0)
 			return (0);
-		}
 		if (ft_atoi(rgb[i]) < 0 || ft_atoi(rgb[i]) > 255)
 		{
 			printf("check_0-255\n");
@@ -222,7 +321,7 @@ int check_element(char *line, t_element *ele) //เช็คบรรทัด
 		else if (*line == '\t' || *line == ' ' || *line == '\n')
 			line++;
 		else{
-			// printf("meow\n\n\n");
+			printf("\n\n\nmeow\n\n\n");
 			return (0);//ตัวอื่นๆที่ไม่ใช่ element หรือ space ให้ออกหมด จบโปรแกรม
 		}
 	}
@@ -285,8 +384,7 @@ int check_file(int argc, char **argv)
 		printf("File error cannot open\n");
 		return (0);
 	}
-	// printf("sdciueidhuids  %d\n",check_in_file(fd));
-	// printf("sdciueidhuids  %d\n",check_in_file(fd));
+	printf("check_splitexyz = %d\n", check_spiltxyz(""));
 	if (check_in_file(fd) == 0)//ใส่้ใน ข้อมูล
 	{
 		printf("In file error\n");
