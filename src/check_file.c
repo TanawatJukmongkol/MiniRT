@@ -45,7 +45,7 @@ int check_float(char *line)
 	int dot = 0;
 	int i = 0;
 
-	while ((*line >= '0' && *line <= '9') || *line == '.' || *line == '\0')
+	while ((*line >= '0' && *line <= '9') || *line == '.' || *line == '\0' || *line == ' ')
 	{
 		if (*line == '.')
 		{
@@ -56,8 +56,8 @@ int check_float(char *line)
 				return (0);
 			}
 		}
-		else if (*line == '\0')
-			return (1);
+		else if (*line == '\0' || *line == ' ')
+			return (i);
 		line++;
 		i++;
 	}
@@ -112,19 +112,30 @@ double	ft_atof(const char *nptr)
 	return (sign * nbr);
 }
 
-
 int check_int(char *str)
 {
 	int i = 0;
-
-	while (str[i])
+	while ((str[i] >= '0' && str[i] <= '9'))
 	{
-		if (str[i] < '0' || str[i] > '9')
-			return (0);
 		i++;
 	}
-	return (1);
+	if ((str[i] >= 9 && str[i] <= 13) || str[i] == 32 || str[i] == '\0')
+	{
+		return (1);
+	printf("\n\nHello\n\n");
+	}
+	return (0);
 }
+
+
+// int check_int(char *str)
+// {
+// 	// int i = 0;
+// 	printf("str = %s\n",str);
+// 	printf("strlen = %zu\n", ft_strlen(str));
+// 	// while (str[i] >= '0' && str[i] <= '9')
+// 	return (1);
+// }
 
 int count_dot(char *str)
 {
@@ -170,8 +181,7 @@ int count_comma(char *str)
 int check_number(char *str)
 {
 	int i = 0;
-	int n = 1;
-	int dot = 0;
+
 
 	if (count_minus(str) >= 2 || count_dot(str) >= 2 || str[0] == '.' || str[ft_strlen(str) - 1] == '.')
 			return (0);
@@ -204,7 +214,6 @@ int	check_spiltxyz(char *line)
 {
 	char **xyz;
 	int i = 0;
-	int j;
 
 	xyz = ft_split(line, ',');
 	if (count_comma(line) > 2)
@@ -233,8 +242,14 @@ int check_spiltrgb(char *line)
 	rgb = ft_split(line, ',');
 	while (rgb[i])
 	{
-		if (check_int(rgb[i]) == 0)
+	printf("rgb[i] = %s\n",rgb[i]);
+		if (check_int(rgb[i]) == 0) //221 ไม่ผ่านตรงนี้
+		{
+			printf("line = %s\n", line);
+			printf("rgb = %s\n",rgb[i]);
+			printf("return (0) check_splitrgb\n");
 			return (0);
+		}
 		if (ft_atoi(rgb[i]) < 0 || ft_atoi(rgb[i]) > 255)
 		{
 			printf("check_0-255\n");
@@ -249,30 +264,39 @@ int check_spiltrgb(char *line)
 	return (0);
 }
 
-
 int check_element_a(char *line, int num_a)
 {
-	while (*line == ' ' || *line == '\t')
-		line++;
-	if ((*line >= '0' && *line <= '9') && num_a <= 1)
-	{
-		if (check_float(line) == 0)
-		{
-			printf("check_float in check_element_a\n");
-			return (0);
-		}
-		line = line + check_float(line);
-		while (*line == ' ' || *line == '\t')
-		{
-			line++;
-		}
-		if (check_spiltrgb(line) == 1)
-		{
-			return (1);
-		}
-	}
-	return (0);
+	while ((str[i] >= 9 && str[i] <= 13) || str[i] == 32 || str[i] == '\0')
+		return (0);
 }
+
+// int check_element_a(char *line, int num_a)
+// {
+// 	while (*line == ' ' || *line == '\t')
+// 		line++;
+
+// 	if ((*line >= '0' && *line <= '9') && num_a <= 1)
+// 	{
+// 		if (check_float(line) == 0)
+// 		{
+// 			printf("check_float in check_element_a\n");
+// 			return (0);
+// 		}
+// 		line = line + check_float(line);
+// 		while (*line == ' ' || *line == '\t')
+// 		{
+// 			line++;
+// 		}
+// 		if (check_spiltrgb(line) == 1) //ไม่ผ่านตรงนี้
+// 		{
+// 		// printf("line = %s\n", line);
+
+// 		printf("return (1) in check_element_a \n");
+// 			return (1);
+// 		}
+// 	}
+// 	return (0);
+// }
 
 int check_element(char *line, t_element *ele) //เช็คบรรทัด
 {
@@ -285,42 +309,16 @@ int check_element(char *line, t_element *ele) //เช็คบรรทัด
 			line++;
 			if (check_element_a(line, ele->a) == 1)
 			{
+
 				return (1);
 			}
-			break;
+						printf("reutrn (0) in check_element \n");
+			return (0);
 		}
-        // else if (*line == 'C')
-        // {
-		// 	ele.a++;
-		// 	line++;
-		// 	if (check_element_a(line, ele.a) == 0)
-		// 		return (0);
-		// }
-        // else if (*line == 'p' && *(line + 1) == 'l')
-        // {
-		// 	ele.a++;
-		// 	line++;
-		// 	if (check_element_a(line, ele.a) == 0)
-		// 		return (0);
-		// }
-        // else if (*line == 's' && *(line + 1) == 'p')
-        // {
-		// 	ele.a++;
-		// 	line++;
-		// 	if (check_element_a(line, ele.a) == 0)
-		// 		return (0);
-		// }
-        // else if (*line == 'c' && *(line + 1) == 'y')
-        // {
-		// 	ele.a++;
-		// 	line++;
-		// 	if (check_element_a(line, ele.a) == 0)
-		// 		return (0);
-		// }
-
-		else if (*line == '\t' || *line == ' ' || *line == '\n')
+		else if (*line == '\t' || *line == ' ')
 			line++;
-		else{
+		if (*line == '\0' || *line == '\n')
+		{
 			printf("\n\n\nmeow\n\n\n");
 			return (0);//ตัวอื่นๆที่ไม่ใช่ element หรือ space ให้ออกหมด จบโปรแกรม
 		}
@@ -384,7 +382,6 @@ int check_file(int argc, char **argv)
 		printf("File error cannot open\n");
 		return (0);
 	}
-	printf("check_splitexyz = %d\n", check_spiltxyz(""));
 	if (check_in_file(fd) == 0)//ใส่้ใน ข้อมูล
 	{
 		printf("In file error\n");
