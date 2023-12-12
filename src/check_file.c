@@ -315,16 +315,15 @@ int check_element_a(char *line, int num_a)
 	str = ft_split_space(line);
 	while (str[i])
 		i++;
-	// printf("i = %d\n",i);
-	// printf("str[i] = %s\n",str[i]);
-	if ((i == 3 && str[2] == NULL) && i >= 3)
-			return (0);
-	if ((ft_atof(str[0]) < 0 || ft_atof(str[0]) > 1) || check_float(str[0]) == 0)
+	if ((i == 3 && ft_isalnum(str[2][0]) != 0))
+		return (0);
+	else if (i > 3)
+		return (0);
+	else if ((ft_atof(str[0]) < 0 || ft_atof(str[0]) > 1) || check_float(str[0]) == 0)
 		return (0);
 	else if (check_spiltrgb(str[1]) == 0)
 		return (0);
 	return (1);
-
 }
 int check_element_c(char *line, int num_c)
 {
@@ -333,25 +332,120 @@ int check_element_c(char *line, int num_c)
 	int i = 0;
 
 	str = ft_split_space(line);
-	while (str[i]){
-		printf("i = %d str = %s\n",i,str[i]);
+	while (str[i])
 		i++;
-		}
-	if (i != 3)
+	if ((i == 4 && ft_isalnum(str[3][0]) != 0))
+		return (0);
+	else if (i > 4)
 		return (0);
 	if (check_spiltxyz(str[0]) == 0)
-		return (0);
+	{printf("if\n");
+		return (0);}
 	else if (check_spiltxyz_3d(str[1]) == 0)
-		return (0);
+	{printf("else if1\n");
+		return (0);}
 	else if (check_int(str[2]) == 0 || ft_atoi(str[2]) < 0 || ft_atoi(str[2]) > 180)
-	{
+	{printf("else if2\n");
 			return (0);
 	}
+		printf("Hello\n");
 	return (1);
 
 }
 
-int check_element(char *line, t_element *ele) //เช็คบรรทัด
+int check_element_l(char *line, int num_l)
+{
+	(void) num_l;
+	char **str;
+	int i = 0;
+
+	str = ft_split_space(line);
+	while (str[i])
+		i++;
+	if ((i == 3 && ft_isalnum(str[2][0]) != 0))
+		return (0);
+	else if (i > 3)
+		return (0);
+	else if (check_spiltxyz(str[0]) == 0)
+		return (0);
+	else if ((ft_atof(str[1]) < 0 || ft_atof(str[1]) > 1) || check_float(str[1]) == 0)
+		return (0);
+	else if (check_spiltrgb(str[2]) == 0)
+		return (0);
+	return (1);
+}
+
+int check_element_sp(char *line, int num_sp)
+{
+	(void) num_sp;
+	char **str;
+	int i = 0;
+
+	str = ft_split_space(line);
+	while (str[i])
+		i++;
+	if ((i == 3 && ft_isalnum(str[2][0]) != 0))
+		return (0);
+	else if (i > 3)
+		return (0);
+	else if (check_spiltxyz(str[0]) == 0)
+		return (0);
+	else if (check_float(str[1]) == 0)
+		return (0);
+	else if (check_spiltrgb(str[2]) == 0)
+		return (0);
+	return (1);
+}
+
+int check_element_pl(char *line, int num_pl)
+{
+	(void) num_pl;
+	char **str;
+	int i = 0;
+
+	str = ft_split_space(line);
+	while (str[i])
+		i++;
+	if ((i == 3 && ft_isalnum(str[2][0]) != 0))
+		return (0);
+	else if (i > 3)
+		return (0);
+	else if (check_spiltxyz(str[0]) == 0)
+		return (0);
+	else if (check_spiltxyz_3d(str[1]) == 0)
+		return (0);
+	else if (check_spiltrgb(str[2]) == 0)
+		return (0);
+	return (1);
+}
+
+int check_element_cy(char *line, int num_cy)
+{
+	(void) num_cy;
+	char **str;
+	int i = 0;
+
+	str = ft_split_space(line);
+	while (str[i])
+		i++;
+	if ((i == 5 && ft_isalnum(str[4][0]) != 0))
+		return (0);
+	else if (i > 5)
+		return (0);
+	else if (check_spiltxyz(str[0]) == 0)
+		return (0);
+	else if (check_spiltxyz_3d(str[1]) == 0)
+		return (0);
+	else if (check_float(str[2]) == 0)
+		return (0);
+	else if (check_float(str[3]) == 0)
+		return (0);
+	else if (check_spiltrgb(str[4]) == 0)
+		return (0);
+	return (1);
+}
+
+int check_element(char *line, t_element *ele) //เช็คบรรทัดz
 {
 
 	while (*line != '\0' && *line != '\n')
@@ -361,11 +455,17 @@ int check_element(char *line, t_element *ele) //เช็คบรรทัด
 			ele->a++;
 			line++;
 			if (check_element_a(line, ele->a) == 1)
-			{
-
 				return (1);
-			}
-						printf("reutrn (0) in check_element \n");
+			printf("return (0) int check_element -> C\n");
+			return (0);
+		}
+		else if (*line == 'C')
+		{
+			ele->c++;
+			line++;
+			if (check_element_c(line, ele->c) == 1)
+				return (1);
+			printf("return (0) int check_element -> C\n");
 			return (0);
 		}
 		else if (*line == '\t' || *line == ' ')
@@ -376,7 +476,8 @@ int check_element(char *line, t_element *ele) //เช็คบรรทัด
 			return (0);//ตัวอื่นๆที่ไม่ใช่ element หรือ space ให้ออกหมด จบโปรแกรม
 		}
 	}
-	return (1);
+	printf("return (0) in check_element\n");
+	return (0);
 }
 
 int check_in_file(int fd)
@@ -397,6 +498,7 @@ int check_in_file(int fd)
 	}
 	while (line) //วนเช็คในทุกบรรทัด
 	{
+		printf("line ==== %s\n",line);
 		if ((check_comment(line) == 1))//เป็นคอมเม้น ไปบรรทัดใหม่
 		{
 			free(line);
@@ -405,6 +507,7 @@ int check_in_file(int fd)
 
 		if (check_element(line, &ele) == 0)
 		{ //ถ้าไม่มีตัวไหนเลยหรือมีเกิน ให้จบโปรแกรมไปเลย
+			printf("if check_element in check_in_file\n");
 			return (0);
 		}
 		free(line);
