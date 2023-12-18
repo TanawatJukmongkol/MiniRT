@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:30:53 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/12/04 22:26:42 by tsirirak         ###   ########.fr       */
+/*   Updated: 2023/12/13 02:23:44 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_element
 {
 	int		a;
 	int		c;
+	int		l;
 	int		pl;
 	int		sp;
 	int		cy;
