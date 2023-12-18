@@ -13,7 +13,6 @@ int checkdot_rt(char *str)
 		printf("file error\n");
 		exit(1);
 	}
-	printf("file .rt is ok\n");
 	return (0);
 }
 
@@ -36,7 +35,6 @@ int count_split(char **str)
 	{
 		i++;
 	}
-	printf("len_split = %d\n",i);
 	return (i);
 }
 
@@ -97,7 +95,6 @@ int check_int(char *str)
 	if ((str[i] >= 9 && str[i] <= 13) || str[i] == 32 || str[i] == '\0')
 	{
 		return (1);
-	printf("\n\nHello\n\n");
 	}
 	return (0);
 }
@@ -198,7 +195,6 @@ int check_number(char *str)
 {
 	int i = 0;
 
-
 	if (count_minus(str) >= 2 || count_dot(str) >= 2 || str[0] == '.' || str[ft_strlen(str) - 1] == '.')
 			return (0);
 	else if (str[0] == '-')
@@ -212,16 +208,17 @@ int check_number(char *str)
 				return (0);
 		}
 		if (i <= 1)
+		{
 			return (0);
+		}
 		return (1);
 	}
 	else if (check_int(str) == 1 || check_float(str) == 1)
 	{
-			// printf("str = %d\n", check_float(str));
 		return (1);
 	}
 
-	return (0);
+	return (1);
 
 }
 
@@ -256,6 +253,7 @@ int	check_spiltxyz_3d(char *line)
 		return (0);
 	while (xyz[i])
 	{
+			printf("number  =  %s\n",xyz[i]);
 		if (check_number(xyz[i]) == 0)
 		{
 			return (0);
@@ -308,8 +306,12 @@ int check_element_a(char *line, int num_a)
 	int i = 0;
 
 	str = ft_split_space(line);
+	printf("a\n");
 	while (str[i])
+	{
+		printf("str = %s\n", str[i]);
 		i++;
+	}
 	if ((i == 3 && ft_isalnum(str[2][0]) != 0))
 		return (0);
 	else if (i > 3)
@@ -327,8 +329,12 @@ int check_element_c(char *line, int num_c)
 	int i = 0;
 
 	str = ft_split_space(line);
+	printf("c\n");
 	while (str[i])
+	{
+		printf("str = %s\n", str[i]);
 		i++;
+	}
 	if ((i == 4 && ft_isalnum(str[3][0]) != 0))
 		return (0);
 	else if (i > 4)
@@ -345,27 +351,28 @@ int check_element_c(char *line, int num_c)
 
 }
 
-int check_element_l(char *line, int num_l)
-{
-	(void) num_l;
-	char **str;
-	int i = 0;
+// int check_element_l(char *line, int num_l)
+// {
+// 	(void) num_l;
+// 	char **str;
+// 	int i = 0;
 
-	str = ft_split_space(line);
-	while (str[i])
-		i++;
-	if ((i == 3 && ft_isalnum(str[2][0]) != 0))
-		return (0);
-	else if (i > 3)
-		return (0);
-	else if (check_spiltxyz(str[0]) == 0)
-		return (0);
-	else if ((ft_atof(str[1]) < 0 || ft_atof(str[1]) > 1) || check_float(str[1]) == 0)
-		return (0);
-	else if (check_spiltrgb(str[2]) == 0)
-		return (0);
-	return (1);
-}
+// 	str = ft_split_space(line);
+// 	printf("l\n");
+// 	while (str[i])
+// 		i++;
+// 	if ((i == 3 && ft_isalnum(str[2][0]) != 0))
+// 		return (0);
+// 	else if (i > 3)
+// 		return (0);
+// 	else if (check_spiltxyz(str[0]) == 0)
+// 		return (0);
+// 	else if ((ft_atof(str[1]) < 0 || ft_atof(str[1]) > 1) || check_float(str[1]) == 0)
+// 		return (0);
+// 	else if (check_spiltrgb(str[2]) == 0)
+// 		return (0);
+// 	return (1);
+// }
 
 int check_element_sp(char *line, int num_sp)
 {
@@ -374,11 +381,12 @@ int check_element_sp(char *line, int num_sp)
 	int i = 0;
 
 	str = ft_split_space(line);
+	printf("sp\n");
 	while (str[i])
 		i++;
-	if ((i == 3 && ft_isalnum(str[2][0]) != 0))
+	if ((i == 4 && ft_isalnum(str[3][0]) != 0))
 		return (0);
-	else if (i > 3)
+	else if (i > 4)
 		return (0);
 	else if (check_spiltxyz(str[0]) == 0)
 		return (0);
@@ -396,16 +404,23 @@ int check_element_pl(char *line, int num_pl)
 	int i = 0;
 
 	str = ft_split_space(line);
+	printf("pl\n");
 	while (str[i])
+	{
+		printf("str = %s\n", str[i]);
 		i++;
-	if ((i == 3 && ft_isalnum(str[2][0]) != 0))
+	}
+	if ((i == 4 && ft_isalnum(str[3][0]) != 0))
 		return (0);
-	else if (i > 3)
+	else if (i > 4)
 		return (0);
 	else if (check_spiltxyz(str[0]) == 0)
 		return (0);
 	else if (check_spiltxyz_3d(str[1]) == 0)
+	{
+		printf("fsdfsdflirinlbnvldfx\n");
 		return (0);
+	}
 	else if (check_spiltrgb(str[2]) == 0)
 		return (0);
 	return (1);
@@ -418,11 +433,12 @@ int check_element_cy(char *line, int num_cy)
 	int i = 0;
 
 	str = ft_split_space(line);
+	printf("cy\n");
 	while (str[i])
 		i++;
-	if ((i == 5 && ft_isalnum(str[4][0]) != 0))
+	if ((i == 6 && ft_isalnum(str[5][0]) != 0))
 		return (0);
-	else if (i > 5)
+	else if (i > 6)
 		return (0);
 	else if (check_spiltxyz(str[0]) == 0)
 		return (0);
@@ -447,7 +463,7 @@ int check_element(char *line, t_element *ele) //เช็คบรรทัดz
 			line++;
 			if (check_element_a(line, ele->a) == 1)
 				return (1);
-			printf("return (0) int check_element -> C\n");
+			printf("return (0) int check_element -> A\n");
 			return (0);
 		}
 		else if (*line == 'C')
@@ -463,7 +479,7 @@ int check_element(char *line, t_element *ele) //เช็คบรรทัดz
 		// {
 		// 	ele->l++;
 		// 	line++;
-		// 	if (check_element_c(line, ele->l) == 1)
+		// 	if (check_element_l(line, ele->l) == 1)
 		// 		return (1);
 		// 	printf("return (0) int check_element -> L\n");
 		// 	return (0);
@@ -471,8 +487,9 @@ int check_element(char *line, t_element *ele) //เช็คบรรทัดz
 		else if (ft_strncmp(line, "pl", 2) == 0)
 		{
 			ele->pl++;
-			line++;
-			if (check_element_c(line, ele->pl) == 1)
+			line = line + 2;
+			printf("line = %s\n",line);
+			if (check_element_pl(line, ele->pl) == 1)
 				return (1);
 			printf("return (0) int check_element -> pl\n");
 			return (0);
@@ -480,8 +497,8 @@ int check_element(char *line, t_element *ele) //เช็คบรรทัดz
 		else if (ft_strncmp(line, "sp", 2) == 0)
 		{
 			ele->sp++;
-			line++;
-			if (check_element_c(line, ele->sp) == 1)
+			line = line + 2;
+			if (check_element_sp(line, ele->sp) == 1)
 				return (1);
 			printf("return (0) int check_element -> sp\n");
 			return (0);
@@ -489,8 +506,8 @@ int check_element(char *line, t_element *ele) //เช็คบรรทัดz
 		else if (ft_strncmp(line, "cy", 2) == 0)
 		{
 			ele->cy++;
-			line++;
-			if (check_element_c(line, ele->cy) == 1)
+			line = line + 2;
+			if (check_element_cy(line, ele->cy) == 1)
 				return (1);
 			printf("return (0) int check_element -> cy\n");
 			return (0);
