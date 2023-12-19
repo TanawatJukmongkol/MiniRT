@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:30:53 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/12/13 02:23:44 by tsirirak         ###   ########.fr       */
+/*   Updated: 2023/12/19 11:36:55 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,14 +91,36 @@ typedef struct s_glob
 int	ft_loop_end(t_glob *g);
 int	ft_destroy_display(t_glob *g);
 
+//check_file
 int check_file(int argc, char **argv);
 int check_in_file(int fd);
 int check_element(char *line, t_element *ele);
-int check_element_a(char *line, int num_a);
-int check_comment(char *str);
 int checkdot_rt(char *str);
+
+//check_element
+int check_element_a(char *line, int num_a);
+int check_element_c(char *line, int num_c);
+// int check_element_l(char *line, int num_l);
+int check_element_sp(char *line, int num_sp);
+int check_element_pl(char *line, int num_pl);
+int check_element_cy(char *line, int num_cy);
+int count_element(t_element ele);
+
+//check_inelement
+int	check_spiltxyz(char *line);
+int	check_spiltxyz_3d(char *line);
+int check_spiltrgb(char *line);
 int check_float(char *line);
-double	ft_atof(const char *nptr);
+int check_int(char *str);
+
+//other
+int check_comment(char *str);
+int count_split(char **str);
 double	ft_atof_dot(const char *nptr, double nbr);
+double	ft_atof(const char *nptr);
+int check_number(char *str);
+int count_dot(char *str);
+int count_minus(char *str);
+int count_comma(char *str);
 
 #endif
