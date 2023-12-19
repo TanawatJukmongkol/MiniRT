@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   o_check_file.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thanapornsirirakwongsa <thanapornsirira    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:28:25 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/12/19 14:14:17 by tsirirak         ###   ########.fr       */
+/*   Updated: 2023/12/19 15:12:07 by thanapornsi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ int check_in_file(int fd)
 		{
 			if (check_element(line, &ele) == 0)
 			{
+
 				printf("error : check_element in check_in_file\n");
 				return (0);
 			}
@@ -82,8 +83,11 @@ int check_in_file(int fd)
 
 int check_element(char *line, t_element *ele) //เช็คบรรทัดz
 {
+	while ((*line >= 9 && *line <= 13) || *line == 32)
+		line++;
 	while (*line != '\0' && *line != '\n')
 	{
+		printf("llllllllllll\n");
         if (*line == 'A')
 		{
 			ele->a++;
@@ -140,8 +144,8 @@ int check_element(char *line, t_element *ele) //เช็คบรรทัดz
 		}
 		else if (*line == '\t' || *line == ' ' || *line == '\n')
 			line++;
-		if (*line == '\0')
-			return (0);//ตัวอื่นๆที่ไม่ใช่ element หรือ space ให้ออกหมด จบโปรแกรม
+		else
+			return (0);
 	}
 	return (1);
 }
