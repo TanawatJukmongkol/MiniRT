@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:28:25 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/12/19 11:47:06 by tsirirak         ###   ########.fr       */
+/*   Updated: 2023/12/19 14:14:17 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,14 @@ int check_in_file(int fd)
 	}
 	while (line)
 	{
-		if (check_element(line, &ele) == 0)
+
+		if (check_comment(line) != 1)
 		{
-			printf("error : check_element in check_in_file\n");
-			return (0);
+			if (check_element(line, &ele) == 0)
+			{
+				printf("error : check_element in check_in_file\n");
+				return (0);
+			}
 		}
 		free(line);
 		line = get_next_line(fd);
@@ -111,7 +115,6 @@ int check_element(char *line, t_element *ele) //เช็คบรรทัดz
 		{
 			ele->pl++;
 			line = line + 2;
-			printf("line = %s\n",line);
 			if (check_element_pl(line, ele->pl) == 1)
 				return (1);
 			printf("return (0) int check_element -> pl\n");
@@ -138,12 +141,8 @@ int check_element(char *line, t_element *ele) //เช็คบรรทัดz
 		else if (*line == '\t' || *line == ' ' || *line == '\n')
 			line++;
 		if (*line == '\0')
-		{
-			printf("\n\n\nmeow\n\n\n");
 			return (0);//ตัวอื่นๆที่ไม่ใช่ element หรือ space ให้ออกหมด จบโปรแกรม
-		}
 	}
-	printf("return (0) in check_element\n");
 	return (1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:28:25 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/12/19 11:46:44 by tsirirak         ###   ########.fr       */
+/*   Updated: 2023/12/19 14:13:58 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ int	check_spiltxyz_3d(char *line)
 		return (0);
 	while (xyz[i])
 	{
-			printf("number  =  %s\n",xyz[i]);
 		if (check_number(xyz[i]) == 0)
 		{
 			return (0);
@@ -71,7 +70,7 @@ int check_spiltrgb(char *line)
 	rgb = ft_split(line, ',');
 	while (rgb[i])
 	{
-		if (check_int(rgb[i]) == 0) //221 ไม่ผ่านตรงนี้
+		if (check_int(rgb[i]) == 0)
 		{
 			printf("return (0) check_splitrgb\n");
 			return (0);
@@ -84,9 +83,7 @@ int check_spiltrgb(char *line)
 		i++;
 	}
 	if (i == 3)
-	{
 		return (1);
-	}
 	return (0);
 }
 

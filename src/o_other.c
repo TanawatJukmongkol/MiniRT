@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:28:25 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/12/19 11:46:56 by tsirirak         ###   ########.fr       */
+/*   Updated: 2023/12/19 14:04:54 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 int check_comment(char *str)
 {
 	int i = 0;
-	while (str[i])
+	while (str[i] || str[i] == '\n')
 	{
-		i++;
 		if (str[i] == '#')
 			return (1);
+		i++;
 	}
 	return (0);
 }

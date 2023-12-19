@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:28:25 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/12/19 11:47:13 by tsirirak         ###   ########.fr       */
+/*   Updated: 2023/12/19 14:15:48 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,8 @@ int check_element_a(char *line, int num_a)
 	int i = 0;
 
 	str = ft_split_space(line);
-	printf("a\n");
 	while (str[i])
-	{
-		printf("str = %s\n", str[i]);
 		i++;
-	}
 	if ((i == 3 && ft_isalnum(str[2][0]) != 0))
 		return (0);
 	else if (i > 3)
@@ -42,12 +38,8 @@ int check_element_c(char *line, int num_c)
 	int i = 0;
 
 	str = ft_split_space(line);
-	printf("c\n");
 	while (str[i])
-	{
-		printf("str = %s\n", str[i]);
 		i++;
-	}
 	if ((i == 4 && ft_isalnum(str[3][0]) != 0))
 		return (0);
 	else if (i > 4)
@@ -57,9 +49,7 @@ int check_element_c(char *line, int num_c)
 	else if (check_spiltxyz_3d(str[1]) == 0)
 		return (0);
 	else if (check_int(str[2]) == 0 || ft_atoi(str[2]) < 0 || ft_atoi(str[2]) > 180)
-	{
-			return (0);
-	}
+		return (0);
 	return (1);
 
 }
@@ -94,7 +84,6 @@ int check_element_sp(char *line, int num_sp)
 	int i = 0;
 
 	str = ft_split_space(line);
-	printf("sp\n");
 	while (str[i])
 		i++;
 	if ((i == 4 && ft_isalnum(str[3][0]) != 0))
@@ -117,12 +106,8 @@ int check_element_pl(char *line, int num_pl)
 	int i = 0;
 
 	str = ft_split_space(line);
-	printf("pl\n");
 	while (str[i])
-	{
-		printf("str = %s\n", str[i]);
 		i++;
-	}
 	if ((i == 4 && ft_isalnum(str[3][0]) != 0))
 		return (0);
 	else if (i > 4)
@@ -130,10 +115,7 @@ int check_element_pl(char *line, int num_pl)
 	else if (check_spiltxyz(str[0]) == 0)
 		return (0);
 	else if (check_spiltxyz_3d(str[1]) == 0)
-	{
-		printf("fsdfsdflirinlbnvldfx\n");
 		return (0);
-	}
 	else if (check_spiltrgb(str[2]) == 0)
 		return (0);
 	return (1);
@@ -146,7 +128,6 @@ int check_element_cy(char *line, int num_cy)
 	int i = 0;
 
 	str = ft_split_space(line);
-	printf("cy\n");
 	while (str[i])
 		i++;
 	if ((i == 6 && ft_isalnum(str[5][0]) != 0))
