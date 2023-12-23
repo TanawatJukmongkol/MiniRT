@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   o_check_file.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thanapornsirirakwongsa <thanapornsirira    +#+  +:+       +#+        */
+/*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:28:25 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/12/19 15:12:07 by thanapornsi      ###   ########.fr       */
+/*   Updated: 2023/12/23 22:43:57 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ int check_element(char *line, t_element *ele) //เช็คบรรทัดz
 		line++;
 	while (*line != '\0' && *line != '\n')
 	{
-		printf("llllllllllll\n");
         if (*line == 'A')
 		{
 			ele->a++;

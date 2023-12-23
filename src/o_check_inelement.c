@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:28:25 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/12/19 14:13:58 by tsirirak         ###   ########.fr       */
+/*   Updated: 2023/12/23 17:50:34 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ int check_spiltrgb(char *line)
 	rgb = ft_split(line, ',');
 	while (rgb[i])
 	{
+	printf("edb[%d] = %s\n",i,rgb[i]);
 		if (check_int(rgb[i]) == 0)
 		{
 			printf("return (0) check_splitrgb\n");
@@ -82,7 +83,8 @@ int check_spiltrgb(char *line)
 		}
 		i++;
 	}
-	if (i == 3)
+	printf("argb[] = %d\n", check_int(rgb[2]));
+	if (i == 3 && check_int(rgb[2]) != 0)
 		return (1);
 	return (0);
 }
@@ -133,13 +135,18 @@ int check_float(char *line)
 int check_int(char *str)
 {
 	int i = 0;
+	printf("str = %s\n", str);
 	while ((str[i] >= '0' && str[i] <= '9'))
 	{
 		i++;
 	}
-	if ((str[i] >= 9 && str[i] <= 13) || str[i] == 32 || str[i] == '\0')
+	printf("Hellooooooooooooooooo\n");
+	if (i <= 0)
+		return (0);
+	else if ((str[i] >= 9 && str[i] <= 13) || str[i] == 32 || str[i] == '\0' || str[i])
 	{
-		return (1);
+		if (i >= 1)
+			return (1);
 	}
 	return (0);
 }

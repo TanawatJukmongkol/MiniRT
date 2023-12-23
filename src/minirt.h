@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:30:53 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/12/19 11:36:55 by tsirirak         ###   ########.fr       */
+/*   Updated: 2023/12/23 22:31:18 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef struct s_element
 
 
 enum e_obj
-{
+{//enumคล้ายๆกับ define โดยจะเรียงตัวเลขให้เลย
 	// pos, normal, FOV
 	camera,
 	// pos, brightness, color
@@ -51,14 +51,15 @@ enum e_obj
 
 typedef struct s_object
 {
-	enum e_obj	type;		// Object identification
-	t_color		abs_color;	// Color absorptiveness (inverted color)
-	t_vec3		pos;		// Position
-	t_fixed_pt	fov;		// Field of view
-	t_fixed_pt	size;		// Diameter (or other if have bonus)
-	t_fixed_pt	height;		// Height
-	t_fixed_pt	brightness;	// Brightness
-}				t_object;
+	enum e_obj    type;        // Object identification
+	t_color        abs_color;    // Color absorptiveness (inverted color) rgb ของ
+	t_vec3        pos;        // Position กล้องจุดไหน
+	t_vec3        normal;        // Normal vector กล้องหันไปทางไหน
+	t_fixed_pt    fov;        // Field of view การทำมุมของกล้อง มุมอง
+	t_fixed_pt    size;        // Diameter (or other if have bonus)
+	t_fixed_pt    height;        // Height
+	t_fixed_pt    brightness;    // Brightness
+} t_object;
 
 typedef struct s_world
 {
@@ -67,7 +68,7 @@ typedef struct s_world
 	t_object	cam;			// Camera
 	t_object	*objs;			// Object list
 	size_t		obj_count;		// Number of ojects
-}				t_world;
+}	t_world;
 
 typedef struct s_glob
 {
@@ -122,5 +123,9 @@ int check_number(char *str);
 int count_dot(char *str);
 int count_minus(char *str);
 int count_comma(char *str);
+
+//pass
+void	pass_element(char **argv, t_world world);
+void	add_element(char *line, t_world world);
 
 #endif
