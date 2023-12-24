@@ -10,7 +10,8 @@ SRCS		= minirt.c \
 			o_check_file.c \
 			o_check_element.c \
 			o_check_inelement.c \
-			o_other.c
+			o_other.c \
+			o_pass.c
 LIBS		= mlx libft gnl
 
 SRC_DIR		= ./src

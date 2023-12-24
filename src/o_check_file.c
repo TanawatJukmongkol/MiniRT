@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:28:25 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/12/23 22:43:57 by tsirirak         ###   ########.fr       */
+/*   Updated: 2023/12/24 21:04:05 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ int check_file(int argc, char **argv)
 		return (0);
 	}
 	printf("Happy Happy Happy\n");
-	close(fd);
+	int retclose = close(fd);
+	printf("close fd: %d\n", retclose);
 	return 1;
 }
 
@@ -74,6 +75,7 @@ int check_in_file(int fd)
 		}
 		free(line);
 		line = get_next_line(fd);
+		printf("line : %s\n", line);
 	}
 	if (count_element(ele) == 0)
 		return (0);
