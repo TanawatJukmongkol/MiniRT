@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:29:43 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/12/23 22:08:23 by tsirirak         ###   ########.fr       */
+/*   Updated: 2023/12/23 23:10:44 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,7 @@ int main(int argc, char **argv)
 
 	if (check_file(argc, argv) == 0)
 		return (0);
-	pass_element(argv, glob.world);
+	pass_element(argv, &glob.world);
 	return (1);
 }
 
