@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:30:53 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/12/23 23:11:05 by tsirirak         ###   ########.fr       */
+/*   Updated: 2023/12/25 11:30:30 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,10 @@ int count_comma(char *str);
 //pass
 void	pass_element(char **argv, t_world *world);
 void	add_element(char *line, t_world *world);
-void add_element_a(char *line, t_world *world);
+void	add_element_a(char *line, t_world *world);
+void	add_element_c(char *line, t_world *world);
+void	add_element_pl(char *line, t_world *world);
+void	add_element_sp(char *line, t_world *world);
+void	add_element_cy(char *line, t_world *world);
 
 #endif
