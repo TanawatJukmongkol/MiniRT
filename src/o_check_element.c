@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:28:25 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/12/23 11:46:38 by tsirirak         ###   ########.fr       */
+/*   Updated: 2023/12/25 13:33:57 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int check_element_a(char *line, int num_a)
 	str = ft_split_space(line);
 	while (str[i])
 		i++;
-		
+
 	if ((i == 3 && ft_isalnum(str[2][0]) != 0))
 		return (0);
 	else if (i > 3)
@@ -150,11 +150,11 @@ int check_element_cy(char *line, int num_cy)
 
 
 
-int count_element(t_element ele)
+int count_element(t_element *ele)
 {
-	if (ele.c != 1 || ele.a >= 2)
+	if (ele->c != 1 || ele->a >= 2)
 		return (0);
-	if (ele.pl == 0 || ele.sp == 0 || ele.cy == 0)
+	if (ele->pl == 0 || ele->sp == 0 || ele->cy == 0)
 		return (0);
 	// if (ele.l != 1)
 		// return (0);

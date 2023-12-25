@@ -6,14 +6,14 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:28:25 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/12/24 21:04:05 by tsirirak         ###   ########.fr       */
+/*   Updated: 2023/12/25 13:32:43 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
 
-int check_file(int argc, char **argv)
+int check_file(int argc, char **argv, t_element *ele)
 {
 	int	fd;
 
@@ -33,27 +33,28 @@ int check_file(int argc, char **argv)
 		printf("File error cannot open\n");
 		return (0);
 	}
-	if (check_in_file(fd) == 0)//ใส่้ใน ข้อมูล
+	if (check_in_file(fd, ele) == 0)//ใส่้ใน ข้อมูล
 	{
 		printf("In file error\n");
 		return (0);
 	}
 	printf("Happy Happy Happy\n");
-	int retclose = close(fd);
-	printf("close fd: %d\n", retclose);
 	return 1;
 }
 
-int check_in_file(int fd)
+void set_ele(t_element *ele)
+{
+	ele->a = 0;
+	ele->c = 0;
+	ele->l = 0;
+	ele->cy = 0;
+	ele->pl = 0;
+	ele->sp = 0;
+}
+
+int check_in_file(int fd, t_element *ele)
 {
 	char *line;
-	t_element ele;
-	ele.a = 0;
-	ele.c = 0;
-	ele.l = 0;
-	ele.cy = 0;
-	ele.pl = 0;
-	ele.sp = 0;
 
 	line = get_next_line(fd);
 	if (line == NULL)
@@ -66,7 +67,7 @@ int check_in_file(int fd)
 
 		if (check_comment(line) != 1)
 		{
-			if (check_element(line, &ele) == 0)
+			if (check_element(line, ele) == 0)
 			{
 
 				printf("error : check_element in check_in_file\n");
@@ -75,7 +76,6 @@ int check_in_file(int fd)
 		}
 		free(line);
 		line = get_next_line(fd);
-		printf("line : %s\n", line);
 	}
 	if (count_element(ele) == 0)
 		return (0);

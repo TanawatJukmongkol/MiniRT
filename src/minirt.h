@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:30:53 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/12/25 11:30:30 by tsirirak         ###   ########.fr       */
+/*   Updated: 2023/12/25 14:12:42 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@
 
 typedef struct s_element
 {
-	int		a;
-	int		c;
+	int		a;//0-1
+	int		c;//1
 	int		l;
-	int		pl;
-	int		sp;
-	int		cy;
+	int		pl;//>=1
+	int		sp;//>=1
+	int		cy;//>=1
 }				t_element;
 
 
@@ -68,6 +68,7 @@ typedef struct s_world
 	t_object	cam;			// Camera
 	t_object	*objs;			// Object list
 	size_t		obj_count;		// Number of ojects
+	t_element ele;				//Opal ไว้นับจำนวน element
 }	t_world;
 
 typedef struct s_glob
@@ -93,10 +94,11 @@ int	ft_loop_end(t_glob *g);
 int	ft_destroy_display(t_glob *g);
 
 //check_file
-int check_file(int argc, char **argv);
-int check_in_file(int fd);
+int check_file(int argc, char **argv, t_element *ele);
+int check_in_file(int fd, t_element *ele);
 int check_element(char *line, t_element *ele);
 int checkdot_rt(char *str);
+void set_ele(t_element *ele);
 
 //check_element
 int check_element_a(char *line, int num_a);
@@ -105,7 +107,7 @@ int check_element_c(char *line, int num_c);
 int check_element_sp(char *line, int num_sp);
 int check_element_pl(char *line, int num_pl);
 int check_element_cy(char *line, int num_cy);
-int count_element(t_element ele);
+int count_element(t_element *ele);
 
 //check_inelement
 int	check_spiltxyz(char *line);

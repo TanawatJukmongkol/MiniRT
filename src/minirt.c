@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:29:43 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/12/25 11:21:37 by tsirirak         ###   ########.fr       */
+/*   Updated: 2023/12/25 14:17:20 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,9 +149,9 @@ int main(int argc, char **argv)
 	t_glob glob;
 	(void)argc;
 
-	// if (check_file(argc, argv) == 0)
+	set_ele(&glob.world.ele);
+	// if (check_file(argc, argv, &glob.world.ele) == 0)
 	// 	return (0);
-	// printf("Before pass elememt\n");
 	pass_element(argv, &glob.world);
 	return (1);
 }
