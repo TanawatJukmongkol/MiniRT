@@ -6,42 +6,18 @@
 /*   By: tjukmong <tjukmong@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:30:53 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/11/24 23:30:06 by tjukmong         ###   ########.fr       */
+/*   Updated: 2023/12/25 04:40:45 by Tanawat J.       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/math.h"
 #include "../include/graphics.h"
 #include "../include/static_def.h"
+#include "../include/hittable.h"
 // #include <X11/X.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-
-enum e_obj
-{
-	// pos, normal, FOV
-	camera,
-	// pos, brightness, color
-	point_light,
-	// pos, size (diameter), color
-	sphere,
-	// pos, normal, color
-	plane_infinite,
-	// pos, size (diameter), height
-	cylinder
-};
-
-typedef struct s_object
-{
-	enum e_obj	type;		// Object identification
-	t_color		abs_color;	// Color absorptiveness (inverted color)
-	t_vec3		pos;		// Position
-	t_fixed_pt	fov;		// Field of view
-	t_fixed_pt	size;		// Diameter (or other if have bonus)
-	t_fixed_pt	height;		// Height
-	t_fixed_pt	brightness;	// Brightness
-}				t_object;
 
 typedef struct s_world
 {
@@ -50,13 +26,20 @@ typedef struct s_world
 	t_object	cam;			// Camera
 	t_object	*objs;			// Object list
 	size_t		obj_count;		// Number of ojects
+	t_hittable	hit_rec;
 }				t_world;
 
 typedef struct s_glob
 {
-	t_mlx	mlx;
-	t_world	world;
+	t_mlx		mlx;
+	t_world		world;
 }				t_glob;
+
+/*  Z ^
+ *    |  Y
+ *    |/
+ *    |---> X
+*/
 
 /*
 	t_world

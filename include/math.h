@@ -46,6 +46,7 @@ t_vec3		vec_sub(t_vec3 v1, t_vec3 v2);
 t_vec3		vec_mult(t_vec3 v, double num);
 t_fixed_pt	vec_dot(t_vec3 v1, t_vec3 v2);
 t_vec3		vec_cross(t_vec3 v1, t_vec3 v2);
+double		vec_mag(t_vec3);
 t_vec3		vec_norm(t_vec3 v);
 
 // Rays

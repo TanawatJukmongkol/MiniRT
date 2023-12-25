@@ -1,6 +1,6 @@
 
 NAME		= miniRT
-SRCS		= minirt.c fixed_point.c graphics.c graphics_util.c vec3_01.c ft_destroy_display.c ft_loop_end.c
+SRCS		= minirt.c fixed_point.c graphics.c graphics_util.c vec3_01.c ft_destroy_display.c ft_loop_end.c hittable.c
 LIBS		= mlx libft
 
 SRC_DIR		= ./src
@@ -10,7 +10,7 @@ BUILD_DIR	= ./build
 MLX_REPO	= https://github.com/42Paris/minilibx-linux.git
 
 CC			= gcc
-CFLAGS		= -g -Wall -Werror -Wextra 
+CFLAGS		= -g -Wall -Werror -Wextra -Ofast
 
 SRC			= ${addprefix ${BUILD_DIR}/,${SRCS}}
 LIBS_DIR	= ${addprefix ${LIB_DIR}/,${LIBS}}
