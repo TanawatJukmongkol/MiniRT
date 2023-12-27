@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   o_pass.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thanapornsirirakwongsa <thanapornsirira    +#+  +:+       +#+        */
+/*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:29:43 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/12/27 16:31:36 by thanapornsi      ###   ########.fr       */
+/*   Updated: 2023/12/28 00:49:35 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,19 @@ void	pass_element(char **argv, t_world *world)
 	world->objs = (t_object *)malloc(sizeof(t_object) * world->obj_count);
 	while (line)
 	{
+		printf("line in pass_element = %s\n",line);
 		if (check_comment(line) == 0)
 			i = i + add_element(line, i, world);
 		free(line);
 		line = get_next_line(fd);
 	}
 	close(fd);
+	printf("Hello Opal = %zu\n",world->cam.pos.x);
 	return;
 }
 
 int add_element(char *line, int i, t_world *world)
 {
-	i = 0;
 	while ((*line >= 9 && *line <= 13) || *line == 32)
 		line++;
 	if (*line == 'A')
@@ -96,6 +97,7 @@ void add_element_c(char *line, t_world *world)//1only
 	world->cam.pos.x = double_to_fixed(ft_atof(xyz[0]));
 	world->cam.pos.y = double_to_fixed(ft_atof(xyz[1]));
 	world->cam.pos.z = double_to_fixed(ft_atof(xyz[2]));
+	printf("test = %f\n",ft_atof(xyz[2]));
 
 	xyz = ft_split(split[1], ',');
 	world->cam.normal.x = double_to_fixed(ft_atof(xyz[0]));
@@ -116,15 +118,15 @@ void add_element_sp(char *line, int i, t_world *world)//>=1
 
 	world->objs[i].type = sphere;
 
-	world->objs[i].pos.x = xyz[0];
-	world->objs[i].pos.y = xyz[1];
-	world->objs[i].pos.z = xyz[2];
+	world->objs[i].pos.x = double_to_fixed(ft_atof(xyz[0]));
+	world->objs[i].pos.y = double_to_fixed(ft_atof(xyz[1]));
+	world->objs[i].pos.z = double_to_fixed(ft_atof(xyz[2]));
 
 	world->objs[i].size = double_to_fixed(ft_atof(split[1]));
 
-	world->objs[i].abs_color.r = abs[0];
-	world->objs[i].abs_color.g = abs[1];
-	world->objs[i].abs_color.b = abs[2];
+	world->objs[i].abs_color.r = double_to_fixed(ft_atof(abs[0]));
+	world->objs[i].abs_color.g = double_to_fixed(ft_atof(abs[1]));
+	world->objs[i].abs_color.b = double_to_fixed(ft_atof(abs[2]));
 
 
 }
@@ -142,17 +144,17 @@ void add_element_pl(char *line, int i, t_world *world)//>=1
 
 	world->objs[i].type = point_light;
 
-	world->objs[i].pos.x = xyz[0];
-	world->objs[i].pos.y = xyz[1];
-	world->objs[i].pos.z = xyz[2];
+	world->objs[i].pos.x = double_to_fixed(ft_atof(xyz[0]));
+	world->objs[i].pos.y = double_to_fixed(ft_atof(xyz[1]));
+	world->objs[i].pos.z = double_to_fixed(ft_atof(xyz[2]));
 
-	world->objs[i].normal.x = normal[0];
-	world->objs[i].normal.y = normal[1];
-	world->objs[i].normal.z = normal[2];
+	world->objs[i].normal.x = double_to_fixed(ft_atof(normal[0]));
+	world->objs[i].normal.y = double_to_fixed(ft_atof(normal[1]));
+	world->objs[i].normal.z = double_to_fixed(ft_atof(normal[2]));
 
-	world->objs[i].abs_color.r = abs[0];
-	world->objs[i].abs_color.g = abs[1];
-	world->objs[i].abs_color.b = abs[2];
+	world->objs[i].abs_color.r = double_to_fixed(ft_atof(abs[0]));
+	world->objs[i].abs_color.g = double_to_fixed(ft_atof(abs[1]));
+	world->objs[i].abs_color.b = double_to_fixed(ft_atof(abs[2]));
 }
 void add_element_cy(char *line, int i, t_world *world)//>=1
 {
@@ -168,20 +170,20 @@ void add_element_cy(char *line, int i, t_world *world)//>=1
 
 	world->objs[i].type = cylinder;
 
-	world->objs[i].pos.x = xyz[0];
-	world->objs[i].pos.y = xyz[1];
-	world->objs[i].pos.z = xyz[2];
+	world->objs[i].pos.x = double_to_fixed(ft_atof(xyz[0]));
+	world->objs[i].pos.y = double_to_fixed(ft_atof(xyz[1]));
+	world->objs[i].pos.z = double_to_fixed(ft_atof(xyz[2]));
 
-	world->objs[i].normal.x = normal[0];
-	world->objs[i].normal.y = normal[1];
-	world->objs[i].normal.z = normal[2];
+	world->objs[i].normal.x = double_to_fixed(ft_atof(normal[0]));
+	world->objs[i].normal.y = double_to_fixed(ft_atof(normal[1]));
+	world->objs[i].normal.z = double_to_fixed(ft_atof(normal[2]));
 
 	world->objs[i].size = double_to_fixed(ft_atof(split[2]));
 	world->objs[i].height = double_to_fixed(ft_atof(split[3]));
 
-	world->objs[i].abs_color.r = abs[0];
-	world->objs[i].abs_color.g = abs[1];
-	world->objs[i].abs_color.b = abs[2];
+	world->objs[i].abs_color.r = double_to_fixed(ft_atof(abs[0]));
+	world->objs[i].abs_color.g = double_to_fixed(ft_atof(abs[1]));
+	world->objs[i].abs_color.b = double_to_fixed(ft_atof(abs[2]));
 }
 // void add_element_a(char *line, t_world *world)
 // {
