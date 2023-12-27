@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thanapornsirirakwongsa <thanapornsirira    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:30:53 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/12/25 14:12:42 by tsirirak         ###   ########.fr       */
+/*   Updated: 2023/12/27 16:32:40 by thanapornsi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,11 +128,11 @@ int count_comma(char *str);
 
 //pass
 void	pass_element(char **argv, t_world *world);
-void	add_element(char *line, t_world *world);
+int	add_element(char *line, int i, t_world *world);
 void	add_element_a(char *line, t_world *world);
 void	add_element_c(char *line, t_world *world);
-void	add_element_pl(char *line, t_world *world);
-void	add_element_sp(char *line, t_world *world);
-void	add_element_cy(char *line, t_world *world);
+void	add_element_pl(char *line, int i, t_world *world);
+void	add_element_sp(char *line, int i, t_world *world);
+void	add_element_cy(char *line, int i, t_world *world);
 
 #endif
