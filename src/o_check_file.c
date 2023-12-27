@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:28:25 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/12/25 13:32:43 by tsirirak         ###   ########.fr       */
+/*   Updated: 2023/12/28 02:32:05 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int check_file(int argc, char **argv, t_element *ele)
 		return (0);
 	}
 	printf("Happy Happy Happy\n");
-	return 1;
+	return (1);
 }
 
 void set_ele(t_element *ele)
@@ -64,12 +64,10 @@ int check_in_file(int fd, t_element *ele)
 	}
 	while (line)
 	{
-
 		if (check_comment(line) != 1)
 		{
 			if (check_element(line, ele) == 0)
 			{
-
 				printf("error : check_element in check_in_file\n");
 				return (0);
 			}
@@ -83,66 +81,24 @@ int check_in_file(int fd, t_element *ele)
 	return (1);
 }
 
-int check_element(char *line, t_element *ele) //เช็คบรรทัดz
+int check_element(char *line, t_element *ele)
 {
 	while ((*line >= 9 && *line <= 13) || *line == 32)
 		line++;
 	while (*line != '\0' && *line != '\n')
 	{
         if (*line == 'A')
-		{
-			ele->a++;
-			line++;
-			if (check_element_a(line, ele->a) == 1)
-				return (1);
-			printf("return (0) int check_element -> A\n");
-			return (0);
-		}
+			return (check_element_a(line++, ele->a++));
 		else if (*line == 'C')
-		{
-			ele->c++;
-			line++;
-			if (check_element_c(line, ele->c) == 1)
-				return (1);
-			printf("return (0) int check_element -> C\n");
-			return (0);
-		}
+			return(check_element_c(line++, ele->c++));
 		// else if (*line == 'L')
-		// {
-		// 	ele->l++;
-		// 	line++;
-		// 	if (check_element_l(line, ele->l) == 1)
-		// 		return (1);
-		// 	printf("return (0) int check_element -> L\n");
-		// 	return (0);
-		// }
+		// 	return check_element_l(line++, ele->l++));
 		else if (ft_strncmp(line, "pl", 2) == 0)
-		{
-			ele->pl++;
-			line = line + 2;
-			if (check_element_pl(line, ele->pl) == 1)
-				return (1);
-			printf("return (0) int check_element -> pl\n");
-			return (0);
-		}
+			return (check_element_pl(line + 2, ele->pl++));
 		else if (ft_strncmp(line, "sp", 2) == 0)
-		{
-			ele->sp++;
-			line = line + 2;
-			if (check_element_sp(line, ele->sp) == 1)
-				return (1);
-			printf("return (0) int check_element -> sp\n");
-			return (0);
-		}
+			return (check_element_sp(line + 2, ele->sp++));
 		else if (ft_strncmp(line, "cy", 2) == 0)
-		{
-			ele->cy++;
-			line = line + 2;
-			if (check_element_cy(line, ele->cy) == 1)
-				return (1);
-			printf("return (0) int check_element -> cy\n");
-			return (0);
-		}
+			return (check_element_cy(line + 2, ele->cy++));
 		else if (*line == '\t' || *line == ' ' || *line == '\n')
 			line++;
 		else

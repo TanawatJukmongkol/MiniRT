@@ -11,6 +11,7 @@ SRCS		= minirt.c \
 			o_check_element.c \
 			o_check_inelement.c \
 			o_other.c \
+			o_other2.c \
 			o_pass.c
 LIBS		= mlx libft gnl
 

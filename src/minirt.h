@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thanapornsirirakwongsa <thanapornsirira    +#+  +:+       +#+        */
+/*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:30:53 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/12/27 16:32:40 by thanapornsi      ###   ########.fr       */
+/*   Updated: 2023/12/28 02:51:08 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ int	check_spiltxyz(char *line);
 int	check_spiltxyz_3d(char *line);
 int check_spiltrgb(char *line);
 int check_float(char *line);
+int check_float_minus(char *line);
 int check_int(char *str);
 
 //other
@@ -125,6 +126,7 @@ int check_number(char *str);
 int count_dot(char *str);
 int count_minus(char *str);
 int count_comma(char *str);
+double	ft_atof_fraction(const char *nptr);
 
 //pass
 void	pass_element(char **argv, t_world *world);
