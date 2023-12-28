@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:29:43 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/12/28 00:49:35 by tsirirak         ###   ########.fr       */
+/*   Updated: 2023/12/28 19:01:58 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,12 @@ void	pass_element(char **argv, t_world *world)
 	world->objs = (t_object *)malloc(sizeof(t_object) * world->obj_count);
 	while (line)
 	{
-		printf("line in pass_element = %s\n",line);
 		if (check_comment(line) == 0)
 			i = i + add_element(line, i, world);
 		free(line);
 		line = get_next_line(fd);
 	}
 	close(fd);
-	printf("Hello Opal = %zu\n",world->cam.pos.x);
 	return;
 }
 
@@ -97,7 +95,6 @@ void add_element_c(char *line, t_world *world)//1only
 	world->cam.pos.x = double_to_fixed(ft_atof(xyz[0]));
 	world->cam.pos.y = double_to_fixed(ft_atof(xyz[1]));
 	world->cam.pos.z = double_to_fixed(ft_atof(xyz[2]));
-	printf("test = %f\n",ft_atof(xyz[2]));
 
 	xyz = ft_split(split[1], ',');
 	world->cam.normal.x = double_to_fixed(ft_atof(xyz[0]));
