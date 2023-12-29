@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:28:25 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/12/24 17:46:22 by tsirirak         ###   ########.fr       */
+/*   Updated: 2023/12/29 18:33:28 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 int	check_spiltxyz(char *line)
 {
-	char **xyz;
-	int i = 0;
+	char	**xyz;
+	int		i;
 
+	i = 0;
 	xyz = ft_split(line, ',');
 	if (count_comma(line) > 2)
 		return (0);
@@ -35,9 +36,10 @@ int	check_spiltxyz(char *line)
 
 int	check_spiltxyz_3d(char *line)
 {
-	char **xyz;
-	int i = 0;
+	char	**xyz;
+	int		i;
 
+	i = 0;
 	xyz = ft_split(line, ',');
 	if (count_comma(line) > 2)
 		return (0);
@@ -58,13 +60,12 @@ int	check_spiltxyz_3d(char *line)
 	return (0);
 }
 
-
-
-int check_spiltrgb(char *line)
+int	check_spiltrgb(char *line)
 {
-	char **rgb;
-	int i = 0;
+	char	**rgb;
+	int		i;
 
+	i = 0;
 	if (count_comma(line) >= 3)
 		return (0);
 	rgb = ft_split(line, ',');
@@ -87,13 +88,16 @@ int check_spiltrgb(char *line)
 	return (0);
 }
 
-int check_float(char *line)
+int	check_float(char *line)
 {
-	int dot = 0;
-	int i = 0;
+	int	dot;
+	int	i;
 
-	if (count_minus(line) >= 2 || count_dot(line) >= 2 || line[0] == '.' || line[ft_strlen(line) - 1] == '.')
-			return (0);
+	dot = 0;
+	i = 0;
+	if (count_minus(line) >= 2 || count_dot(line) >= 2
+		|| line[0] == '.' || line[ft_strlen(line) - 1] == '.')
+		return (0);
 	else if (line[0] == '-')
 	{
 		i = 1;
@@ -108,7 +112,8 @@ int check_float(char *line)
 			return (0);
 		return (1);
 	}
-	while ((*line >= '0' && *line <= '9') || *line == '.' || *line == '\0' || *line == ' ')
+	while ((*line >= '0' && *line <= '9') || *line == '.'
+		|| *line == '\0' || *line == ' ')
 	{
 		if (*line == '.')
 		{
@@ -129,17 +134,19 @@ int check_float(char *line)
 	return (0);
 }
 
-
-int check_int(char *str)
+int	check_int(char *str)
 {
-	int i = 0;
+	int	i;
+
+	i = 0;
 	while ((str[i] >= '0' && str[i] <= '9'))
 	{
 		i++;
 	}
 	if (i <= 0)
 		return (0);
-	else if ((str[i] >= 9 && str[i] <= 13) || str[i] == 32 || str[i] == '\0' || str[i])
+	else if ((str[i] >= 9 && str[i] <= 13)
+		|| str[i] == 32 || str[i] == '\0' || str[i])
 	{
 		if (i >= 1)
 			return (1);

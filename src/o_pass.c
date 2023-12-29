@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:29:43 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/12/28 19:01:58 by tsirirak         ###   ########.fr       */
+/*   Updated: 2023/12/29 18:37:21 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	pass_element(char **argv, t_world *world)
 {
-	int fd;
-	int i;
-	char *line;
+	int		fd;
+	int		i;
+	char	*line;
 
 	i = 0;
 	fd = 0;
@@ -32,10 +32,9 @@ void	pass_element(char **argv, t_world *world)
 		line = get_next_line(fd);
 	}
 	close(fd);
-	return;
 }
 
-int add_element(char *line, int i, t_world *world)
+int	add_element(char *line, int i, t_world *world)
 {
 	while ((*line >= 9 && *line <= 13) || *line == 32)
 		line++;
@@ -49,7 +48,6 @@ int add_element(char *line, int i, t_world *world)
 		line++;
 		add_element_c(line, world);
 	}
-
 	else if (ft_strncmp(line, "pl", 2) == 0)
 	{
 		line = line + 2;
@@ -71,122 +69,99 @@ int add_element(char *line, int i, t_world *world)
 	return (i);
 }
 
-void add_element_a(char *line, t_world *world)//0-1
+void	add_element_a(char *line, t_world *world)
 {
-	char **split;
-	char **rgb;
+	char	**split;
+	char	**rgb;
 
 	split = ft_split(line, ' ');
 	world->amb_brightness = double_to_fixed(ft_atof(split[0]));
-
 	rgb = ft_split(split[1], ',');
 	world->ambient.r = double_to_fixed(ft_atof(rgb[0]));
 	world->ambient.g = double_to_fixed(ft_atof(rgb[1]));
 	world->ambient.b = double_to_fixed(ft_atof(rgb[2]));
 }
 
-void add_element_c(char *line, t_world *world)//1only
+void	add_element_c(char *line, t_world *world)
 {
-	char **split;
-	char **xyz;
+	char	**split;
+	char	**xyz;
 
 	split = ft_split(line, ' ');
 	xyz = ft_split(split[0], ',');
 	world->cam.pos.x = double_to_fixed(ft_atof(xyz[0]));
 	world->cam.pos.y = double_to_fixed(ft_atof(xyz[1]));
 	world->cam.pos.z = double_to_fixed(ft_atof(xyz[2]));
-
 	xyz = ft_split(split[1], ',');
 	world->cam.normal.x = double_to_fixed(ft_atof(xyz[0]));
 	world->cam.normal.y = double_to_fixed(ft_atof(xyz[1]));
 	world->cam.normal.z = double_to_fixed(ft_atof(xyz[2]));
-
 	world->cam.fov = double_to_fixed(ft_atof(split[2]));
 }
-void add_element_sp(char *line, int i, t_world *world)//>=1
+
+void	add_element_sp(char *line, int i, t_world *world)
 {
-	char **split;
-	char **xyz;
-	char **abs;
+	char	**split;
+	char	**xyz;
+	char	**abs;
 
 	split = ft_split(line, ' ');
 	xyz = ft_split(split[0], ',');
 	abs = ft_split(split[2], ',');
-
 	world->objs[i].type = sphere;
-
 	world->objs[i].pos.x = double_to_fixed(ft_atof(xyz[0]));
 	world->objs[i].pos.y = double_to_fixed(ft_atof(xyz[1]));
 	world->objs[i].pos.z = double_to_fixed(ft_atof(xyz[2]));
-
 	world->objs[i].size = double_to_fixed(ft_atof(split[1]));
-
 	world->objs[i].abs_color.r = double_to_fixed(ft_atof(abs[0]));
 	world->objs[i].abs_color.g = double_to_fixed(ft_atof(abs[1]));
 	world->objs[i].abs_color.b = double_to_fixed(ft_atof(abs[2]));
-
-
 }
-void add_element_pl(char *line, int i, t_world *world)//>=1
+
+void	add_element_pl(char *line, int i, t_world *world)
 {
-	char **split;
-	char **xyz;
-	char **normal;
-	char **abs;
+	char	**split;
+	char	**xyz;
+	char	**normal;
+	char	**abs;
 
 	split = ft_split(line, ' ');
 	xyz = ft_split(split[0], ',');
 	normal = ft_split(split[1], ',');
 	abs = ft_split(split[2], ',');
-
 	world->objs[i].type = point_light;
-
 	world->objs[i].pos.x = double_to_fixed(ft_atof(xyz[0]));
 	world->objs[i].pos.y = double_to_fixed(ft_atof(xyz[1]));
 	world->objs[i].pos.z = double_to_fixed(ft_atof(xyz[2]));
-
 	world->objs[i].normal.x = double_to_fixed(ft_atof(normal[0]));
 	world->objs[i].normal.y = double_to_fixed(ft_atof(normal[1]));
 	world->objs[i].normal.z = double_to_fixed(ft_atof(normal[2]));
-
 	world->objs[i].abs_color.r = double_to_fixed(ft_atof(abs[0]));
 	world->objs[i].abs_color.g = double_to_fixed(ft_atof(abs[1]));
 	world->objs[i].abs_color.b = double_to_fixed(ft_atof(abs[2]));
 }
-void add_element_cy(char *line, int i, t_world *world)//>=1
+
+void	add_element_cy(char *line, int i, t_world *world)
 {
-	char **split;
-	char **xyz;
-	char **normal;
-	char **abs;
+	char	**split;
+	char	**xyz;
+	char	**normal;
+	char	**abs;
 
 	split = ft_split(line, ' ');
 	xyz = ft_split(split[0], ',');
 	normal = ft_split(split[1], ',');
 	abs = ft_split(split[4], ',');
-
 	world->objs[i].type = cylinder;
-
 	world->objs[i].pos.x = double_to_fixed(ft_atof(xyz[0]));
 	world->objs[i].pos.y = double_to_fixed(ft_atof(xyz[1]));
 	world->objs[i].pos.z = double_to_fixed(ft_atof(xyz[2]));
-
 	world->objs[i].normal.x = double_to_fixed(ft_atof(normal[0]));
 	world->objs[i].normal.y = double_to_fixed(ft_atof(normal[1]));
 	world->objs[i].normal.z = double_to_fixed(ft_atof(normal[2]));
-
 	world->objs[i].size = double_to_fixed(ft_atof(split[2]));
 	world->objs[i].height = double_to_fixed(ft_atof(split[3]));
-
 	world->objs[i].abs_color.r = double_to_fixed(ft_atof(abs[0]));
 	world->objs[i].abs_color.g = double_to_fixed(ft_atof(abs[1]));
 	world->objs[i].abs_color.b = double_to_fixed(ft_atof(abs[2]));
 }
-// void add_element_a(char *line, t_world *world)
-// {
-// 	char **split;
-// 	(void)world;
-
-// 	split = ft_split(line, ' ');
-// 	printf("Hello = %s",split[0]);
-// }

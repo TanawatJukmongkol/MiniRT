@@ -6,14 +6,13 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:28:25 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/12/25 13:32:43 by tsirirak         ###   ########.fr       */
+/*   Updated: 2023/12/29 20:19:31 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-
-int check_file(int argc, char **argv, t_element *ele)
+int	check_file(int argc, char **argv, t_element *ele)
 {
 	int	fd;
 
@@ -33,16 +32,16 @@ int check_file(int argc, char **argv, t_element *ele)
 		printf("File error cannot open\n");
 		return (0);
 	}
-	if (check_in_file(fd, ele) == 0)//ใส่้ใน ข้อมูล
+	if (check_in_file(fd, ele) == 0)
 	{
 		printf("In file error\n");
 		return (0);
 	}
 	printf("Happy Happy Happy\n");
-	return 1;
+	return (1);
 }
 
-void set_ele(t_element *ele)
+void	set_ele(t_element *ele)
 {
 	ele->a = 0;
 	ele->c = 0;
@@ -52,24 +51,22 @@ void set_ele(t_element *ele)
 	ele->sp = 0;
 }
 
-int check_in_file(int fd, t_element *ele)
+int	check_in_file(int fd, t_element *ele)
 {
-	char *line;
+	char	*line;
 
 	line = get_next_line(fd);
 	if (line == NULL)
 	{
 		printf("file empty\n");
-		return(0);
+		return (0);
 	}
 	while (line)
 	{
-
 		if (check_comment(line) != 1)
 		{
 			if (check_element(line, ele) == 0)
 			{
-
 				printf("error : check_element in check_in_file\n");
 				return (0);
 			}
@@ -83,21 +80,14 @@ int check_in_file(int fd, t_element *ele)
 	return (1);
 }
 
-int check_element(char *line, t_element *ele) //เช็คบรรทัดz
+int	check_element(char *line, t_element *ele) //เช็คบรรทัดz
 {
 	while ((*line >= 9 && *line <= 13) || *line == 32)
 		line++;
 	while (*line != '\0' && *line != '\n')
 	{
-        if (*line == 'A')
-		{
-			ele->a++;
-			line++;
-			if (check_element_a(line, ele->a) == 1)
-				return (1);
-			printf("return (0) int check_element -> A\n");
-			return (0);
-		}
+		if (*line == 'A')
+			return (check_element_a(line + 1, ele->a + 1));
 		else if (*line == 'C')
 		{
 			ele->c++;
@@ -107,15 +97,6 @@ int check_element(char *line, t_element *ele) //เช็คบรรทัดz
 			printf("return (0) int check_element -> C\n");
 			return (0);
 		}
-		// else if (*line == 'L')
-		// {
-		// 	ele->l++;
-		// 	line++;
-		// 	if (check_element_l(line, ele->l) == 1)
-		// 		return (1);
-		// 	printf("return (0) int check_element -> L\n");
-		// 	return (0);
-		// }
 		else if (ft_strncmp(line, "pl", 2) == 0)
 		{
 			ele->pl++;
@@ -151,7 +132,7 @@ int check_element(char *line, t_element *ele) //เช็คบรรทัดz
 	return (1);
 }
 
-int checkdot_rt(char *str)
+int	checkdot_rt(char *str)
 {
 	if (ft_strrchr(str, '.') == NULL)
 	{

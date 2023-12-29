@@ -6,15 +6,17 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:28:25 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/12/19 14:04:54 by tsirirak         ###   ########.fr       */
+/*   Updated: 2023/12/29 18:48:12 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int check_comment(char *str)
+int	check_comment(char *str)
 {
-	int i = 0;
+	int	i;
+
+	i = 0;
 	while (str[i] || str[i] == '\n')
 	{
 		if (str[i] == '#')
@@ -24,16 +26,15 @@ int check_comment(char *str)
 	return (0);
 }
 
-int count_split(char **str)
+int	count_split(char **str)
 {
-	int  i = 0;
+	int	i;
+
+	i = 0;
 	while (str[i])
-	{
 		i++;
-	}
 	return (i);
 }
-
 
 double	ft_atof_dot(const char *nptr, double nbr)
 {
@@ -43,7 +44,7 @@ double	ft_atof_dot(const char *nptr, double nbr)
 	while (*nptr && *nptr >= '0' && *nptr <= '9')
 	{
 		nbr = nbr + dot * (*nptr - '0');
-		dot = dot/10;
+		dot = dot / 10;
 		nptr++;
 	}
 	return (nbr);
@@ -81,15 +82,14 @@ double	ft_atof(const char *nptr)
 	return (sign * nbr);
 }
 
-
-
-
-int check_number(char *str)
+int	check_number(char *str)
 {
-	int i = 0;
+	int	i;
 
-	if (count_minus(str) >= 2 || count_dot(str) >= 2 || str[0] == '.' || str[ft_strlen(str) - 1] == '.')
-			return (0);
+	i = 0;
+	if (count_minus(str) >= 2 || count_dot(str) >= 2
+		|| str[0] == '.' || str[ft_strlen(str) - 1] == '.')
+		return (0);
 	else if (str[0] == '-')
 	{
 		i = 1;
@@ -110,26 +110,16 @@ int check_number(char *str)
 	{
 		return (1);
 	}
-
 	return (1);
-
 }
 
-
-// int check_int(char *str)
-// {
-// 	// int i = 0;
-// 	printf("str = %s\n",str);
-// 	printf("strlen = %zu\n", ft_strlen(str));
-// 	// while (str[i] >= '0' && str[i] <= '9')
-// 	return (1);
-// }
-
-int count_dot(char *str)
+int	count_dot(char *str)
 {
-	int i = 0;
-	int dot = 0;
+	int	i;
+	int	dot;
 
+	i = 0;
+	dot = 0;
 	while (str[i])
 	{
 		if (str[i] == '.')
@@ -139,11 +129,13 @@ int count_dot(char *str)
 	return (dot);
 }
 
-int count_minus(char *str)
+int	count_minus(char *str)
 {
-	int i = 0;
-	int minus = 0;
+	int	i;
+	int	minus;
 
+	i = 0;
+	minus = 0;
 	while (str[i])
 	{
 		if (str[i] == '-')
@@ -153,11 +145,13 @@ int count_minus(char *str)
 	return (minus);
 }
 
-int count_comma(char *str)
+int	count_comma(char *str)
 {
-	int i = 0;
-	int comma = 0;
+	int	i;
+	int	comma;
 
+	i = 0;
+	comma = 0;
 	while (str[i])
 	{
 		if (str[i] == ',')
@@ -167,6 +161,11 @@ int count_comma(char *str)
 	return (comma);
 }
 
-
-
-
+int	count_element(t_element *ele)
+{
+	if (ele->c != 1 || ele->a >= 2)
+		return (0);
+	if (ele->pl == 0 || ele->sp == 0 || ele->cy == 0)
+		return (0);
+	return (1);
+}

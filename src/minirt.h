@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thanapornsirirakwongsa <thanapornsirira    +#+  +:+       +#+        */
+/*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:30:53 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/12/27 16:32:40 by thanapornsi      ###   ########.fr       */
+/*   Updated: 2023/12/29 18:49:18 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,6 @@ int check_element_c(char *line, int num_c);
 int check_element_sp(char *line, int num_sp);
 int check_element_pl(char *line, int num_pl);
 int check_element_cy(char *line, int num_cy);
-int count_element(t_element *ele);
 
 //check_inelement
 int	check_spiltxyz(char *line);
@@ -125,6 +124,7 @@ int check_number(char *str);
 int count_dot(char *str);
 int count_minus(char *str);
 int count_comma(char *str);
+int count_element(t_element *ele);
 
 //pass
 void	pass_element(char **argv, t_world *world);
