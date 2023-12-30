@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:28:25 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/12/29 20:19:31 by tsirirak         ###   ########.fr       */
+/*   Updated: 2023/12/29 22:02:07 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int	check_in_file(int fd, t_element *ele)
 	return (1);
 }
 
-int	check_element(char *line, t_element *ele) //เช็คบรรทัดz
+int	check_element(char *line, t_element *ele)
 {
 	while ((*line >= 9 && *line <= 13) || *line == 32)
 		line++;
@@ -89,41 +89,13 @@ int	check_element(char *line, t_element *ele) //เช็คบรรทัดz
 		if (*line == 'A')
 			return (check_element_a(line + 1, ele->a + 1));
 		else if (*line == 'C')
-		{
-			ele->c++;
-			line++;
-			if (check_element_c(line, ele->c) == 1)
-				return (1);
-			printf("return (0) int check_element -> C\n");
-			return (0);
-		}
+			return (check_element_c(++line, ++ele->c));
 		else if (ft_strncmp(line, "pl", 2) == 0)
-		{
-			ele->pl++;
-			line = line + 2;
-			if (check_element_pl(line, ele->pl) == 1)
-				return (1);
-			printf("return (0) int check_element -> pl\n");
-			return (0);
-		}
+			return (check_element_pl(line + 2, ++ele->pl));
 		else if (ft_strncmp(line, "sp", 2) == 0)
-		{
-			ele->sp++;
-			line = line + 2;
-			if (check_element_sp(line, ele->sp) == 1)
-				return (1);
-			printf("return (0) int check_element -> sp\n");
-			return (0);
-		}
+			return (check_element_sp(line + 2, ++ele->sp));
 		else if (ft_strncmp(line, "cy", 2) == 0)
-		{
-			ele->cy++;
-			line = line + 2;
-			if (check_element_cy(line, ele->cy) == 1)
-				return (1);
-			printf("return (0) int check_element -> cy\n");
-			return (0);
-		}
+			return (check_element_cy(line + 2, ++ele->cy));
 		else if (*line == '\t' || *line == ' ' || *line == '\n')
 			line++;
 		else

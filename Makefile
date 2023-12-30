@@ -10,6 +10,9 @@ SRCS		= minirt.c \
 			o_check_file.c \
 			o_check_element.c \
 			o_check_inelement.c \
+			o_check_other.c \
+			o_count.c \
+			o_count2.c \
 			o_other.c \
 			o_pass.c
 LIBS		= mlx libft gnl
@@ -21,7 +24,7 @@ BUILD_DIR	= ./build
 MLX_REPO	= https://github.com/42Paris/minilibx-linux.git
 
 CC			= gcc
-CFLAGS		= -g -Wall -Werror -Wextra
+
 
 SRC			= ${addprefix ${BUILD_DIR}/,${SRCS}}
 LIBS_DIR	= ${addprefix ${LIB_DIR}/,${LIBS}}

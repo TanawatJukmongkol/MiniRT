@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:30:53 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/12/29 18:49:18 by tsirirak         ###   ########.fr       */
+/*   Updated: 2023/12/30 18:27:09 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,8 +112,6 @@ int check_element_cy(char *line, int num_cy);
 int	check_spiltxyz(char *line);
 int	check_spiltxyz_3d(char *line);
 int check_spiltrgb(char *line);
-int check_float(char *line);
-int check_int(char *str);
 
 //other
 int check_comment(char *str);
@@ -134,5 +132,11 @@ void	add_element_c(char *line, t_world *world);
 void	add_element_pl(char *line, int i, t_world *world);
 void	add_element_sp(char *line, int i, t_world *world);
 void	add_element_cy(char *line, int i, t_world *world);
+void	remove_split(char **sp);
+
+//check_other
+int check_float(char *line);
+int check_int(char *str);
+int	check_floattwo(char *line);
 
 #endif

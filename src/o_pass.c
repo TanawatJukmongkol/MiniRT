@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:29:43 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/12/29 18:37:21 by tsirirak         ###   ########.fr       */
+/*   Updated: 2023/12/30 22:26:57 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	pass_element(char **argv, t_world *world)
 		free(line);
 		line = get_next_line(fd);
 	}
+	remove_split(world->objs);
 	close(fd);
 }
 
@@ -80,6 +81,8 @@ void	add_element_a(char *line, t_world *world)
 	world->ambient.r = double_to_fixed(ft_atof(rgb[0]));
 	world->ambient.g = double_to_fixed(ft_atof(rgb[1]));
 	world->ambient.b = double_to_fixed(ft_atof(rgb[2]));
+	remove_split(rgb);
+	remove_split(split);
 }
 
 void	add_element_c(char *line, t_world *world)
@@ -92,11 +95,14 @@ void	add_element_c(char *line, t_world *world)
 	world->cam.pos.x = double_to_fixed(ft_atof(xyz[0]));
 	world->cam.pos.y = double_to_fixed(ft_atof(xyz[1]));
 	world->cam.pos.z = double_to_fixed(ft_atof(xyz[2]));
+	remove_split(xyz);
 	xyz = ft_split(split[1], ',');
 	world->cam.normal.x = double_to_fixed(ft_atof(xyz[0]));
 	world->cam.normal.y = double_to_fixed(ft_atof(xyz[1]));
 	world->cam.normal.z = double_to_fixed(ft_atof(xyz[2]));
 	world->cam.fov = double_to_fixed(ft_atof(split[2]));
+	remove_split(xyz);
+	remove_split(split);
 }
 
 void	add_element_sp(char *line, int i, t_world *world)
@@ -112,10 +118,13 @@ void	add_element_sp(char *line, int i, t_world *world)
 	world->objs[i].pos.x = double_to_fixed(ft_atof(xyz[0]));
 	world->objs[i].pos.y = double_to_fixed(ft_atof(xyz[1]));
 	world->objs[i].pos.z = double_to_fixed(ft_atof(xyz[2]));
+	remove_split(xyz);
 	world->objs[i].size = double_to_fixed(ft_atof(split[1]));
 	world->objs[i].abs_color.r = double_to_fixed(ft_atof(abs[0]));
 	world->objs[i].abs_color.g = double_to_fixed(ft_atof(abs[1]));
 	world->objs[i].abs_color.b = double_to_fixed(ft_atof(abs[2]));
+	remove_split(abs);
+	remove_split(split);
 }
 
 void	add_element_pl(char *line, int i, t_world *world)
@@ -133,12 +142,16 @@ void	add_element_pl(char *line, int i, t_world *world)
 	world->objs[i].pos.x = double_to_fixed(ft_atof(xyz[0]));
 	world->objs[i].pos.y = double_to_fixed(ft_atof(xyz[1]));
 	world->objs[i].pos.z = double_to_fixed(ft_atof(xyz[2]));
+	remove_split(xyz);
 	world->objs[i].normal.x = double_to_fixed(ft_atof(normal[0]));
 	world->objs[i].normal.y = double_to_fixed(ft_atof(normal[1]));
 	world->objs[i].normal.z = double_to_fixed(ft_atof(normal[2]));
+	remove_split(normal);
 	world->objs[i].abs_color.r = double_to_fixed(ft_atof(abs[0]));
 	world->objs[i].abs_color.g = double_to_fixed(ft_atof(abs[1]));
 	world->objs[i].abs_color.b = double_to_fixed(ft_atof(abs[2]));
+	remove_split(abs);
+	remove_split(split);
 }
 
 void	add_element_cy(char *line, int i, t_world *world)
@@ -156,12 +169,45 @@ void	add_element_cy(char *line, int i, t_world *world)
 	world->objs[i].pos.x = double_to_fixed(ft_atof(xyz[0]));
 	world->objs[i].pos.y = double_to_fixed(ft_atof(xyz[1]));
 	world->objs[i].pos.z = double_to_fixed(ft_atof(xyz[2]));
+	remove_split(xyz);
 	world->objs[i].normal.x = double_to_fixed(ft_atof(normal[0]));
 	world->objs[i].normal.y = double_to_fixed(ft_atof(normal[1]));
 	world->objs[i].normal.z = double_to_fixed(ft_atof(normal[2]));
+	remove_split(normal);
 	world->objs[i].size = double_to_fixed(ft_atof(split[2]));
 	world->objs[i].height = double_to_fixed(ft_atof(split[3]));
 	world->objs[i].abs_color.r = double_to_fixed(ft_atof(abs[0]));
 	world->objs[i].abs_color.g = double_to_fixed(ft_atof(abs[1]));
 	world->objs[i].abs_color.b = double_to_fixed(ft_atof(abs[2]));
+	remove_split(abs);
+	remove_split(split);
+}
+
+void	remove_split(char **sp)
+{
+	int	i;
+
+	i = 0;
+	// if (sp == NULL)
+	// 	return ;
+	while (sp[i] != NULL)
+	{
+		free(sp[i]);
+		i++;
+	}
+	free(sp);
+}
+
+void	remove_split_struct(t_world *w)
+{
+
+	int	i;
+
+	i = 0;
+	while (objs[i])
+	{
+		free(w->objs[i]);
+		i++;
+	}
+	free(w->objs);
 }

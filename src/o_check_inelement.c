@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:28:25 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/12/29 18:33:28 by tsirirak         ###   ########.fr       */
+/*   Updated: 2023/12/29 22:18:45 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,71 +85,5 @@ int	check_spiltrgb(char *line)
 	}
 	if (i == 3 && check_int(rgb[2]) != 0)
 		return (1);
-	return (0);
-}
-
-int	check_float(char *line)
-{
-	int	dot;
-	int	i;
-
-	dot = 0;
-	i = 0;
-	if (count_minus(line) >= 2 || count_dot(line) >= 2
-		|| line[0] == '.' || line[ft_strlen(line) - 1] == '.')
-		return (0);
-	else if (line[0] == '-')
-	{
-		i = 1;
-		while (line[i])
-		{
-			if ((line[i] >= '0' && line[i] <= '9') || line[i] == '.')
-				i++;
-			else
-				return (0);
-		}
-		if (i <= 1)
-			return (0);
-		return (1);
-	}
-	while ((*line >= '0' && *line <= '9') || *line == '.'
-		|| *line == '\0' || *line == ' ')
-	{
-		if (*line == '.')
-		{
-			dot++;
-			if (dot >= 2)
-			{
-				printf("dot---- \n");
-				return (0);
-			}
-		}
-		else if (*line == '\0' || *line == ' ')
-			return (i);
-		line++;
-		i++;
-	}
-	if (dot == 0)
-		return (0);
-	return (0);
-}
-
-int	check_int(char *str)
-{
-	int	i;
-
-	i = 0;
-	while ((str[i] >= '0' && str[i] <= '9'))
-	{
-		i++;
-	}
-	if (i <= 0)
-		return (0);
-	else if ((str[i] >= 9 && str[i] <= 13)
-		|| str[i] == 32 || str[i] == '\0' || str[i])
-	{
-		if (i >= 1)
-			return (1);
-	}
 	return (0);
 }
