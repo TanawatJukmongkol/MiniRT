@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:28:25 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/12/29 22:18:45 by tsirirak         ###   ########.fr       */
+/*   Updated: 2024/01/02 23:01:16 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,34 @@ int	check_spiltxyz(char *line)
 	int		i;
 
 	i = 0;
-	xyz = ft_split(line, ',');
+	xyz = NULL;
 	if (count_comma(line) > 2)
 		return (0);
+	xyz = ft_split(line, ',');
 	while (xyz[i])
 	{
 		if (check_number(xyz[i]) == 0)
 		{
+			int	j;
+			j = 0;
+			while (xyz[j] != NULL)
+			{
+				free(xyz[j]);
+				j++;
+			}
+			free(xyz);
 			return (0);
 		}
 		i++;
 	}
+	int	j;
+	j = 0;
+	while (xyz[j] != NULL)
+	{
+		free(xyz[j]);
+		j++;
+	}
+	free(xyz);
 	if (i == 3)
 		return (1);
 	return (0);
@@ -40,21 +57,24 @@ int	check_spiltxyz_3d(char *line)
 	int		i;
 
 	i = 0;
-	xyz = ft_split(line, ',');
 	if (count_comma(line) > 2)
 		return (0);
+	xyz = ft_split(line, ',');
 	while (xyz[i])
 	{
 		if (check_number(xyz[i]) == 0)
 		{
+			remove_split(xyz);
 			return (0);
 		}
 		else if (ft_atof(xyz[i]) < -1 || ft_atof(xyz[i]) > 1)
 		{
+			remove_split(xyz);
 			return (0);
 		}
 		i++;
 	}
+	remove_split(xyz);
 	if (i == 3)
 		return (1);
 	return (0);
@@ -73,17 +93,20 @@ int	check_spiltrgb(char *line)
 	{
 		if (check_int(rgb[i]) == 0)
 		{
-			printf("return (0) check_splitrgb\n");
+			remove_split(rgb);
 			return (0);
 		}
 		if (ft_atoi(rgb[i]) < 0 || ft_atoi(rgb[i]) > 255)
 		{
-			printf("check_0-255\n");
+			remove_split(rgb);
 			return (0);
 		}
 		i++;
 	}
 	if (i == 3 && check_int(rgb[2]) != 0)
+	{
+		remove_split(rgb);;
 		return (1);
+	}
 	return (0);
 }

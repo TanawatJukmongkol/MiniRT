@@ -24,7 +24,7 @@ BUILD_DIR	= ./build
 MLX_REPO	= https://github.com/42Paris/minilibx-linux.git
 
 CC			= gcc
-
+CFLAGS		= -g -Wall -Werror -Wextra -Ofast
 
 SRC			= ${addprefix ${BUILD_DIR}/,${SRCS}}
 LIBS_DIR	= ${addprefix ${LIB_DIR}/,${LIBS}}

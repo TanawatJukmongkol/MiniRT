@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:29:43 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/12/30 22:26:57 by tsirirak         ###   ########.fr       */
+/*   Updated: 2024/01/02 21:49:09 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	pass_element(char **argv, t_world *world)
 		free(line);
 		line = get_next_line(fd);
 	}
-	remove_split(world->objs);
+	remove_split_struct(world);
 	close(fd);
 }
 
@@ -52,20 +52,20 @@ int	add_element(char *line, int i, t_world *world)
 	else if (ft_strncmp(line, "pl", 2) == 0)
 	{
 		line = line + 2;
-		i++;
 		add_element_pl(line, i, world);
+		i++;
 	}
 	else if (ft_strncmp(line, "sp", 2) == 0)
 	{
 		line = line + 2;
-		i++;
 		add_element_sp(line, i, world);
+		i++;
 	}
 	else if (ft_strncmp(line, "cy", 2) == 0)
 	{
 		line = line + 2;
-		i++;
 		add_element_cy(line, i, world);
+		i++;
 	}
 	return (i);
 }
@@ -200,14 +200,9 @@ void	remove_split(char **sp)
 
 void	remove_split_struct(t_world *w)
 {
-
-	int	i;
-
-	i = 0;
-	while (objs[i])
+	if (w->objs != NULL)
 	{
-		free(w->objs[i]);
-		i++;
+		free(w->objs);
+		w->objs = NULL;
 	}
-	free(w->objs);
 }

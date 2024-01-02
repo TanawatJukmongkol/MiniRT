@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:30:53 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/12/30 18:27:09 by tsirirak         ###   ########.fr       */
+/*   Updated: 2024/01/02 20:06:50 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,7 @@ void	add_element_pl(char *line, int i, t_world *world);
 void	add_element_sp(char *line, int i, t_world *world);
 void	add_element_cy(char *line, int i, t_world *world);
 void	remove_split(char **sp);
+void	remove_split_struct(t_world *w);
 
 //check_other
 int check_float(char *line);
