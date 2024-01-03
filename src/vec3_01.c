@@ -6,7 +6,7 @@
 /*   By: tjukmong <tjukmong@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:30:44 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/11/23 05:06:29 by Tanawat J.       ###   ########.fr       */
+/*   Updated: 2024/01/02 23:12:31 by Tanawat J.       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 // Fast Inverse Square Root using fixed point number and Newton's square root method
 // The function was explained here: https://www.youtube.com/watch?v=p8u_k2LIZyo
-t_fixed_pt	q_rsqrt(t_fixed_pt num)
+/*t_fixed_pt	q_rsqrt(t_fixed_pt num)
 {
 	long long	i;
 	double		x2;
@@ -33,7 +33,7 @@ void	vec_set(t_vec3 *dst, t_vec3 v)
 	dst->x = v.x;
 	dst->y = v.y;
 	dst->z = v.z;
-}
+}*/
 
 t_vec3	vec3(double x, double y, double z)
 {

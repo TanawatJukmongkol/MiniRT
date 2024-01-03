@@ -6,7 +6,7 @@
 /*   By: tjukmong <tjukmong@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 15:42:45 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/04/17 21:55:06 by tjukmong         ###   ########.fr       */
+/*   Updated: 2024/01/03 14:20:56 by Tanawat J.       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,29 +89,28 @@ void	consume_token(t_vars *v, char *str)
 
 char	*get_next_line(int fd)
 {
-	static t_vars	v[FD_MAX];
-	char			*str;
+	t_vars	*v;
+	char	*str;
 
-	if (fd < 0 || fd >= FD_MAX)
+	v = files_fd(fd);
+	if (!v)
 		return (NULL);
-	if (v[fd].eof && v[fd].fin)
-		return (NULL);
-	if (!v[fd].t)
+	if (!v->t)
 	{
-		v[fd].fd = fd;
-		v[fd].offset = 0;
-		v[fd].tok_len = 0;
+		v->fd = fd;
+		v->offset = 0;
+		v->tok_len = 0;
 	}
-	v[fd].nl_bytes = 0;
-	get_nlbyte(&v[fd]);
-	if (v[fd].nl_bytes == 0 || v[fd].t->nbyte == (size_t)-1)
+	v->nl_bytes = 0;
+	get_nlbyte(v);
+	if (v->nl_bytes == 0 || v->t->nbyte == (size_t)-1)
 	{
-		free(v[fd].t);
-		v[fd].fin = 1;
+		free(v->t);
+		v->fin = 1;
 		return (NULL);
 	}
-	str = malloc(v[fd].nl_bytes + 1);
-	consume_token(&v[fd], str);
-	str[v[fd].nl_bytes] = '\0';
+	str = malloc(v->nl_bytes + 1);
+	consume_token(v, str);
+	str[v->nl_bytes] = '\0';
 	return (str);
 }

@@ -6,7 +6,7 @@
 /*   By: tjukmong <tjukmong@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 15:42:31 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/04/18 22:27:47 by tjukmong         ###   ########.fr       */
+/*   Updated: 2024/01/03 13:10:43 by Tanawat J.       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,7 @@ typedef struct s_vars
 }				t_vars;
 
 char	*get_next_line(int fd);
+t_vars	*files_fd(int fd);
+void	free_gnl(int fd, char *str);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:28:25 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/12/29 22:02:07 by tsirirak         ###   ########.fr       */
+/*   Updated: 2024/01/03 16:11:49 by Tanawat J.       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ int	check_in_file(int fd, t_element *ele)
 	if (line == NULL)
 	{
 		printf("file empty\n");
+		free_gnl(fd, line);
 		return (0);
 	}
 	while (line)
@@ -68,15 +69,17 @@ int	check_in_file(int fd, t_element *ele)
 			if (check_element(line, ele) == 0)
 			{
 				printf("error : check_element in check_in_file\n");
+				printf("> %s\n", line);
+				free_gnl(fd, line);
 				return (0);
 			}
 		}
 		free(line);
 		line = get_next_line(fd);
 	}
+	free_gnl(fd, line);
 	if (count_element(ele) == 0)
 		return (0);
-	free(line);
 	return (1);
 }
 
@@ -90,6 +93,8 @@ int	check_element(char *line, t_element *ele)
 			return (check_element_a(line + 1, ele->a + 1));
 		else if (*line == 'C')
 			return (check_element_c(++line, ++ele->c));
+		else if (*line == 'L')
+			return (check_element_l(++line, ++ele->l));
 		else if (ft_strncmp(line, "pl", 2) == 0)
 			return (check_element_pl(line + 2, ++ele->pl));
 		else if (ft_strncmp(line, "sp", 2) == 0)

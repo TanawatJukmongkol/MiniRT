@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:30:53 by tjukmong          #+#    #+#             */
-/*   Updated: 2024/01/02 20:06:50 by tsirirak         ###   ########.fr       */
+/*   Updated: 2024/01/03 16:06:10 by Tanawat J.       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ void set_ele(t_element *ele);
 //check_element
 int check_element_a(char *line, int num_a);
 int check_element_c(char *line, int num_c);
-// int check_element_l(char *line, int num_l);
+int check_element_l(char *line, int num_l);
 int check_element_sp(char *line, int num_sp);
 int check_element_pl(char *line, int num_pl);
 int check_element_cy(char *line, int num_cy);

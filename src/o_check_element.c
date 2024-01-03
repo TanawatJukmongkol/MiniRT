@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:28:25 by tjukmong          #+#    #+#             */
-/*   Updated: 2024/01/02 22:38:17 by tsirirak         ###   ########.fr       */
+/*   Updated: 2024/01/03 16:10:27 by Tanawat J.       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,33 @@ int	check_element_c(char *line, int num_c)
 	remove_split(str);
 	return (re);
 }
+
+int	check_element_l(char *line, int num_pl)
+{
+	char	**str;
+	int		i;
+	int		re;
+
+	(void) num_pl;
+	i = 0;
+	re = 1;
+	str = ft_split_space(line);
+	while (str[i])
+		i++;
+	if ((i == 4 && ft_isalnum(str[3][0]) != 0))
+		re = 0;
+	else if (i > 4)
+		re = 0;
+	else if (check_spiltxyz(str[0]) == 0)
+		re = 0;
+	else if (check_float(str[1]) == 0)
+		re = 0;
+	else if (check_spiltrgb(str[2]) == 0)
+		re = 0;
+	remove_split(str);
+	return (re);
+}
+
 
 int	check_element_sp(char *line, int num_sp)
 {
