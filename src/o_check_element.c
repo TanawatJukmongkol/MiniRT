@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:28:25 by tjukmong          #+#    #+#             */
-/*   Updated: 2024/01/05 02:49:08 by tsirirak         ###   ########.fr       */
+/*   Updated: 2024/01/05 02:56:50 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	check_element_a(char *line, int num_a)
 	}
 	printf("i = %c\n",str[2][0]);
 	printf("i = %d\n",i);
-	if (i == 3 && (ft_isalnum(str[2][0]) != '\0' || str[2][0] == '/') )
+	if (i == 3 && (ft_isalnum(str[2][0]) != '\0' || str[2][0] == '/'))
 		re = 0;
 	else if (i > 3)
 		re = 0;
@@ -65,7 +65,7 @@ int	check_element_c(char *line, int num_c)
 	str = ft_split_space(line);
 	while (str[i])
 		i++;
-	if ((i == 4 && ft_isalnum(str[3][0]) != 0))
+	if ((i == 4 && ft_isalnum((str[3][0]) != 0 | str[3][0] == '/')))
 		re = 0;
 	else if (i > 4)
 		re = 0;
@@ -90,7 +90,7 @@ int	check_element_l(char *line, int num_pl)
 	str = ft_split_space(line);
 	while (str[i])
 		i++;
-	if ((i == 4 && ft_isalnum(str[3][0]) != 0))
+	if ((i == 4 && (ft_isalnum(str[3][0]) != 0 | str[2][0] == '/')))
 		re = 0;
 	else if (i > 4)
 		re = 0;
@@ -117,8 +117,9 @@ int	check_element_sp(char *line, int num_sp)
 	str = ft_split_space(line);
 	while (str[i])
 		i++;
-	if ((i == 4 && ft_isalnum(str[3][0]) != 0) || i > 4)
+	if (i == 4 && (ft_isalnum(str[3][0]) != 0 || str[3][0] == '/'))
 		re = 0;
+	else if (i < 4)
 	if (i > 4)
 		re = 0;
 	if (check_spiltxyz(str[0]) == 0)
@@ -145,11 +146,11 @@ int	check_element_pl(char *line, int num_pl)
 	str = ft_split_space(line);
 	while (str[i])
 		i++;
-	if ((i == 4 && ft_isalnum(str[3][0]) != 0))
+	if (i == 4 && (ft_isalnum(str[3][0]) != 0 | str[3][0] == '/'))
 		re = 0;
-	if (i > 4)
+	else if (i > 4)
 		re = 0;
-	if (check_spiltxyz(str[0]) == 0)
+	else if (check_spiltxyz(str[0]) == 0)
 		re = 0;
 	else if (check_spiltxyz_3d(str[1]) == 0)
 		re = 0;
@@ -171,7 +172,7 @@ int	check_element_cy(char *line, int num_cy)
 	str = ft_split_space(line);
 	while (str[i])
 		i++;
-	if ((i == 6 && ft_isalnum(str[5][0]) != 0))
+	if (i == 6 && (ft_isalnum(str[5][0]) != 0 | str[2][0] == '/'))
 		re = 0;
 	else if (i > 6)
 		re = 0;
