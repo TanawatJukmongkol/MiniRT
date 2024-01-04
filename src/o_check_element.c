@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:28:25 by tjukmong          #+#    #+#             */
-/*   Updated: 2024/01/03 16:10:27 by Tanawat J.       ###   ########.fr       */
+/*   Updated: 2024/01/05 00:45:11 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	check_element_a(char *line, int num_a)
 	int		re;
 
 	(void) num_a;
+	printf("AAAAAA ");
 	i = 0;
 	re = 1;
 	str = ft_split_space(line);
@@ -28,11 +29,13 @@ int	check_element_a(char *line, int num_a)
 		re = 0;
 	else if (i > 3)
 		re = 0;
-	else if ((ft_atof(str[0]) < 0 || ft_atof(str[0]) > 1)
+	if ((ft_atof(str[0]) < 0 || ft_atof(str[0]) > 1)
 		|| check_float(str[0]) == 0)
 		re = 0;
 	else if (check_spiltrgb(str[1]) == 0)
+	{
 		re = 0;
+	}
 	remove_split(str);
 	return (re);
 }
@@ -55,7 +58,7 @@ int	check_element_c(char *line, int num_c)
 		re = 0;
 	if (check_spiltxyz(str[0]) == 0 || check_spiltxyz_3d(str[1]) == 0)
 		re = 0;
-	else if (check_int(str[2]) == 0 || ft_atoi(str[2]) < 0
+	if (check_int(str[2]) == 0 || ft_atoi(str[2]) < 0
 		|| ft_atoi(str[2]) > 180)
 		re = 0;
 	remove_split(str);
@@ -78,7 +81,7 @@ int	check_element_l(char *line, int num_pl)
 		re = 0;
 	else if (i > 4)
 		re = 0;
-	else if (check_spiltxyz(str[0]) == 0)
+	if (check_spiltxyz(str[0]) == 0)
 		re = 0;
 	else if (check_float(str[1]) == 0)
 		re = 0;
@@ -101,14 +104,16 @@ int	check_element_sp(char *line, int num_sp)
 	str = ft_split_space(line);
 	while (str[i])
 		i++;
-	if ((i == 4 && ft_isalnum(str[3][0]) != 0))
+	if ((i == 4 && ft_isalnum(str[3][0]) != 0) || i > 4)
 		re = 0;
-	else if (i > 4)
+	if (i > 4)
 		re = 0;
-	else if (check_spiltxyz(str[0]) == 0)
+	if (check_spiltxyz(str[0]) == 0)
 		re = 0;
 	else if (check_float(str[1]) == 0)
+	{
 		re = 0;
+	}
 	else if (check_spiltrgb(str[2]) == 0)
 		re = 0;
 	remove_split(str);
@@ -129,9 +134,9 @@ int	check_element_pl(char *line, int num_pl)
 		i++;
 	if ((i == 4 && ft_isalnum(str[3][0]) != 0))
 		re = 0;
-	else if (i > 4)
+	if (i > 4)
 		re = 0;
-	else if (check_spiltxyz(str[0]) == 0)
+	if (check_spiltxyz(str[0]) == 0)
 		re = 0;
 	else if (check_spiltxyz_3d(str[1]) == 0)
 		re = 0;
@@ -157,7 +162,7 @@ int	check_element_cy(char *line, int num_cy)
 		re = 0;
 	else if (i > 6)
 		re = 0;
-	else if (check_spiltxyz(str[0]) == 0)
+	if (check_spiltxyz(str[0]) == 0)
 		re = 0;
 	else if (check_spiltxyz_3d(str[1]) == 0)
 		re = 0;

@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:30:53 by tjukmong          #+#    #+#             */
-/*   Updated: 2024/01/03 16:06:10 by Tanawat J.       ###   ########.fr       */
+/*   Updated: 2024/01/05 00:55:19 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ int check_element_cy(char *line, int num_cy);
 int	check_spiltxyz(char *line);
 int	check_spiltxyz_3d(char *line);
 int check_spiltrgb(char *line);
+int	check_splitrgb2(char *line);
 
 //other
 int check_comment(char *str);
