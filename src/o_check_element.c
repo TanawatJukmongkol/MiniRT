@@ -6,11 +6,19 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:28:25 by tjukmong          #+#    #+#             */
-/*   Updated: 2024/01/05 00:45:11 by tsirirak         ###   ########.fr       */
+/*   Updated: 2024/01/05 02:49:08 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+int	is_space(char c)
+{
+	if ((c >= 9 && c <= 13)
+		|| c == 32 || c)
+		return (1);
+	return (0);
+}
 
 int	check_element_a(char *line, int num_a)
 {
@@ -19,17 +27,21 @@ int	check_element_a(char *line, int num_a)
 	int		re;
 
 	(void) num_a;
-	printf("AAAAAA ");
 	i = 0;
 	re = 1;
 	str = ft_split_space(line);
 	while (str[i])
+	{
+		printf("str[i] = %s\n",str[i]);
 		i++;
-	if ((i == 3 && ft_isalnum(str[2][0]) != 0))
+	}
+	printf("i = %c\n",str[2][0]);
+	printf("i = %d\n",i);
+	if (i == 3 && (ft_isalnum(str[2][0]) != '\0' || str[2][0] == '/') )
 		re = 0;
 	else if (i > 3)
 		re = 0;
-	if ((ft_atof(str[0]) < 0 || ft_atof(str[0]) > 1)
+	else if ((ft_atof(str[0]) < 0 || ft_atof(str[0]) > 1)
 		|| check_float(str[0]) == 0)
 		re = 0;
 	else if (check_spiltrgb(str[1]) == 0)
@@ -37,6 +49,7 @@ int	check_element_a(char *line, int num_a)
 		re = 0;
 	}
 	remove_split(str);
+	printf("re = %d\n",re);
 	return (re);
 }
 
