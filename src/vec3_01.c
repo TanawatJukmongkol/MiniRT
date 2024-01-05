@@ -6,7 +6,7 @@
 /*   By: tjukmong <tjukmong@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:30:44 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/12/22 07:46:35 by Tanawat J.       ###   ########.fr       */
+/*   Updated: 2024/01/01 10:26:43 by Tanawat J.       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,17 @@ double	vec_mag(t_vec3 vec)
 t_vec3	vec_norm(t_vec3 vec)
 {
 	return (vec_mult(vec, 1 / vec_mag(vec)));
+}
+
+double	vec_norm_theta(t_vec3 v, t_vec3 norm)
+{
+	return (acos(fixed_to_double(
+					vec_dot(v, norm))/(vec_mag(v)*vec_mag(norm))));
+}
+
+int	vec_assert_equal(t_vec3 v1, t_vec3 v2)
+{
+	return (v1.x == v2.x && v1.y == v2.y && v1.z == v2.z);
 }
 
 // Get point at t.

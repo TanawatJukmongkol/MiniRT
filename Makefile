@@ -1,6 +1,6 @@
 
 NAME		= miniRT
-SRCS		= minirt.c fixed_point.c graphics.c graphics_util.c vec3_01.c ft_destroy_display.c ft_loop_end.c hittable.c
+SRCS		= minirt.c fixed_point.c graphics.c graphics_util.c vec3_01.c ft_destroy_display.c ft_loop_end.c hittable.c lighting.c
 LIBS		= mlx libft
 
 SRC_DIR		= ./src

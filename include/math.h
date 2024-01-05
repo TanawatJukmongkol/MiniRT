@@ -48,6 +48,8 @@ t_fixed_pt	vec_dot(t_vec3 v1, t_vec3 v2);
 t_vec3		vec_cross(t_vec3 v1, t_vec3 v2);
 double		vec_mag(t_vec3);
 t_vec3		vec_norm(t_vec3 v);
+double		vec_norm_theta(t_vec3 v, t_vec3 norm);
+int			vec_assert_equal(t_vec3 v1, t_vec3 v2);
 
 // Rays
 t_vec3		ray_at(t_ray ray, double t);

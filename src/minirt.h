@@ -6,40 +6,26 @@
 /*   By: tjukmong <tjukmong@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:30:53 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/12/25 04:40:45 by Tanawat J.       ###   ########.fr       */
+/*   Updated: 2024/01/01 09:51:09 by Tanawat J.       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/math.h"
 #include "../include/graphics.h"
 #include "../include/static_def.h"
-#include "../include/hittable.h"
+#include "../include/world.h"
 // #include <X11/X.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 
-typedef struct s_world
-{
-	t_fixed_pt	amb_brightness;	// Ambient light brightness
-	t_color		ambient;		// Ambient color
-	t_object	cam;			// Camera
-	t_object	*objs;			// Object list
-	size_t		obj_count;		// Number of ojects
-	t_hittable	hit_rec;
-}				t_world;
-
 typedef struct s_glob
 {
 	t_mlx		mlx;
 	t_world		world;
+	t_hittable	hit_record;
+	int			render_mode;
 }				t_glob;
-
-/*  Z ^
- *    |  Y
- *    |/
- *    |---> X
-*/
 
 /*
 	t_world

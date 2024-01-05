@@ -6,7 +6,7 @@
 /*   By: tjukmong <tjukmong@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:29:43 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/12/25 08:28:42 by Tanawat J.       ###   ########.fr       */
+/*   Updated: 2024/01/04 22:54:04 by Tanawat J.       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ t_vec3	get_pixel_dirr(t_glob *g, int x, int y)
 	t_vec3 u;
 	t_vec3 v;
 
-	vec_set(&u, vec_cross(g->world.cam.normal, vec3(0, 0, 1))); // alignment vec x up vector
+	vec_set(&u, vec_cross(g->world.cam.normal, vec3(0, -1, 0))); // alignment vec x up vector
 	vec_set(&v, vec_cross(u, g->world.cam.normal)); // u x look_at
-	
+
 	// Set u, v to length of half viewport width, height modified by x, y.
 	vec_set(&u, vec_mult(u, (((float)x / g->mlx.width) - 0.5) * vw));
-	vec_set(&v, vec_mult(v, (((float)(g->mlx.height - y) / g->mlx.height) - 0.5) * vh));
+	vec_set(&v, vec_mult(v, ((((float)g->mlx.height - y) / g->mlx.height) - 0.5) * vh));
 
 	vec_set(&u, vec_add(u, vec_mult(g->world.cam.normal, focal))); // Add focus vector
 	vec_set(&v, vec_add(v, vec_mult(g->world.cam.normal, focal))); // Add focus vector
@@ -36,13 +36,12 @@ t_vec3	get_pixel_dirr(t_glob *g, int x, int y)
 				vec_add(u, v))));
 
 	// printf("< %f, %f, %f >\n", fixed_to_double(dirr.x), fixed_to_double(dirr.y), fixed_to_double(dirr.z));
-
 	return dirr;
 }
 
 void	fragment_renderer(
 	t_glob *g, int chunk_nbr, t_color frag(
-			t_mlx *ctx, t_world *world, t_ray ray))
+			t_mlx *ctx, t_world *world, t_ray ray, t_hittable *rec))
 {
 	int		x;
 	int		y;
@@ -58,59 +57,41 @@ void	fragment_renderer(
 		x = 0;
 		while (x < g->mlx.width)
 		{
+			g->hit_record.n = 0;
 			vec_set(&r.origin, g->world.cam.pos);
 			vec_set(&r.direction, get_pixel_dirr(g, x, y));
-			// Anti alias
-			//vec_set(&r.direction, vec_mult(
-			//		r.direction, 1 - (
-			//			(float)rand() / RAND_MAX / 18e3)));
-			putpixel(&g->mlx, x, y, frag(&g->mlx, &g->world, r));
+			putpixel(&g->mlx, x, y, frag(&g->mlx, &g->world, r, &g->hit_record));
 			x++;
 		}
 		y++;
 	}
 }
 
-t_color	fragment(t_mlx *ctx, t_world *w, t_ray r)
+t_color	fragment(t_mlx *ctx, t_world *w, t_ray r, t_hittable *rec)
 {
 	t_color		c_light;
-	t_hittable	record;
-	size_t		i;
-
 	(void)(ctx);
 
-	vec_set(&record.norm, vec3(0, 0, 0));
-	record.t = -1;
+	vec_set(&rec->norm, r.direction);
+	rec->t = -1;
+	rec->intensity = fixed_to_double(w->amb_brightness);
 
-	i = 0;
-	while (i < w->obj_count)
-		hittable(&record, w->objs[i++], r);
+	hittable(w, rec, r);
 
-	if (record.t != -1)
-	{
-		set_color(&c_light, rgb(
-					(fixed_to_double(record.norm.x) + 1) * 127,
-					(fixed_to_double(-record.norm.y) + 1) * 127,
-					(fixed_to_double(record.norm.z) + 1) * 127 ));
-		// set_color(&c_light, rgb(
-					// (fixed_to_double(record.norm.x) + 1) * 127, 0, 0));
-					// 0, (fixed_to_double(-record.norm.y) + 1) * 127, 0));
-					// 0, 0, (fixed_to_double(record.norm.z) + 1) * 127 ));
-	}
-	else
-		set_color(&c_light, w->ambient);
+	if (rec->t == -1)
+		return (w->ambient);
 
-	return c_light;
+	lighting(w, rec, r);
+
+	set_color(&c_light, rec->color);
+	color_mult_norm(&c_light, rec->intensity / w->light_count);
+	return (c_light);
 }
 
 int	draw(t_glob *g)
 {
-	if (g->mlx.frame >= 16)
-	{
-		g->mlx.frame %= 4;
+	if (g->mlx.frame >= 4)
 		return (update_canvas(&g->mlx));
-	}
-	// mlx_string_put(g->mlx.mlx, g->mlx.win, 10, 10, rgb_to_hex(rgb(255,255,255)), "Loading...");
 	fragment_renderer(g, g->mlx.frame % 4, fragment);
 	g->mlx.frame++;
 	return (update_canvas(&g->mlx));
@@ -141,18 +122,18 @@ int ev_keypressed(int keycode, t_glob *g)
 	if (keycode == KEY_D)
 		g->world.cam.pos.x += double_to_fixed(0.1);
 	if (keycode == KEY_W)
-		g->world.cam.pos.z += double_to_fixed(0.1);
+		g->world.cam.pos.y += double_to_fixed(0.1);
 	if (keycode == KEY_S)
-		g->world.cam.pos.z -= double_to_fixed(0.1);
+		g->world.cam.pos.y -= double_to_fixed(0.1);
 	if (keycode == KEY_UP)
-		g->world.cam.pos.y += double_to_fixed(0.5);
+		g->world.cam.pos.z += double_to_fixed(0.5);
 	if (keycode == KEY_DOWN)
-		g->world.cam.pos.y -= double_to_fixed(0.5);
+		g->world.cam.pos.z -= double_to_fixed(0.5);
 	if (keycode == KEY_RIGHT && fixed_to_double(g->world.cam.fov) > 5)
 		g->world.cam.fov -= double_to_fixed(5);
 	if (keycode == KEY_LEFT && fixed_to_double(g->world.cam.fov) < 175)
 		g->world.cam.fov += double_to_fixed(5);
-	g->mlx.frame += 15;
+	g->mlx.frame = 0;
 	return 0;
 }
 
@@ -160,29 +141,58 @@ int	main(void)
 {
 	t_glob	g;
 
-	g.world.obj_count = 2;
-	t_object obj[g.world.obj_count];
+	g.render_mode = 0;
 
+	g.world.obj_count = 3;
+	t_object obj[g.world.obj_count];
+	g.world.light_count = 2;
+	t_object light[g.world.light_count];
 
 	if (init_canvas(&g.mlx, "MiniRT", 1000, 800) < 0)
 		ev_destroy(&g);
 
 	// Setup world
-	g.world.cam.normal = vec3(0, 1, 0);
-	g.world.cam.fov = double_to_fixed(95);
-	g.world.cam.pos = vec3(0, -20, 0);
-	g.world.ambient = rgb(0, 0, 0);
-	
+	g.world.ambient = rgb(125, 125, 125);
+	g.world.amb_brightness = double_to_fixed(0.2);
+
+	g.world.cam.pos = vec3(0, 0, -10);
+	g.world.cam.normal = vec_norm(vec3(0, 0, 1));
+	g.world.cam.fov = double_to_fixed(90);
+
+	// Setup Lights
+	light[0].type = point_light;
+	light[0].abs_color = rgb(255, 255, 255);
+	light[0].brightness = double_to_fixed(0.8);
+	light[0].pos = vec3(0.4, 4, 0);
+
+	light[1].type = point_light;
+	light[1].abs_color = rgb(255, 255, 255);
+	light[1].brightness = double_to_fixed(0.4);
+	light[1].pos = vec3(-0.4, 4, 0);
+
 	// Read objects
-	obj[0].type = sphere;
-	obj[0].pos = vec3(0, 0, 0);
-	obj[0].size = double_to_fixed(1);
+
+	obj[0].type = plane_infinite;
+	obj[0].pos = vec3(0, -0.6, 0);
+	obj[0].normal = vec_norm(vec3(0.1, 1, -0.3));
+	obj[0].abs_color = rgb(0, 0, 255);
 
 	obj[1].type = sphere;
-	obj[1].pos = vec3(0, 0, 1.3);
-	obj[1].size = double_to_fixed(0.7);
-	
+	obj[1].pos = vec3(0.5, 0, 0);
+	obj[1].size = double_to_fixed(1);
+	obj[1].abs_color = rgb(255, 0, 0);
+
+	obj[2].type = cylinder;
+	obj[2].pos = vec3(-0.5, 0.4, 0);
+	obj[2].normal = vec_norm(vec3(0.4, 1, -0.4));
+	// obj[2].normal = vec_norm(vec3(0, 1, 0));
+	// obj[2].normal = vec_norm(vec3(1, 0, 0));
+	obj[2].size = double_to_fixed(1);
+	obj[2].height = double_to_fixed(1);
+	obj[2].abs_color = rgb(0, 255, 0);
+
 	g.world.objs = obj;
+	g.world.lights = light;
 
 	srand(141337);
 	mlx_hook(g.mlx.win, STATIC_DESTROY, 0L, ev_destroy, &g);
