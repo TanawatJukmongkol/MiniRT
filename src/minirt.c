@@ -6,7 +6,7 @@
 /*   By: tjukmong <tjukmong@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:29:43 by tjukmong          #+#    #+#             */
-/*   Updated: 2024/01/04 22:54:04 by Tanawat J.       ###   ########.fr       */
+/*   Updated: 2024/01/05 11:38:21 by Tanawat J.       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ t_color	fragment(t_mlx *ctx, t_world *w, t_ray r, t_hittable *rec)
 
 	vec_set(&rec->norm, r.direction);
 	rec->t = -1;
-	rec->intensity = fixed_to_double(w->amb_brightness);
+	rec->intensity = w->light_count;
 
 	hittable(w, rec, r);
 
@@ -84,7 +84,8 @@ t_color	fragment(t_mlx *ctx, t_world *w, t_ray r, t_hittable *rec)
 	lighting(w, rec, r);
 
 	set_color(&c_light, rec->color);
-	color_mult_norm(&c_light, rec->intensity / w->light_count);
+	color_add(&c_light, w->ambient);
+	color_mult_norm(&c_light, rec->intensity + fixed_to_double(w->amb_brightness) / w->light_count);
 	return (c_light);
 }
 
@@ -95,46 +96,6 @@ int	draw(t_glob *g)
 	fragment_renderer(g, g->mlx.frame % 4, fragment);
 	g->mlx.frame++;
 	return (update_canvas(&g->mlx));
-}
-
-int	ev_destroy(t_glob *g)
-{
-	if (!g->mlx.mlx)
-		exit(-1);
-	ft_loop_end(g);
-	if (g->mlx.canvas.ptr)
-		mlx_destroy_image(g->mlx.mlx, g->mlx.canvas.ptr);
-	if (g->mlx.win)
-		mlx_destroy_window(g->mlx.mlx, g->mlx.win);
-	ft_destroy_display(g);
-	free(g->mlx.mlx);
-	exit(0);
-	return (0);
-}
-
-int ev_keypressed(int keycode, t_glob *g)
-{
-	// printf("keycode: %d\n", keycode);
-	if (keycode == KEY_ESC)
-		ev_destroy(g);
-	if (keycode == KEY_A)
-		g->world.cam.pos.x -= double_to_fixed(0.1);
-	if (keycode == KEY_D)
-		g->world.cam.pos.x += double_to_fixed(0.1);
-	if (keycode == KEY_W)
-		g->world.cam.pos.y += double_to_fixed(0.1);
-	if (keycode == KEY_S)
-		g->world.cam.pos.y -= double_to_fixed(0.1);
-	if (keycode == KEY_UP)
-		g->world.cam.pos.z += double_to_fixed(0.5);
-	if (keycode == KEY_DOWN)
-		g->world.cam.pos.z -= double_to_fixed(0.5);
-	if (keycode == KEY_RIGHT && fixed_to_double(g->world.cam.fov) > 5)
-		g->world.cam.fov -= double_to_fixed(5);
-	if (keycode == KEY_LEFT && fixed_to_double(g->world.cam.fov) < 175)
-		g->world.cam.fov += double_to_fixed(5);
-	g->mlx.frame = 0;
-	return 0;
 }
 
 int	main(void)
@@ -152,8 +113,8 @@ int	main(void)
 		ev_destroy(&g);
 
 	// Setup world
-	g.world.ambient = rgb(125, 125, 125);
-	g.world.amb_brightness = double_to_fixed(0.2);
+	g.world.ambient = rgb(255, 255, 255);
+	g.world.amb_brightness = double_to_fixed(0.1);
 
 	g.world.cam.pos = vec3(0, 0, -10);
 	g.world.cam.normal = vec_norm(vec3(0, 0, 1));
@@ -162,19 +123,24 @@ int	main(void)
 	// Setup Lights
 	light[0].type = point_light;
 	light[0].abs_color = rgb(255, 255, 255);
-	light[0].brightness = double_to_fixed(0.8);
-	light[0].pos = vec3(0.4, 4, 0);
+	light[0].brightness = double_to_fixed(1.0);
+	// light[0].pos = vec3(0.4, 2, 0);
+	light[0].pos = vec3(1, 2, -0.5);
 
 	light[1].type = point_light;
 	light[1].abs_color = rgb(255, 255, 255);
-	light[1].brightness = double_to_fixed(0.4);
-	light[1].pos = vec3(-0.4, 4, 0);
+	light[1].brightness = double_to_fixed(0.2);
+	// light[1].pos = vec3(-0.4, 2, 0);
+	light[1].pos = vec3(-1, 2, -0.8);
 
 	// Read objects
 
 	obj[0].type = plane_infinite;
-	obj[0].pos = vec3(0, -0.6, 0);
-	obj[0].normal = vec_norm(vec3(0.1, 1, -0.3));
+	// obj[0].pos = vec3(0, -0.6, 0);
+	obj[0].pos = vec3(0, 0, 0.5);
+	// obj[0].normal = vec_norm(vec3(0.1, 1, -0.3));
+	// obj[0].normal = vec_norm(vec3(0, 1, 0));
+	obj[0].normal = vec_norm(vec3(0, 0, 1));
 	obj[0].abs_color = rgb(0, 0, 255);
 
 	obj[1].type = sphere;

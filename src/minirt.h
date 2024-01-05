@@ -6,7 +6,7 @@
 /*   By: tjukmong <tjukmong@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:30:53 by tjukmong          #+#    #+#             */
-/*   Updated: 2024/01/01 09:51:09 by Tanawat J.       ###   ########.fr       */
+/*   Updated: 2024/01/05 10:41:38 by Tanawat J.       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include "../include/graphics.h"
 #include "../include/static_def.h"
 #include "../include/world.h"
-// #include <X11/X.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -42,3 +41,8 @@ typedef struct s_glob
 // MLX weak linking (Apple)
 int	ft_loop_end(t_glob *g);
 int	ft_destroy_display(t_glob *g);
+
+// Event hooks
+int	ev_destroy(t_glob *g);
+int ev_keypressed(int keycode, t_glob *g);
+

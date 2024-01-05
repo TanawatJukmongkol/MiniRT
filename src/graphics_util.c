@@ -6,7 +6,7 @@
 /*   By: tjukmong <tjukmong@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:28:18 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/11/22 19:41:32 by Tanawat J.       ###   ########.fr       */
+/*   Updated: 2024/01/05 11:17:09 by Tanawat J.       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ void	color_invrt(t_color *dst)
 
 void	color_add(t_color *dst, t_color c)
 {
-	dst->r = dst->r + c.r;
-	dst->g = dst->g + c.g;
-	dst->b = dst->b + c.b;
+	dst->r = (dst->r + c.r) / 2;
+	dst->g = (dst->g + c.g) / 2;
+	dst->b = (dst->b + c.b) / 2;
 	if (dst->r > (255 << FIXED_BIT_FRAC))
 		dst->r = 255 << FIXED_BIT_FRAC;
 	if (dst->g > (255 << FIXED_BIT_FRAC))
