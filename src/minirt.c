@@ -6,7 +6,7 @@
 /*   By: tjukmong <tjukmong@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:29:43 by tjukmong          #+#    #+#             */
-/*   Updated: 2024/01/06 04:01:32 by Tanawat J.       ###   ########.fr       */
+/*   Updated: 2024/01/06 04:32:25 by Tanawat J.       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ int	main(void)
 
 	g.world.obj_count = 4;
 	t_object obj[g.world.obj_count];
-	g.world.light_count = 2;
+	g.world.light_count = 3;
 	t_object light[g.world.light_count];
 
 	if (init_canvas(&g.mlx, "MiniRT", 1000, 800) < 0)
@@ -117,7 +117,7 @@ int	main(void)
 
 	// Setup world
 	g.world.ambient = rgb(255, 255, 255);
-	g.world.amb_brightness = double_to_fixed(0.1);
+	g.world.amb_brightness = double_to_fixed(0.6);
 
 	g.world.cam.pos = vec3(0, 0, -10);
 	g.world.cam.normal = vec_norm(vec3(0, 0, 1));
@@ -135,6 +135,12 @@ int	main(void)
 	light[1].brightness = double_to_fixed(0.2);
 	// light[1].pos = vec3(-0.4, 2, 0);
 	light[1].pos = vec3(-1, 2, -0.8);
+	
+	light[2].type = point_light;
+	light[2].abs_color = rgb(255, 255, 255);
+	light[2].brightness = double_to_fixed(0.5);
+	// light[2].pos = vec3(-0.4, 2, 0);
+	light[2].pos = vec3(0, 0.1, -3);
 
 	// Read objects
 	
@@ -147,7 +153,7 @@ int	main(void)
 	obj[0].abs_color = rgb(0, 0, 255);
 
 	obj[1].type = plane_infinite;
-	obj[1].pos = vec3(0, 0, 0.6);
+	obj[1].pos = vec3(0, 0, 2);
 	// obj[1].pos = vec3(0, 0, 0.5);
 	// obj[1].normal = vec_norm(vec3(0.1, 1, -0.3));
 	// obj[1].normal = vec_norm(vec3(0, 1, 0));
