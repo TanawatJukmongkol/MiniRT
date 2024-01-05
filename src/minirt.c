@@ -6,7 +6,7 @@
 /*   By: tjukmong <tjukmong@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:29:43 by tjukmong          #+#    #+#             */
-/*   Updated: 2024/01/05 11:38:21 by Tanawat J.       ###   ########.fr       */
+/*   Updated: 2024/01/06 04:01:32 by Tanawat J.       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,17 +75,20 @@ t_color	fragment(t_mlx *ctx, t_world *w, t_ray r, t_hittable *rec)
 	vec_set(&rec->norm, r.direction);
 	rec->t = -1;
 	rec->intensity = w->light_count;
+	rec->color = w->ambient;
 
 	hittable(w, rec, r);
+	set_color(&c_light, rec->color);
 
 	if (rec->t == -1)
-		return (w->ambient);
+	{
+		color_mult_norm(&c_light, fixed_to_double(w->amb_brightness));
+		return (c_light);
+	}
 
 	lighting(w, rec, r);
-
-	set_color(&c_light, rec->color);
 	color_add(&c_light, w->ambient);
-	color_mult_norm(&c_light, rec->intensity + fixed_to_double(w->amb_brightness) / w->light_count);
+	color_mult_norm(&c_light, fixed_to_double(w->amb_brightness) + rec->intensity / w->light_count);
 	return (c_light);
 }
 
@@ -104,7 +107,7 @@ int	main(void)
 
 	g.render_mode = 0;
 
-	g.world.obj_count = 3;
+	g.world.obj_count = 4;
 	t_object obj[g.world.obj_count];
 	g.world.light_count = 2;
 	t_object light[g.world.light_count];
@@ -123,7 +126,7 @@ int	main(void)
 	// Setup Lights
 	light[0].type = point_light;
 	light[0].abs_color = rgb(255, 255, 255);
-	light[0].brightness = double_to_fixed(1.0);
+	light[0].brightness = double_to_fixed(0.8);
 	// light[0].pos = vec3(0.4, 2, 0);
 	light[0].pos = vec3(1, 2, -0.5);
 
@@ -134,28 +137,36 @@ int	main(void)
 	light[1].pos = vec3(-1, 2, -0.8);
 
 	// Read objects
-
+	
 	obj[0].type = plane_infinite;
-	// obj[0].pos = vec3(0, -0.6, 0);
-	obj[0].pos = vec3(0, 0, 0.5);
+	obj[0].pos = vec3(0, -0.6, 0);
+	// obj[0].pos = vec3(0, 0, 0.5);
 	// obj[0].normal = vec_norm(vec3(0.1, 1, -0.3));
-	// obj[0].normal = vec_norm(vec3(0, 1, 0));
-	obj[0].normal = vec_norm(vec3(0, 0, 1));
+	obj[0].normal = vec_norm(vec3(0, 1, 0));
+	// obj[0].normal = vec_norm(vec3(0, 0, 1));
 	obj[0].abs_color = rgb(0, 0, 255);
 
-	obj[1].type = sphere;
-	obj[1].pos = vec3(0.5, 0, 0);
-	obj[1].size = double_to_fixed(1);
-	obj[1].abs_color = rgb(255, 0, 0);
+	obj[1].type = plane_infinite;
+	obj[1].pos = vec3(0, 0, 0.6);
+	// obj[1].pos = vec3(0, 0, 0.5);
+	// obj[1].normal = vec_norm(vec3(0.1, 1, -0.3));
+	// obj[1].normal = vec_norm(vec3(0, 1, 0));
+	obj[1].normal = vec_norm(vec3(0, 0, -1));
+	obj[1].abs_color = rgb(0, 0, 255);
 
-	obj[2].type = cylinder;
-	obj[2].pos = vec3(-0.5, 0.4, 0);
-	obj[2].normal = vec_norm(vec3(0.4, 1, -0.4));
-	// obj[2].normal = vec_norm(vec3(0, 1, 0));
-	// obj[2].normal = vec_norm(vec3(1, 0, 0));
+	obj[2].type = sphere;
+	obj[2].pos = vec3(0.5, 0, 0);
 	obj[2].size = double_to_fixed(1);
-	obj[2].height = double_to_fixed(1);
-	obj[2].abs_color = rgb(0, 255, 0);
+	obj[2].abs_color = rgb(255, 0, 0);
+
+	obj[3].type = cylinder;
+	obj[3].pos = vec3(-0.5, 0.4, 0);
+	obj[3].normal = vec_norm(vec3(0.4, 1, -0.4));
+	// obj[3].normal = vec_norm(vec3(0, 1, 0));
+	// obj[3].normal = vec_norm(vec3(1, 0, 0));
+	obj[3].size = double_to_fixed(1);
+	obj[3].height = double_to_fixed(1);
+	obj[3].abs_color = rgb(0, 255, 0);
 
 	g.world.objs = obj;
 	g.world.lights = light;
