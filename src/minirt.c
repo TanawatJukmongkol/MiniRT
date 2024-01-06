@@ -6,7 +6,7 @@
 /*   By: tjukmong <tjukmong@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:29:43 by tjukmong          #+#    #+#             */
-/*   Updated: 2024/01/06 04:43:23 by Tanawat J.       ###   ########.fr       */
+/*   Updated: 2024/01/06 22:47:12 by Tanawat J.       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,21 +75,19 @@ t_color	fragment(t_mlx *ctx, t_world *w, t_ray r, t_hittable *rec)
 	vec_set(&rec->norm, r.direction);
 	rec->t = -1;
 	rec->intensity = w->light_count;
-	rec->color = w->ambient;
 
 	hittable(w, rec, r);
-	set_color(&c_light, rec->color);
+	set_color(&c_light, w->ambient);
 
 	if (rec->t == -1)
-	{
-		color_mult_norm(&c_light, fixed_to_double(w->amb_brightness));
-		return (c_light);
-	}
+		return (color_mult_norm(c_light, fixed_to_double(w->amb_brightness)));
 
 	lighting(w, rec, r);
-	color_add(&c_light, w->ambient);
-	color_mult_norm(&c_light, fixed_to_double(w->amb_brightness) + rec->intensity / w->light_count);
-	return (c_light);
+	// set_color(&c_light, color_add(rec->color, w->ambient));
+	set_color(&c_light, rec->color);
+	return (color_mult_norm(c_light,
+				fixed_to_double(w->amb_brightness)
+				+ rec->intensity / w->light_count));
 }
 
 int	draw(t_glob *g)
@@ -117,7 +115,7 @@ int	main(void)
 
 	// Setup world
 	g.world.ambient = rgb(255, 255, 255);
-	g.world.amb_brightness = double_to_fixed(0.4);
+	g.world.amb_brightness = double_to_fixed(0.08);
 
 	g.world.cam.pos = vec3(0, 0, -10);
 	g.world.cam.normal = vec_norm(vec3(0, 0, 1));
@@ -125,22 +123,22 @@ int	main(void)
 
 	// Setup Lights
 	light[0].type = point_light;
-	light[0].abs_color = rgb(255, 255, 255);
-	light[0].brightness = double_to_fixed(0.8);
+	light[0].abs_color = rgb(255, 100, 100);
+	light[0].brightness = double_to_fixed(1.0);
 	// light[0].pos = vec3(0.4, 2, 0);
-	light[0].pos = vec3(1, 2, -0.5);
+	light[0].pos = vec3(2, 2, -0.5);
 
 	light[1].type = point_light;
-	light[1].abs_color = rgb(255, 255, 255);
-	light[1].brightness = double_to_fixed(0.8);
+	light[1].abs_color = rgb(100, 100, 255);
+	light[1].brightness = double_to_fixed(1.0);
 	// light[1].pos = vec3(-0.4, 2, 0);
-	light[1].pos = vec3(-1, 2, -0.8);
+	light[1].pos = vec3(-2, 2, -0.5);
 	
 	light[2].type = point_light;
 	light[2].abs_color = rgb(255, 255, 255);
-	light[2].brightness = double_to_fixed(0.5);
+	light[2].brightness = double_to_fixed(0.3);
 	// light[2].pos = vec3(-0.4, 2, 0);
-	light[2].pos = vec3(0, 0, -3);
+	light[2].pos = vec3(0, 0.1, -3);
 
 	// Read objects
 	
@@ -150,7 +148,7 @@ int	main(void)
 	// obj[0].normal = vec_norm(vec3(0.1, 1, -0.3));
 	obj[0].normal = vec_norm(vec3(0, 1, 0));
 	// obj[0].normal = vec_norm(vec3(0, 0, 1));
-	obj[0].abs_color = rgb(0, 0, 255);
+	obj[0].abs_color = rgb(255, 255, 255);
 
 	obj[1].type = plane_infinite;
 	obj[1].pos = vec3(0, 0, 2);
@@ -158,7 +156,7 @@ int	main(void)
 	// obj[1].normal = vec_norm(vec3(0.1, 1, -0.3));
 	// obj[1].normal = vec_norm(vec3(0, 1, 0));
 	obj[1].normal = vec_norm(vec3(0, 0, -1));
-	obj[1].abs_color = rgb(0, 0, 255);
+	obj[1].abs_color = rgb(255, 255, 255);
 
 	obj[2].type = sphere;
 	obj[2].pos = vec3(0.5, 0, 0);
