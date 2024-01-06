@@ -6,7 +6,7 @@
 /*   By: tjukmong <tjukmong@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:30:44 by tjukmong          #+#    #+#             */
-/*   Updated: 2024/01/01 10:26:43 by Tanawat J.       ###   ########.fr       */
+/*   Updated: 2024/01/06 10:43:46 by Tanawat J.       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,8 +113,13 @@ t_vec3	vec_norm(t_vec3 vec)
 
 double	vec_norm_theta(t_vec3 v, t_vec3 norm)
 {
-	return (acos(fixed_to_double(
-					vec_dot(v, norm))/(vec_mag(v)*vec_mag(norm))));
+	double	nomina;
+	double	denom;
+
+
+	nomina = fixed_to_double(vec_dot(v, norm));
+	denom = vec_mag(v) * vec_mag(norm);
+	return (acos(floor(nomina * 10000 / denom) / 10000));
 }
 
 int	vec_assert_equal(t_vec3 v1, t_vec3 v2)

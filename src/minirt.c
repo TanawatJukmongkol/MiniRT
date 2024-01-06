@@ -6,7 +6,7 @@
 /*   By: tjukmong <tjukmong@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:29:43 by tjukmong          #+#    #+#             */
-/*   Updated: 2024/01/06 04:32:25 by Tanawat J.       ###   ########.fr       */
+/*   Updated: 2024/01/06 04:43:23 by Tanawat J.       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ int	main(void)
 
 	// Setup world
 	g.world.ambient = rgb(255, 255, 255);
-	g.world.amb_brightness = double_to_fixed(0.6);
+	g.world.amb_brightness = double_to_fixed(0.4);
 
 	g.world.cam.pos = vec3(0, 0, -10);
 	g.world.cam.normal = vec_norm(vec3(0, 0, 1));
@@ -132,7 +132,7 @@ int	main(void)
 
 	light[1].type = point_light;
 	light[1].abs_color = rgb(255, 255, 255);
-	light[1].brightness = double_to_fixed(0.2);
+	light[1].brightness = double_to_fixed(0.8);
 	// light[1].pos = vec3(-0.4, 2, 0);
 	light[1].pos = vec3(-1, 2, -0.8);
 	
@@ -140,7 +140,7 @@ int	main(void)
 	light[2].abs_color = rgb(255, 255, 255);
 	light[2].brightness = double_to_fixed(0.5);
 	// light[2].pos = vec3(-0.4, 2, 0);
-	light[2].pos = vec3(0, 0.1, -3);
+	light[2].pos = vec3(0, 0, -3);
 
 	// Read objects
 	
