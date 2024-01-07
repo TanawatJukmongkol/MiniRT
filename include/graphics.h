@@ -47,11 +47,11 @@ t_color			*getpixel(t_mlx *window, int x, int y);
 
 // Color
 t_color			rgb(int r, int g, int b);
+t_color			color_invrt(t_color dst);
 void			set_color(t_color *dst, t_color c);
 unsigned int	rgb_to_hex(t_color c);
-void			color_invrt(t_color *dst);
-void			color_add(t_color *dst, t_color c);
-void			color_sub(t_color *dst, t_color c);
-void			color_mult_norm(t_color *dst, double magnitude);
+t_color			color_add(t_color dst, t_color c);
+t_color			color_sub(t_color dst, t_color c);
+t_color			color_mult_norm(t_color dst, double magnitude);
 
 #endif

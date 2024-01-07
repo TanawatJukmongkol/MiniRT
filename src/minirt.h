@@ -10,19 +10,19 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#ifndef MINIRT_H
+# define MINIRT_H
 #include "../include/math.h"
 #include "../include/graphics.h"
 #include "../include/static_def.h"
+#include "../include/world.h"
 #include "../lib/libft/libft.h"
 #include "../lib/gnl/get_next_line.h"
-// #include <X11/X.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
-#include <fcntl.h>
 
+// #include <stdio.h>
+// #include <stdlib.h>
+// #include <math.h>
+// #include <fcntl.h>
 
 typedef struct s_element
 {
@@ -34,47 +34,12 @@ typedef struct s_element
 	int		cy;//>=1
 }				t_element;
 
-
-enum e_obj
-{//enumคล้ายๆกับ define โดยจะเรียงตัวเลขให้เลย
-	// pos, normal, FOV
-	camera,
-	// pos, brightness, color
-	point_light,
-	// pos, size (diameter), color
-	sphere,
-	// pos, normal, color
-	plane_infinite,
-	// pos, size (diameter), height
-	cylinder
-};
-
-typedef struct s_object
-{
-	enum e_obj    type;        // Object identification
-	t_color        abs_color;    // Color absorptiveness (inverted color) rgb ของ
-	t_vec3        pos;        // Position กล้องจุดไหน
-	t_vec3        normal;        // Normal vector กล้องหันไปทางไหน
-	t_fixed_pt    fov;        // Field of view การทำมุมของกล้อง มุมอง
-	t_fixed_pt    size;        // Diameter (or other if have bonus)
-	t_fixed_pt    height;        // Height
-	t_fixed_pt    brightness;    // Brightness
-} t_object;
-
-typedef struct s_world
-{
-	t_fixed_pt	amb_brightness;	// Ambient light brightness
-	t_color		ambient;		// Ambient color
-	t_object	cam;			// Camera
-	t_object	*objs;			// Object list
-	size_t		obj_count;		// Number of ojects
-	t_element ele;				//Opal ไว้นับจำนวน element
-}	t_world;
-
 typedef struct s_glob
 {
-	t_mlx	mlx;
-	t_world	world;
+	t_mlx		mlx;
+	t_world		world;
+	t_hittable	hit_record;
+	int			render_mode;
 }				t_glob;
 
 /*
@@ -92,6 +57,10 @@ typedef struct s_glob
 // MLX weak linking (Apple)
 int	ft_loop_end(t_glob *g);
 int	ft_destroy_display(t_glob *g);
+
+// Event hooks
+int	ev_destroy(t_glob *g);
+int ev_keypressed(int keycode, t_glob *g);
 
 //check_file
 int check_file(int argc, char **argv, t_element *ele);
