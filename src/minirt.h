@@ -3,20 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tjukmong <tjukmong@student.42bangkok.co    +#+  +:+       +#+        */
+/*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:30:53 by tjukmong          #+#    #+#             */
-/*   Updated: 2024/01/05 10:41:38 by Tanawat J.       ###   ########.fr       */
+/*   Updated: 2024/01/07 16:03:22 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef MINIRT_H
+# define MINIRT_H
 #include "../include/math.h"
 #include "../include/graphics.h"
 #include "../include/static_def.h"
 #include "../include/world.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
+#include "../lib/libft/libft.h"
+#include "../lib/gnl/get_next_line.h"
+
+// #include <stdio.h>
+// #include <stdlib.h>
+// #include <math.h>
+// #include <fcntl.h>
+
+typedef struct s_element
+{
+	int		a;//0-1
+	int		c;//1
+	int		l;
+	int		pl;//>=1
+	int		sp;//>=1
+	int		cy;//>=1
+}				t_element;
 
 typedef struct s_glob
 {
@@ -46,3 +62,53 @@ int	ft_destroy_display(t_glob *g);
 int	ev_destroy(t_glob *g);
 int ev_keypressed(int keycode, t_glob *g);
 
+//check_file
+int check_file(int argc, char **argv, t_element *ele);
+int check_in_file(int fd, t_element *ele);
+int check_element(char *line, t_element *ele);
+int checkdot_rt(char *str);
+void set_ele(t_element *ele);
+
+//check_element
+int check_element_a(char *line, int num_a);
+int check_element_c(char *line, int num_c);
+int check_element_l(char *line, int num_l);
+int check_element_sp(char *line, int num_sp);
+int check_element_pl(char *line, int num_pl);
+int check_element_cy(char *line, int num_cy);
+
+//check_inelement
+int	check_spiltxyz(char *line);
+int	check_spiltxyz_3d(char *line);
+int check_spiltrgb(char *line);
+int	check_splitrgb2(char *line);
+
+//other
+int check_comment(char *str);
+int count_split(char **str);
+double	ft_atof_dot(const char *nptr, double nbr);
+double	ft_atof(const char *nptr);
+int check_number(char *str);
+int count_dot(char *str);
+int count_minus(char *str);
+int count_comma(char *str);
+int count_element(t_element *ele);
+int	check_minus(char *str);
+
+//pass
+void	pass_element(char **argv, t_world *world);
+int	add_element(char *line, int i, t_world *world);
+void	add_element_a(char *line, t_world *world);
+void	add_element_c(char *line, t_world *world);
+void	add_element_pl(char *line, int i, t_world *world);
+void	add_element_sp(char *line, int i, t_world *world);
+void	add_element_cy(char *line, int i, t_world *world);
+void	remove_split(char **sp);
+void	remove_split_struct(t_world *w);
+
+//check_other
+int check_float(char *line);
+int check_int(char *str);
+int	check_floattwo(char *line);
+
+#endif

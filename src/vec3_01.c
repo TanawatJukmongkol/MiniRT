@@ -12,28 +12,12 @@
 
 #include "minirt.h"
 
-// Fast Inverse Square Root using fixed point number and Newton's square root method
-// The function was explained here: https://www.youtube.com/watch?v=p8u_k2LIZyo
-/* t_fixed_pt	q_rsqrt(t_fixed_pt num)
-{
-	long long	i;
-	double		x2;
-	double		y;
-
-	x2 = fixed_to_double(num >> 1);
-	y = fixed_to_double(num);
-	i = *(long long *)&y;
-	i = 0x5f3759df - ( i >> 1 );
-	y = y * ( 1.5F - (x2 * y * y));
-	return (double_to_fixed(*(double *)&y));
-} */
-
 void	vec_set(t_vec3 *dst, t_vec3 v)
 {
 	dst->x = v.x;
 	dst->y = v.y;
 	dst->z = v.z;
-}
+}*/
 
 t_vec3	vec3(double x, double y, double z)
 {
