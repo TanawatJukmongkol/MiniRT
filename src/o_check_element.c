@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:28:25 by tjukmong          #+#    #+#             */
-/*   Updated: 2024/01/07 15:07:14 by tsirirak         ###   ########.fr       */
+/*   Updated: 2024/01/07 19:34:54 by Tanawat J.       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	check_element_c(char *line, int num_c)
 		i++;
 	}
 	printf("------------\n\n");
-	if ((i == 4 && ft_isalnum((str[3][0]) != 0 | str[3][0] == '/')))
+	if ((i == 4 && ft_isalnum((str[3][0]) != 0 || str[3][0] == '/')))
 		re = 0;
 	else if (i > 4)
 		re = 0;
@@ -93,7 +93,7 @@ int	check_element_l(char *line, int num_pl)
 	str = ft_split_space(line);
 	while (str[i])
 		i++;
-	if ((i == 4 && (ft_isalnum(str[3][0]) != 0 | str[2][0] == '/')))
+	if ((i == 4 && (ft_isalnum(str[3][0]) != 0 || str[2][0] == '/')))
 		re = 0;
 	else if (i > 4)
 		re = 0;
@@ -149,7 +149,7 @@ int	check_element_pl(char *line, int num_pl)
 	str = ft_split_space(line);
 	while (str[i])
 		i++;
-	if (i == 4 && (ft_isalnum(str[3][0]) != 0 | str[3][0] == '/'))
+	if (i == 4 && (ft_isalnum(str[3][0]) != 0 || str[3][0] == '/'))
 		re = 0;
 	else if (i > 4)
 		re = 0;
@@ -175,7 +175,7 @@ int	check_element_cy(char *line, int num_cy)
 	str = ft_split_space(line);
 	while (str[i])
 		i++;
-	if (i == 6 && (ft_isalnum(str[5][0]) != 0 | str[2][0] == '/'))
+	if (i == 6 && (ft_isalnum(str[5][0]) != 0 || str[2][0] == '/'))
 		re = 0;
 	else if (i > 6)
 		re = 0;

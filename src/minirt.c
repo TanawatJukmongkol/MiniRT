@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:29:43 by tjukmong          #+#    #+#             */
-/*   Updated: 2024/01/06 22:47:12 by Tanawat J.       ###   ########.fr       */
+/*   Updated: 2024/01/07 23:40:22 by Tanawat J.       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,16 +101,18 @@ int	draw(t_glob *g)
 
 int	main(int argc, char **argv)
 {
-  t_glob glob;
-	(void)argc;
+	t_glob		g;
 
-	set_ele(&glob.world.ele);
-	if (check_file(argc, argv, &glob.world.ele) == 0)
+	(void)argc;
+	set_ele(&g.world.ele);
+
+	if (check_file(argc, argv, &g.world.ele) == 0)
 		return (0);
-	pass_element(argv, &glob.world);
-  
-  if (init_canvas(&g.mlx, "MiniRT", 1000, 800) < 0)
+	pass_element(argv, &g.world);
+
+	if (init_canvas(&g.mlx, "MiniRT", 1000, 800) < 0)
 		ev_destroy(&g);
+
 	srand(141337);
 	mlx_hook(g.mlx.win, STATIC_DESTROY, 0L, ev_destroy, &g);
 	mlx_key_hook(g.mlx.win, ev_keypressed, &g);
@@ -118,3 +120,4 @@ int	main(int argc, char **argv)
 	mlx_loop(g.mlx.mlx);
 	return (0);
 }
+

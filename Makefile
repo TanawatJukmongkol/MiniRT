@@ -1,15 +1,15 @@
 
 NAME		= miniRT
 SRCS		= minirt.c \
-      fixed_point.c \
-      graphics.c \
-      graphics_util.c \
-      vec3_01.c \
-      ft_destroy_display.c \
-      ft_loop_end.c \
-      hittable.c \
-      lighting.c \
-      event_hooks.c \
+			fixed_point.c \
+			graphics.c \
+			graphics_util.c \
+			vec3_01.c \
+			ft_destroy_display.c \
+			ft_loop_end.c \
+			hittable.c \
+			lighting.c \
+			event_hooks.c \
 			o_check_file.c \
 			o_check_element.c \
 			o_check_inelement.c \
@@ -18,6 +18,7 @@ SRCS		= minirt.c \
 			o_count2.c \
 			o_other.c \
 			o_pass.c
+
 LIBS		= mlx libft gnl
 
 SRC_DIR		= ./src

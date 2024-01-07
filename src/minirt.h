@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:30:53 by tjukmong          #+#    #+#             */
-/*   Updated: 2024/01/07 16:03:22 by tsirirak         ###   ########.fr       */
+/*   Updated: 2024/01/08 00:25:53 by Tanawat J.       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,9 @@
 #include "../lib/libft/libft.h"
 #include "../lib/gnl/get_next_line.h"
 
-// #include <stdio.h>
-// #include <stdlib.h>
-// #include <math.h>
-// #include <fcntl.h>
-
-typedef struct s_element
-{
-	int		a;//0-1
-	int		c;//1
-	int		l;
-	int		pl;//>=1
-	int		sp;//>=1
-	int		cy;//>=1
-}				t_element;
+#include <stdio.h>
+#include <stdlib.h>
+#include <fcntl.h>
 
 typedef struct s_glob
 {
@@ -97,9 +86,10 @@ int	check_minus(char *str);
 
 //pass
 void	pass_element(char **argv, t_world *world);
-int	add_element(char *line, int i, t_world *world);
+void	add_element(char *line, t_world *world);
 void	add_element_a(char *line, t_world *world);
 void	add_element_c(char *line, t_world *world);
+void	add_element_l(char *line, int i, t_world *world);
 void	add_element_pl(char *line, int i, t_world *world);
 void	add_element_sp(char *line, int i, t_world *world);
 void	add_element_cy(char *line, int i, t_world *world);

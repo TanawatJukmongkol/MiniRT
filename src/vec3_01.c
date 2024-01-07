@@ -6,7 +6,7 @@
 /*   By: tjukmong <tjukmong@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:30:44 by tjukmong          #+#    #+#             */
-/*   Updated: 2024/01/06 10:47:10 by Tanawat J.       ###   ########.fr       */
+/*   Updated: 2024/01/07 19:29:59 by Tanawat J.       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	vec_set(t_vec3 *dst, t_vec3 v)
 	dst->x = v.x;
 	dst->y = v.y;
 	dst->z = v.z;
-}*/
+}
 
 t_vec3	vec3(double x, double y, double z)
 {

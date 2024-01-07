@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:28:25 by tjukmong          #+#    #+#             */
-/*   Updated: 2024/01/07 18:05:02 by tsirirak         ###   ########.fr       */
+/*   Updated: 2024/01/07 22:18:18 by Tanawat J.       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ int	check_comment(char *str)
 	return (0);
 }
 
-
+/*
 int	check_number(char *str)
 {
 	int	i;
@@ -132,6 +132,7 @@ int	check_number(char *str)
 		if (check_minus(str) != 0 && )
 	}
 }
+*/
 
 // int	check_number(char *str)
 // {
