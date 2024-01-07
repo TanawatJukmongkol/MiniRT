@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:28:25 by tjukmong          #+#    #+#             */
-/*   Updated: 2024/01/07 15:07:14 by tsirirak         ###   ########.fr       */
+/*   Updated: 2024/01/08 00:52:36 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int	check_element_a(char *line, int num_a)
 	str = ft_split_space(line);
 	while (str[i])
 	{
-
 		i++;
 	}
 	if (i == 3 && (ft_isalnum(str[2][0]) != '\0' || str[2][0] == '/'))
@@ -41,7 +40,9 @@ int	check_element_a(char *line, int num_a)
 		re = 0;
 	else if ((ft_atof(str[0]) < 0 || ft_atof(str[0]) > 1)
 		|| check_float(str[0]) == 0)
-		re = 0;
+		{printf("mamamma%s\n",str[0]);
+	printf("Hcheck_float = %d\n",check_float(str[0]));
+		re = 0;}
 	else if (check_spiltrgb(str[1]) == 0)
 	{
 		re = 0;
@@ -62,16 +63,18 @@ int	check_element_c(char *line, int num_c)
 	str = ft_split_space(line);
 	while (str[i])
 	{
-		printf("str[i] = %s\n",str[i]);
 		i++;
 	}
-	printf("------------\n\n");
 	if ((i == 4 && ft_isalnum((str[3][0]) != 0 | str[3][0] == '/')))
 		re = 0;
 	else if (i > 4)
 		re = 0;
+		printf("xyz %s\n",str[0]);
+	printf("xyz = %d\n",check_spiltxyz(str[0]));
 	if (check_spiltxyz(str[0]) == 0)
+	{
 		re = 0;
+	}
 	else if (check_spiltxyz_3d(str[1]) == 0)
 		re = 0;
 	if (check_int(str[2]) == 0 || ft_atoi(str[2]) < 0

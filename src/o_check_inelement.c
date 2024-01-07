@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:28:25 by tjukmong          #+#    #+#             */
-/*   Updated: 2024/01/07 15:16:38 by tsirirak         ###   ########.fr       */
+/*   Updated: 2024/01/08 01:14:22 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,9 @@ int	check_spiltxyz(char *line)
 	xyz = ft_split(line, ',');
 	while (xyz[i])
 	{
-		printf("%s check_number = %d\n",xyz[i], check_number(xyz[i]));
+		printf("line = %s\n",line);
+		printf("xyz[i] = %s\n",xyz[i]);
+		printf("check_number = %d\n---------\n",check_number(xyz[i]));
 		if (check_number(xyz[i]) == 0)
 		{
 			int	j;
@@ -114,6 +116,7 @@ int	check_spiltrgb(char *line)
 	int		i;
 
 	i = 0;
+
 	if (count_comma(line) >= 3 || check_splitrgb2(line) == 0)
 		return (0);
 	rgb = ft_split(line, ',');
