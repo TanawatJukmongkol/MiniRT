@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:30:53 by tjukmong          #+#    #+#             */
-/*   Updated: 2024/01/05 00:55:19 by tsirirak         ###   ########.fr       */
+/*   Updated: 2024/01/07 16:03:22 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ int count_dot(char *str);
 int count_minus(char *str);
 int count_comma(char *str);
 int count_element(t_element *ele);
+int	check_minus(char *str);
 
 //pass
 void	pass_element(char **argv, t_world *world);

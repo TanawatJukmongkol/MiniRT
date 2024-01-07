@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:28:25 by tjukmong          #+#    #+#             */
-/*   Updated: 2024/01/05 01:25:30 by tsirirak         ###   ########.fr       */
+/*   Updated: 2024/01/07 18:05:02 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	check_int(char *str)
 // 	}
 // 	if (i <= 0)
 // 		return (0);
-// 	else if ((str[i] >= 9 && str[i] <= 13)
+// 	else if ((str[i] >= 9 && str[i] <= 13)w
 // 		|| str[i] == 32 || str[i] == '\0' || str[i])
 // 	{
 // 		if (i >= 1)
@@ -51,6 +51,7 @@ int	check_int(char *str)
 // 	}
 // 	return (0);
 // }
+
 
 
 int	check_float(char *line)
@@ -126,29 +127,73 @@ int	check_number(char *str)
 	int	i;
 
 	i = 0;
-	if (count_minus(str) >= 2 || count_dot(str) >= 2
-		|| str[0] == '.' || str[ft_strlen(str) - 1] == '.'
-		|| (check_float(str) == 0 && check_int(str) == 0))
-		return (0);
-	else if (str[0] == '-')
+	if (str[i] == '-')
 	{
-		i = 1;
-		while (str[i])
-		{
-			if ((str[i] >= '0' && str[i] <= '9') || str[i] == '.')
-				i++;
-			else
-				return (0);
-		}
-		if (i <= 1)
-			return (0);
-		return (1);
+		if (check_minus(str) != 0 && )
 	}
-	if (check_int(str) == 1)
-	{
-		return (1);
-	}
-	else if (check_float(str) == 1)
-		return (1);
-	return (0);
 }
+
+// int	check_number(char *str)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	if (count_minus(str) >= 2 || count_dot(str) >= 2
+// 		|| str[0] == '.' || str[ft_strlen(str) - 1] == '.'
+// 		|| (check_float(str) == 0 && check_int(str) == 0)
+// 		|| check_minus(str))
+// 		return (0);
+// 	else if (str[0] == '-')
+// 	{
+// 		i = 1;
+// 		while (str[i])
+// 		{
+// 			if ((str[i] >= '0' && str[i] <= '9') || str[i] == '.')
+// 				i++;
+// 			else
+// 				return (0);
+// 		}
+// 		if (i <= 1)
+// 			return (0);
+// 		return (1);
+// 	}
+// 	if (check_int(str) == 1)
+// 	{
+// 		return (1);
+// 	}
+// 	else if (check_float(str) == 1)
+// 		return (1);
+// 	return (0);
+// }
+
+// int	check_number(char *str)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	if (count_minus(str) >= 2 || count_dot(str) >= 2
+// 		|| str[0] == '.' || str[ft_strlen(str) - 1] == '.'
+// 		|| (check_float(str) == 0 && check_int(str) == 0))
+// 		return (0);
+// 	else if (str[0] == '-')
+// 	{
+// 		i = 1;
+// 		while (str[i])
+// 		{
+// 			if ((str[i] >= '0' && str[i] <= '9') || str[i] == '.')
+// 				i++;
+// 			else
+// 				return (0);
+// 		}
+// 		if (i <= 1)
+// 			return (0);
+// 		return (1);
+// 	}
+// 	if (check_int(str) == 1)
+// 	{
+// 		return (1);
+// 	}
+// 	else if (check_float(str) == 1)
+// 		return (1);
+// 	return (0);
+// }

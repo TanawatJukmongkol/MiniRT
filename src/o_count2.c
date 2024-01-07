@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:28:25 by tjukmong          #+#    #+#             */
-/*   Updated: 2024/01/04 20:01:04 by tsirirak         ###   ########.fr       */
+/*   Updated: 2024/01/07 16:09:52 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,31 @@ int	count_dot(char *str)
 		i++;
 	}
 	return (dot);
+}
+
+int	check_minus(char *str)
+{
+	int	i;
+	int	minus;
+
+	i = 0;
+	minus = 0;
+	while (str[i])
+	{
+		if (str[i] == '-')
+			minus++;
+		i++;
+	}
+	if (minus >= 2)
+		return (0);
+	i = 1;
+	while (str[i])
+	{
+		if (str[i] == '-')
+			return (0);
+		i++;
+	}
+	return (1);
 }
 
 int	count_minus(char *str)

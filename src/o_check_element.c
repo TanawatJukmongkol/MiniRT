@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:28:25 by tjukmong          #+#    #+#             */
-/*   Updated: 2024/01/05 02:56:50 by tsirirak         ###   ########.fr       */
+/*   Updated: 2024/01/07 15:07:14 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,9 @@ int	check_element_a(char *line, int num_a)
 	str = ft_split_space(line);
 	while (str[i])
 	{
-		printf("str[i] = %s\n",str[i]);
+
 		i++;
 	}
-	printf("i = %c\n",str[2][0]);
-	printf("i = %d\n",i);
 	if (i == 3 && (ft_isalnum(str[2][0]) != '\0' || str[2][0] == '/'))
 		re = 0;
 	else if (i > 3)
@@ -49,7 +47,6 @@ int	check_element_a(char *line, int num_a)
 		re = 0;
 	}
 	remove_split(str);
-	printf("re = %d\n",re);
 	return (re);
 }
 
@@ -64,12 +61,18 @@ int	check_element_c(char *line, int num_c)
 	re = 1;
 	str = ft_split_space(line);
 	while (str[i])
+	{
+		printf("str[i] = %s\n",str[i]);
 		i++;
+	}
+	printf("------------\n\n");
 	if ((i == 4 && ft_isalnum((str[3][0]) != 0 | str[3][0] == '/')))
 		re = 0;
 	else if (i > 4)
 		re = 0;
-	if (check_spiltxyz(str[0]) == 0 || check_spiltxyz_3d(str[1]) == 0)
+	if (check_spiltxyz(str[0]) == 0)
+		re = 0;
+	else if (check_spiltxyz_3d(str[1]) == 0)
 		re = 0;
 	if (check_int(str[2]) == 0 || ft_atoi(str[2]) < 0
 		|| ft_atoi(str[2]) > 180)

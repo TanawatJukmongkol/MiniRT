@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:28:25 by tjukmong          #+#    #+#             */
-/*   Updated: 2024/01/05 00:47:05 by tsirirak         ###   ########.fr       */
+/*   Updated: 2024/01/05 22:42:04 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ int	check_element(char *line, t_element *ele)
 			line++;
 		else
 		{
-			printf("ch %d\n",check_element_sp(line + 2, ++ele->sp));
+			// printf("ch %d\n",check_element_sp(line + 2, ++ele->sp));
 			return (0);
 		}
 	}
