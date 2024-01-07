@@ -6,7 +6,7 @@
 /*   By: tjukmong <tjukmong@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:28:18 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/11/22 19:41:32 by Tanawat J.       ###   ########.fr       */
+/*   Updated: 2024/01/06 16:47:55 by Tanawat J.       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,48 +42,52 @@ void	set_color(t_color *dst, t_color c)
 	dst->b = c.b;
 }
 
-void	color_invrt(t_color *dst)
+t_color	color_invrt(t_color dst)
 {
-	dst->r = (255 << FIXED_BIT_FRAC) - dst->r;
-	dst->g = (255 << FIXED_BIT_FRAC) - dst->g;
-	dst->b = (255 << FIXED_BIT_FRAC) - dst->b;
+	dst.r = double_to_fixed(255) - dst.r;
+	dst.g = double_to_fixed(255) - dst.g;
+	dst.b = double_to_fixed(255) - dst.b;
+	return (dst);
 }
 
-void	color_add(t_color *dst, t_color c)
+t_color	color_add(t_color dst, t_color c)
 {
-	dst->r = dst->r + c.r;
-	dst->g = dst->g + c.g;
-	dst->b = dst->b + c.b;
-	if (dst->r > (255 << FIXED_BIT_FRAC))
-		dst->r = 255 << FIXED_BIT_FRAC;
-	if (dst->g > (255 << FIXED_BIT_FRAC))
-		dst->g = 255 << FIXED_BIT_FRAC;
-	if (dst->r > (255 << FIXED_BIT_FRAC))
-		dst->r = 255 << FIXED_BIT_FRAC;
+	dst.r = (dst.r + c.r) / 2;
+	dst.g = (dst.g + c.g) / 2;
+	dst.b = (dst.b + c.b) / 2;
+	if (dst.r > (255 << FIXED_BIT_FRAC))
+		dst.r = 255 << FIXED_BIT_FRAC;
+	if (dst.g > (255 << FIXED_BIT_FRAC))
+		dst.g = 255 << FIXED_BIT_FRAC;
+	if (dst.b > (255 << FIXED_BIT_FRAC))
+		dst.b = 255 << FIXED_BIT_FRAC;
+	return (dst);
 }
 
-void	color_sub(t_color *dst, t_color c)
+t_color	color_sub(t_color dst, t_color c)
 {
-	dst->r -= c.r;
-	dst->g -= c.g;
-	dst->b -= c.b;
-	if (dst->r < 0)
-		dst->r = 0;
-	if (dst->g < 0)
-		dst->g = 0;
-	if (dst->b < 0)
-		dst->b = 0;
+	dst.r -= c.r;
+	dst.g -= c.g;
+	dst.b -= c.b;
+	if (dst.r < 0)
+		dst.r = 0;
+	if (dst.g < 0)
+		dst.g = 0;
+	if (dst.b < 0)
+		dst.b = 0;
+	return (dst);
 }
 
-void	color_mult_norm(t_color *dst, double magnitude)
+t_color	color_mult_norm(t_color dst, double magnitude)
 {
 	if (magnitude > 1)
 		magnitude = 1;
 	else if (magnitude < 0)
 		magnitude = 0;
-	dst->r *= magnitude;
-	dst->g *= magnitude;
-	dst->b *= magnitude;
+	dst.r *= magnitude;
+	dst.g *= magnitude;
+	dst.b *= magnitude;
+	return (dst);
 }
 
 unsigned int	rgb_to_hex(t_color c)

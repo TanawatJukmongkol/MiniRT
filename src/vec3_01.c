@@ -6,27 +6,11 @@
 /*   By: tjukmong <tjukmong@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:30:44 by tjukmong          #+#    #+#             */
-/*   Updated: 2024/01/02 23:12:31 by Tanawat J.       ###   ########.fr       */
+/*   Updated: 2024/01/06 10:47:10 by Tanawat J.       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-
-// Fast Inverse Square Root using fixed point number and Newton's square root method
-// The function was explained here: https://www.youtube.com/watch?v=p8u_k2LIZyo
-/*t_fixed_pt	q_rsqrt(t_fixed_pt num)
-{
-	long long	i;
-	double		x2;
-	double		y;
-
-	x2 = fixed_to_double(num >> 1);
-	y = fixed_to_double(num);
-	i = *(long long *)&y;
-	i = 0x5f3759df - ( i >> 1 );
-	y = y * ( 1.5F - (x2 * y * y));
-	return (double_to_fixed(*(double *)&y));
-}
 
 void	vec_set(t_vec3 *dst, t_vec3 v)
 {
@@ -37,7 +21,7 @@ void	vec_set(t_vec3 *dst, t_vec3 v)
 
 t_vec3	vec3(double x, double y, double z)
 {
-	static t_vec3	v;
+	t_vec3	v;
 
 	v.x = double_to_fixed(x);
 	v.y = double_to_fixed(y);
@@ -45,66 +29,91 @@ t_vec3	vec3(double x, double y, double z)
 	return (v);
 }
 
+t_vec3	vec3_raw(t_fixed_pt x, t_fixed_pt y, t_fixed_pt z)
+{
+	t_vec3	v;
+
+	v.x = x;
+	v.y = y;
+	v.z = z;
+	return (v);
+}
+
 t_vec3	vec_add(t_vec3 v1, t_vec3 v2)
 {
-	static t_vec3	v;
-
-	v.x = v1.x + v2.x;
-	v.y = v1.y + v2.y;
-	v.z = v1.z + v2.z;
-	return (v);
+	return (vec3_raw(
+				v1.x + v2.x,
+				v1.y + v2.y,
+				v1.z + v2.z));
 }
 
 t_vec3	vec_sub(t_vec3 v1, t_vec3 v2)
 {
-	static t_vec3	v;
+	return (vec3_raw(
+				v1.x - v2.x,
+				v1.y - v2.y,
+				v1.z - v2.z));
+}
 
-	v.x = v1.x - v2.x;
-	v.y = v1.y - v2.y;
-	v.z = v1.z - v2.z;
-	return (v);
+t_vec3	vec_mult(t_vec3 v, double num)
+{
+	t_fixed_pt	fixed_num;
+
+	fixed_num = double_to_fixed(num);
+	return (vec3_raw(
+				fixed_mult(v.x, fixed_num),
+				fixed_mult(v.y, fixed_num),
+				fixed_mult(v.z, fixed_num)));
 }
 
 t_fixed_pt	vec_dot(t_vec3 v1, t_vec3 v2)
 {
-	static t_fixed_pt	prod;
-
-	prod += fixed_mult(v1.x, v2.x);
-	prod += fixed_mult(v1.y, v2.y);
-	prod += fixed_mult(v1.z, v2.z);
-	return (prod);
+	return (fixed_mult(v1.x, v2.x)
+			+ fixed_mult(v1.y, v2.y)
+			+ fixed_mult(v1.z, v2.z));
 }
 
 t_vec3	vec_cross(t_vec3 v1, t_vec3 v2)
 {
-	static t_vec3	v;
+	return (vec3_raw(
+				fixed_mult(v1.y, v2.z) - fixed_mult(v1.z, v2.y),
+				fixed_mult(v1.x, v2.z) - fixed_mult(v1.z, v2.x),
+				fixed_mult(v1.x, v2.y) - fixed_mult(v1.y, v2.x)));
+}
 
-	v.x = fixed_mult(v1.y, v2.z) - fixed_mult(v1.z, v2.y);
-	v.y = fixed_mult(v1.x, v2.z) - fixed_mult(v1.z, v2.x);
-	v.z = fixed_mult(v1.x, v2.y) - fixed_mult(v1.y, v2.x);
-	return (v);
+double	vec_mag(t_vec3 vec)
+{
+	return (sqrt((fixed_to_double(
+			fixed_mult(vec.x, vec.x) +
+			fixed_mult(vec.y, vec.y) +
+			fixed_mult(vec.z, vec.z)
+			))));
 }
 
 t_vec3	vec_norm(t_vec3 vec)
 {
-	static t_vec3	v;
-	double			m;
+	return (vec_mult(vec, 1 / vec_mag(vec)));
+}
 
-	m = sqrt(fixed_to_double(
-			fixed_mult(vec.x, vec.x) +
-			fixed_mult(vec.y, vec.y) +
-			fixed_mult(vec.x, vec.z)));
-	v.x /= m;
-	v.y /= m;
-	v.z /= m;
-	return (v);
+double	vec_norm_theta(t_vec3 v, t_vec3 norm)
+{
+	double	nomina;
+	double	denom;
+
+	nomina = fixed_to_double(vec_dot(v, norm));
+	denom = vec_mag(v) * vec_mag(norm);
+	return (acos(floor(nomina * 10000 / denom) / 10000));
+}
+
+int	vec_assert_equal(t_vec3 v1, t_vec3 v2)
+{
+	return (v1.x == v2.x && v1.y == v2.y && v1.z == v2.z);
 }
 
 // Get point at t.
 // P(t) = A + tb
 t_vec3	ray_at(t_ray ray, double t)
 {
-	return vec_add(ray.origin, vec_cross(
-				vec3(t, t, t), ray.direction)); 
+	return (vec_add(ray.origin, vec_mult(ray.direction, t)));
 }
 
