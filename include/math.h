@@ -42,6 +42,7 @@ t_fixed_pt	fixed_mult(t_fixed_pt a, t_fixed_pt b);
 
 // Vectors
 t_vec3		vec3(double x, double y, double z);
+t_vec3		vec3_raw(t_fixed_pt x, t_fixed_pt y, t_fixed_pt z);
 void		vec_set(t_vec3 *dst, t_vec3 v);
 t_vec3		vec_add(t_vec3 v1, t_vec3 v2);
 t_vec3		vec_sub(t_vec3 v1, t_vec3 v2);

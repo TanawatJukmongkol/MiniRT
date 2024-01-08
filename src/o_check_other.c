@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:28:25 by tjukmong          #+#    #+#             */
-/*   Updated: 2024/01/08 09:26:47 by Tanawat J.       ###   ########.fr       */
+/*   Updated: 2024/01/08 11:37:44 by Tanawat J.       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,7 @@ int	check_floattwo(char *line)
 		{
 			dot++;
 			if (dot >= 2)
-			{
-				printf("dot---- \n");
 				return (0);
-			}
 		}
 		else if (*line == '\0' || *line == ' ')
 			return (i);
@@ -121,39 +118,24 @@ int	check_number(char *str)
 	if (count_dot(str) >= 2
 		|| str[0] == '.' || str[ft_strlen(str) - 1] == '.'
 		|| (check_float(str) == 0 && check_int(str) == 0))
-		{
-		printf("re 0 %s\n",str);
 		return (0);
-		}
 	else if (str[0] == '-')
 	{
 		i = 1;
 		if (check_minus(str) == 0 || str[i] == '0')
-		{
-			printf("re 0 %s\n",str);
 			return (0);
-		}
 		while (str[i])
 		{
 			if ((str[i] >= '0' && str[i] <= '9') || str[i] == '.')
 				i++;
 			else
-			{
-				printf("re 0 %s\n",str);
 				return (0);
-			}
 		}
 		if (i <= 1)
-		{
-			printf("re 0 %s\n",str);
 			return (0);
-		}
 		return (1);
 	}
 	if (check_int(str) == 1 && check_float(str) != 0)
-	{
-		printf("re 1 %s\n",str);
 		return (1);
-	}
 	return (0);
 }

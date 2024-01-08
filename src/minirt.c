@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:29:43 by tjukmong          #+#    #+#             */
-/*   Updated: 2024/01/08 10:25:30 by Tanawat J.       ###   ########.fr       */
+/*   Updated: 2024/01/08 17:16:52 by Tanawat J.       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,13 @@ t_vec3	get_pixel_dirr(t_glob *g, int x, int y)
 	t_vec3 u;
 	t_vec3 v;
 
+	vec_set(&u, vec_add(u, vec_mult(g->world.cam.normal, focal))); // Add focus vector
 	vec_set(&u, vec_cross(g->world.cam.normal, vec3(0, -1, 0))); // alignment vec x up vector
 	vec_set(&v, vec_cross(u, g->world.cam.normal)); // u x look_at
 
 	// Set u, v to length of half viewport width, height modified by x, y.
 	vec_set(&u, vec_mult(u, (((float)x / g->mlx.width) - 0.5) * vw));
 	vec_set(&v, vec_mult(v, ((((float)g->mlx.height - y) / g->mlx.height) - 0.5) * vh));
-
-	vec_set(&u, vec_add(u, vec_mult(g->world.cam.normal, focal))); // Add focus vector
-	vec_set(&v, vec_add(v, vec_mult(g->world.cam.normal, focal))); // Add focus vector
 
 	vec_set(&dirr, vec_norm(vec_add(
 				vec_mult(g->world.cam.normal, focal),
@@ -83,7 +81,7 @@ t_color	fragment(t_mlx *ctx, t_world *w, t_ray r, t_hittable *rec)
 		return (color_mult_norm(c_light, fixed_to_double(w->amb_brightness)));
 
 	lighting(w, rec, r);
-	// set_color(&c_light, color_add(rec->color, w->ambient));
+	set_color(&c_light, color_sub(rec->color, color_invrt(w->ambient)));
 	set_color(&c_light, rec->color);
 	return (color_mult_norm(c_light,
 				fixed_to_double(w->amb_brightness)
@@ -107,7 +105,7 @@ int	main(int argc, char **argv)
 	set_ele(&g.world.ele);
 
 	if (check_file(argc, argv, &g.world.ele) == 0)
-		return (0);
+		return (1);
 	pass_element(argv, &g.world);
 
 	if (init_canvas(&g.mlx, "MiniRT", 1000, 800) < 0)

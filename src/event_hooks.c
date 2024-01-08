@@ -10,10 +10,11 @@ int	ev_destroy(t_glob *g)
 		mlx_destroy_image(g->mlx.mlx, g->mlx.canvas.ptr);
 	if (g->mlx.win)
 		mlx_destroy_window(g->mlx.mlx, g->mlx.win);
+	free(g->world.objs);
+	free(g->world.lights);
 	ft_destroy_display(g);
 	free(g->mlx.mlx);
-	exit(0);
-	return (0);
+	return (exit(0), 0);
 }
 
 int ev_keypressed(int keycode, t_glob *g)
