@@ -82,7 +82,7 @@ mlx-clean:
 mlx-remove:
 	@ rm -rf $(BUILD_DIR)
 	@ echo -e "\x1b[35;1m--[ REMOVING MLX ]--\x1b[0m"
-	rm -rf $(LIB_DIR)/mlx
+	@- rm -rf $(LIB_DIR)/mlx
 
 libft:
 	@ echo -e "\x1b[35;1m--[ COMPILEING LIBFT ]--\x1b[0m"
@@ -92,6 +92,10 @@ libft-clean:
 	@ echo -e "\x1b[35;1m--[ CLEANING LIBFT ]--\x1b[0m"
 	make clean -C $(LIB_DIR)/libft
 
+libft-fclean:
+	@ echo -e "\x1b[35;1m--[ FCLEANING LIBFT ]--\x1b[0m"
+	@- make clean -C $(LIB_DIR)/libft
+
 gnl:
 	@ echo -e "\x1b[35;1m--[ COMPILEING GNL ]--\x1b[0m"
 	@ make -C ${LIB_DIR}/gnl
@@ -99,6 +103,10 @@ gnl:
 gnl-clean:
 	@ echo -e "\x1b[35;1m--[ CLEANING GNL ]--\x1b[0m"
 	make clean -C $(LIB_DIR)/gnl
+
+gnl-fclean:
+	@ echo -e "\x1b[35;1m--[ FCLEANING GNL ]--\x1b[0m"
+	@- make clean -C $(LIB_DIR)/gnl
 
 ${BUILD_DIR}:
 	@ make mlx libft gnl
@@ -111,7 +119,8 @@ clean: libft-clean mlx-clean gnl-clean
 	@ echo -e "\x1b[35;1m--[ CLEANING MINIRT ]--\x1b[0m"
 	rm -rf $(BUILD_DIR)
 
-fclean: clean
+fclean: libft-fclean mlx-remove gnl-fclean
+	rm -rf $(BUILD_DIR)
 	rm -f ${NAME}
 
 re: fclean all
