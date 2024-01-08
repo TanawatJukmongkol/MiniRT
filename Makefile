@@ -94,7 +94,7 @@ libft-clean:
 
 libft-fclean:
 	@ echo -e "\x1b[35;1m--[ FCLEANING LIBFT ]--\x1b[0m"
-	@- make clean -C $(LIB_DIR)/libft
+	@- make fclean -C $(LIB_DIR)/libft
 
 gnl:
 	@ echo -e "\x1b[35;1m--[ COMPILEING GNL ]--\x1b[0m"
@@ -106,7 +106,7 @@ gnl-clean:
 
 gnl-fclean:
 	@ echo -e "\x1b[35;1m--[ FCLEANING GNL ]--\x1b[0m"
-	@- make clean -C $(LIB_DIR)/gnl
+	@- make fclean -C $(LIB_DIR)/gnl
 
 ${BUILD_DIR}:
 	@ make mlx libft gnl
