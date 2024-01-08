@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:28:25 by tjukmong          #+#    #+#             */
-/*   Updated: 2024/01/08 00:16:01 by Tanawat J.       ###   ########.fr       */
+/*   Updated: 2024/01/08 09:42:33 by Tanawat J.       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	check_element(char *line, t_element *ele)
 	while (*line != '\0' && *line != '\n')
 	{
 		if (*line == 'A')
-			return (check_element_a(line + 1, ele->a + 1));
+			return (check_element_a(++line, ++ele->a));
 		else if (*line == 'C')
 			return (check_element_c(++line, ++ele->c));
 		else if (*line == 'L')

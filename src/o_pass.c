@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:29:43 by tjukmong          #+#    #+#             */
-/*   Updated: 2024/01/08 00:58:25 by Tanawat J.       ###   ########.fr       */
+/*   Updated: 2024/01/08 09:43:57 by Tanawat J.       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,11 +213,11 @@ void	remove_split(char **sp)
 	int	i;
 
 	i = 0;
-	if (sp == NULL)
-		return ;
+	//if (sp == NULL)
+	//	return ;
 	while (sp[i] != NULL)
 	{
-		// free(sp[i]);
+		free(sp[i]);
 		i++;
 	}
 	free(sp);

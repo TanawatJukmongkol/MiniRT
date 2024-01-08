@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:28:25 by tjukmong          #+#    #+#             */
-/*   Updated: 2024/01/08 00:17:07 by Tanawat J.       ###   ########.fr       */
+/*   Updated: 2024/01/08 09:34:35 by Tanawat J.       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,7 @@ int	count_comma(char *str)
 
 int	count_element(t_element *ele)
 {
-	if (ele->c != 1 || ele->a >= 2)
+	if (ele->c != 1 || ele->a != 1)
 		return (0);
-	// if (ele->pl == 0 || ele->sp == 0 || ele->cy == 0)
-	// 	return (0);
 	return (1);
 }

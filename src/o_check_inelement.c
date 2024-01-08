@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:28:25 by tjukmong          #+#    #+#             */
-/*   Updated: 2024/01/07 22:25:23 by Tanawat J.       ###   ########.fr       */
+/*   Updated: 2024/01/08 09:20:38 by Tanawat J.       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 int	check_spiltxyz(char *line)
 {
-//	char	**xyz;
-//	int		i;
+	char	**xyz;
+	int		i;
 
-//	i = 0;
-//	xyz = NULL;
+	i = 0;
+	xyz = NULL;
 	if (count_comma(line) > 2)
 		return (0);
 	return (1);
-	/*xyz = ft_split(line, ',');
+	xyz = ft_split(line, ',');
 	while (xyz[i])
 	{
 		// printf("%s check_number = %d\n",xyz[i], check_number(xyz[i]));
@@ -51,19 +51,19 @@ int	check_spiltxyz(char *line)
 	free(xyz);
 	if (i == 3)
 		return (1);
-	return (0);*/
+	return (0);
 }
 
 int	check_spiltxyz_3d(char *line)
 {
-//	char	**xyz;
-//	int		i;
+	char	**xyz;
+	int		i;
 
-	// i = 0;
+	 i = 0;
 	if (count_comma(line) > 2)
 		return (0);
 	return (1);
-	/*xyz = ft_split(line, ',');
+	xyz = ft_split(line, ',');
 	while (xyz[i])
 	{
 		if (check_number(xyz[i]) == 0)
@@ -81,7 +81,7 @@ int	check_spiltxyz_3d(char *line)
 	remove_split(xyz);
 	if (i == 3)
 		return (1);
-	return (0);*/
+	return (0);
 }
 
 int	check_splitrgb2(char *line)
