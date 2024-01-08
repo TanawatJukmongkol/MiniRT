@@ -6,22 +6,22 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:30:53 by tjukmong          #+#    #+#             */
-/*   Updated: 2024/01/08 11:16:10 by Tanawat J.       ###   ########.fr       */
+/*   Updated: 2024/01/08 20:22:07 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
-#include "../include/math.h"
-#include "../include/graphics.h"
-#include "../include/static_def.h"
-#include "../include/world.h"
-#include "../lib/libft/libft.h"
-#include "../lib/gnl/get_next_line.h"
+# include "../include/math.h"
+# include "../include/graphics.h"
+# include "../include/static_def.h"
+# include "../include/world.h"
+# include "../lib/libft/libft.h"
+# include "../lib/gnl/get_next_line.h"
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <fcntl.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <fcntl.h>
 
 typedef struct s_glob
 {
