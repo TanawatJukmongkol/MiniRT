@@ -5,6 +5,7 @@ SRCS		= minirt.c \
 			graphics.c \
 			graphics_util.c \
 			vec3_01.c \
+			matrix.c \
 			ft_destroy_display.c \
 			ft_loop_end.c \
 			hittable.c \

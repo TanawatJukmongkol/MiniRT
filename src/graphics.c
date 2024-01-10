@@ -6,7 +6,7 @@
 /*   By: tjukmong <tjukmong@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:28:25 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/11/23 13:35:22 by tjukmong         ###   ########.fr       */
+/*   Updated: 2024/01/10 11:37:18 by Tanawat J.       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,20 +31,20 @@ int	init_canvas(t_mlx *window, char *title, int w, int h)
 	window->mlx = mlx_init();
 	window->aspect_ratio = (double)w / h;
 	if (!window->mlx)
-		return (-1);
+		return (1);
 	window->win = mlx_new_window(window->mlx,
 			window->width, window->height, window->title);
 	if (!window->win)
-		return (-1);
+		return (1);
 	window->canvas.ptr = mlx_new_image(window->mlx,
 			window->width, window->height);
 	if (!window->canvas.ptr)
-		return (-1);
+		return (1);
 	window->canvas.buff = mlx_get_data_addr(window->canvas.ptr,
 			&window->canvas.px_bits, &window->canvas.ln_bytes,
 			&window->canvas.endian);
 	if (!window->canvas.buff)
-		return (-1);
+		return (1);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: Tanawat J. <66011255@kmitl.ac.th>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 12:40:57 by Tanawat J.        #+#    #+#             */
-/*   Updated: 2024/01/06 15:26:47 by Tanawat J.       ###   ########.fr       */
+/*   Updated: 2024/01/10 12:56:46 by Tanawat J.       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	hit_sphere(t_hittable *rec, t_object obj, t_ray r)
 	if (discrim < 0)
 		return ;
 	t = (-fixed_to_double(sq[0]) - sqrtf(fixed_to_double(discrim))) / 2.0;
-
 	if (t > 0 && (rec->t > t || rec->t == -1))
 	{
 		rec->t = t;

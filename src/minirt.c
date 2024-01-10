@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:29:43 by tjukmong          #+#    #+#             */
-/*   Updated: 2024/01/07 18:58:08 by Tanawat J.       ###   ########.fr       */
+/*   Updated: 2024/01/10 12:58:07 by Tanawat J.       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ t_color	fragment(t_mlx *ctx, t_world *w, t_ray r, t_hittable *rec)
 int	draw(t_glob *g)
 {
 	if (g->mlx.frame >= 4)
-		return (update_canvas(&g->mlx));
+		g->mlx.frame = 0;
 	fragment_renderer(g, g->mlx.frame % 4, fragment);
 	g->mlx.frame++;
 	return (update_canvas(&g->mlx));
@@ -104,18 +104,13 @@ int	main(int argc, char **argv)
 	(void)argc;
 	set_ele(&g.world.ele);
 
-	if (check_file(argc, argv, &g.world.ele) == 0)
+	if (!check_file(argc, argv, &g.world.ele))
 		return (1);
 	pass_element(argv, &g.world);
 
-	if (init_canvas(&g.mlx, "MiniRT", 1000, 800) < 0)
-		ev_destroy(&g);
-
+	if (init_canvas(&g.mlx, "MiniRT", 1000, 800))
+		return (ev_destroy(&g));
 	srand(141337);
-	mlx_hook(g.mlx.win, STATIC_DESTROY, 0L, ev_destroy, &g);
-	mlx_key_hook(g.mlx.win, ev_keypressed, &g);
-	mlx_loop_hook(g.mlx.mlx, draw, &g);
-	mlx_loop(g.mlx.mlx);
-	return (0);
+	return (hooks(&g));
 }
 
