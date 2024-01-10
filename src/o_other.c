@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:28:25 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/12/29 22:46:53 by tsirirak         ###   ########.fr       */
+/*   Updated: 2024/01/10 14:40:02 by Tanawat J.       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ double	ft_atof(const char *str)
 
 	num = 0;
 	n = 1;
+	if (str == NULL)
+		return (0);
 	if (*str == '-' || *str == '+')
 	{
 		if (*str == '-')
