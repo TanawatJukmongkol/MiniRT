@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:28:25 by tjukmong          #+#    #+#             */
-/*   Updated: 2024/01/12 02:21:04 by tsirirak         ###   ########.fr       */
+/*   Updated: 2024/01/12 04:35:28 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,13 @@ int	check_element_a(char *line, int num_a)
 	if (i >= 2 && str[2] != NULL)
 	{
 		if (is_space(str[2][0]) != 1)
-		{
 			re = 0;
-		}
 	}
 	else if ((ft_atof(str[0]) < 0 || ft_atof(str[0]) > 1)
 		|| check_float(str[0]) == 0)
 		re = 0;
 	else if (check_spiltrgb(str[1]) == 0)
-	{
 		re = 0;
-	}
 	remove_split(str);
 	return (re);
 }
@@ -61,18 +57,12 @@ int	check_element_c(char *line, int num_c)
 	re = 1;
 	str = ft_split_space(line);
 	while (str[i])
-	{
 		i++;
-	}
-	//
 	if (i >= 3 && str[3] != NULL)
 	{
 		if (is_space(str[3][0]) != 1)
-		{
 			re = 0;
-		}
 	}
-	//
 	if (check_spiltxyz(str[0]) == 0)
 		re = 0;
 	else if (check_spiltxyz_3d(str[1]) == 0)
@@ -80,11 +70,10 @@ int	check_element_c(char *line, int num_c)
 	else if (check_number(str[2]) == 0)
 		re = 0;
 	else if (ft_atoi(str[2]) < 0 || ft_atoi(str[2]) > 180)
-			re = 0;
+		re = 0;
 	remove_split(str);
 	return (re);
 }
-
 
 int	check_element_l(char *line, int num_pl)
 {
@@ -101,15 +90,10 @@ int	check_element_l(char *line, int num_pl)
 	if (i >= 3 && str[3] != NULL)
 	{
 		if (is_space(str[3][0]) != 1)
-		{
 			re = 0;
-		}
 	}
 	if (check_spiltxyz(str[0]) == 0)
-	{
-			printf("edwedwedwe\n");
 		re = 0;
-	}
 	else if (check_float(str[1]) == 0)
 		re = 0;
 	else if (check_spiltrgb(str[2]) == 0)
@@ -117,7 +101,6 @@ int	check_element_l(char *line, int num_pl)
 	remove_split(str);
 	return (re);
 }
-
 
 int	check_element_sp(char *line, int num_sp)
 {
@@ -134,16 +117,12 @@ int	check_element_sp(char *line, int num_sp)
 	if (i >= 3 && str[3] != NULL)
 	{
 		if (is_space(str[3][0]) != 1)
-		{
 			re = 0;
-		}
 	}
 	if (check_spiltxyz(str[0]) == 0)
 		re = 0;
 	else if (check_float(str[1]) == 0)
-	{
 		re = 0;
-	}
 	else if (check_spiltrgb(str[2]) == 0)
 		re = 0;
 	remove_split(str);
@@ -165,9 +144,7 @@ int	check_element_pl(char *line, int num_pl)
 	if (i >= 3 && str[3] != NULL)
 	{
 		if (is_space(str[3][0]) != 1)
-		{
 			re = 0;
-		}
 	}
 	else if (check_spiltxyz(str[0]) == 0)
 		re = 0;
@@ -191,13 +168,8 @@ int	check_element_cy(char *line, int num_cy)
 	str = ft_split_space(line);
 	while (str[i])
 		i++;
-	if (i >= 5 && str[5] != NULL)
-	{
-		if (is_space(str[5][0]) != 1)
-		{
-			re = 0;
-		}
-	}
+	if (i >= 5 && str[5] != NULL && is_space(str[5][0]) != 1)
+		re = 0;
 	if (check_spiltxyz(str[0]) == 0)
 		re = 0;
 	else if (check_spiltxyz_3d(str[1]) == 0)

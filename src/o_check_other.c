@@ -6,22 +6,19 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:28:25 by tjukmong          #+#    #+#             */
-/*   Updated: 2024/01/12 02:40:47 by tsirirak         ###   ########.fr       */
+/*   Updated: 2024/01/12 05:22:37 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-
-int check_int(char *str)
+int	check_int(char *str)
 {
 	int	i;
 
 	i = 0;
 	if (str[i] == '\0')
-	{
 		return (0);
-	}
 	while (str[i] >= '0' && str[i] <= '9')
 		i++;
 	if ((str[i] >= 9 && str[i] <= 13)
@@ -32,6 +29,7 @@ int check_int(char *str)
 	}
 	return (0);
 }
+
 int	check_float(char *line)
 {
 	if (check_symbol(line) == 0 || str_digit(line) == 0)
@@ -101,7 +99,6 @@ int	check_float_minus(char *line)
 	return (1);
 }
 
-
 int	check_comment(char *str)
 {
 	int	i;
@@ -116,43 +113,39 @@ int	check_comment(char *str)
 	return (0);
 }
 
+int	check_number_util(char *str)
+{
+	if (count_dot(str) >= 2
+		|| str[0] == '.' || str[ft_strlen(str) - 1] == '.'
+		|| (check_float(str) == 0 && check_int(str) == 0))
+		return (0);
+	return (1);
+}
+
 int	check_number(char *str)
 {
 	int	i;
 
-	i = 0;
-	// printf("check_float(str) == 0 && check_int(str) == 0 -> %d\n",check_float(str) == 0 && check_int(str) == 0);
-	if (count_dot(str) >= 2
-		|| str[0] == '.' || str[ft_strlen(str) - 1] == '.'
-		|| (check_float(str) == 0 && check_int(str) == 0))//int = 0 ,float = 0
-		{
-		return (0);}
+	if (check_number_util(str) == 0)
+		return (0);
 	else if (str[0] == '-')
 	{
 		i = 1;
 		if (check_minus(str) == 0)
-		{
-			printf("Hello\n");
 			return (0);
-		}
 		while (str[i])
 		{
 			if ((str[i] >= '0' && str[i] <= '9') || str[i] == '.')
 				i++;
 			else
-			{
 				return (0);
-			}
 		}
 		if (i <= 1)
-		{
-			return (0);}
+			return (0);
 		return (1);
 	}
 	if (check_int(str) == 1)
-	{
 		return (1);
-	}
 	else if (check_float(str) != 0)
 		return (1);
 	return (1);

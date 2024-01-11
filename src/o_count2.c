@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:28:25 by tjukmong          #+#    #+#             */
-/*   Updated: 2024/01/11 19:38:51 by tsirirak         ###   ########.fr       */
+/*   Updated: 2024/01/12 05:30:51 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ int	check_minus(char *str)
 	}
 	return (1);
 }
-
 
 int	count_minus(char *str)
 {
