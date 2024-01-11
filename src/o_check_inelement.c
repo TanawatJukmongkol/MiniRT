@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:28:25 by tjukmong          #+#    #+#             */
-/*   Updated: 2024/01/12 02:43:12 by tsirirak         ###   ########.fr       */
+/*   Updated: 2024/01/12 02:58:55 by Tanawat J.       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ int	check_spiltxyz(char *line)
 	xyz = ft_split(line, ',');
 	if (len_size(xyz) != 3)
 		return (0);
-		printf("len_size = %d\n",len_size(xyz));
 	while (xyz[i])
 	{
 		if (check_number(xyz[i]) == 0)

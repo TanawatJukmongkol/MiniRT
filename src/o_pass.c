@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:29:43 by tjukmong          #+#    #+#             */
-/*   Updated: 2024/01/08 09:43:57 by Tanawat J.       ###   ########.fr       */
+/*   Updated: 2024/01/12 03:24:50 by Tanawat J.       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,11 @@ void	add_element_c(char *line, t_world *world)
 	world->cam.normal.x = double_to_fixed(ft_atof(xyz[0]));
 	world->cam.normal.y = double_to_fixed(ft_atof(xyz[1]));
 	world->cam.normal.z = double_to_fixed(ft_atof(xyz[2]));
+	if (vec_mag(world->cam.normal) != 1)
+	{
+		printf("Error not unit vector.");
+		// free data and exit...
+	}
 	world->cam.fov = double_to_fixed(ft_atof(split[2]));
 	remove_split(xyz);
 	remove_split(split);
