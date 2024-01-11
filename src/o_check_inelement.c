@@ -6,11 +6,22 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:28:25 by tjukmong          #+#    #+#             */
-/*   Updated: 2024/01/08 09:20:38 by Tanawat J.       ###   ########.fr       */
+/*   Updated: 2024/01/12 02:43:12 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+// int	check_splitxyz(char *line)
+// {
+// 	char	**xyz;
+// 	int	i;
+
+// 	i = 0;
+// 	if (count_comma(line) > 2)
+// 		return (0);
+
+// }
 
 int	check_spiltxyz(char *line)
 {
@@ -19,13 +30,17 @@ int	check_spiltxyz(char *line)
 
 	i = 0;
 	xyz = NULL;
-	if (count_comma(line) > 2)
+	printf("line = %s\n",line);
+	if (count_comma(line) != 2)
+	{
 		return (0);
-	return (1);
+	}
 	xyz = ft_split(line, ',');
+	if (len_size(xyz) != 3)
+		return (0);
+		printf("len_size = %d\n",len_size(xyz));
 	while (xyz[i])
 	{
-		// printf("%s check_number = %d\n",xyz[i], check_number(xyz[i]));
 		if (check_number(xyz[i]) == 0)
 		{
 			int	j;
@@ -36,7 +51,6 @@ int	check_spiltxyz(char *line)
 				j++;
 			}
 			free(xyz);
-
 			return (0);
 		}
 		i++;

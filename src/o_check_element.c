@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:28:25 by tjukmong          #+#    #+#             */
-/*   Updated: 2024/01/11 19:41:47 by tsirirak         ###   ########.fr       */
+/*   Updated: 2024/01/12 02:21:04 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ int	check_element_c(char *line, int num_c)
 	return (re);
 }
 
+
 int	check_element_l(char *line, int num_pl)
 {
 	char	**str;
@@ -97,8 +98,6 @@ int	check_element_l(char *line, int num_pl)
 	str = ft_split_space(line);
 	while (str[i])
 		i++;
-	// if ((i == 4 && (ft_isalnum(str[3][0]) != 0 || str[2][0] == '/')))
-	// 	re = 0;
 	if (i >= 3 && str[3] != NULL)
 	{
 		if (is_space(str[3][0]) != 1)
@@ -107,7 +106,10 @@ int	check_element_l(char *line, int num_pl)
 		}
 	}
 	if (check_spiltxyz(str[0]) == 0)
+	{
+			printf("edwedwedwe\n");
 		re = 0;
+	}
 	else if (check_float(str[1]) == 0)
 		re = 0;
 	else if (check_spiltrgb(str[2]) == 0)

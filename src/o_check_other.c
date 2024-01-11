@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:28:25 by tjukmong          #+#    #+#             */
-/*   Updated: 2024/01/11 19:49:27 by tsirirak         ###   ########.fr       */
+/*   Updated: 2024/01/12 02:40:47 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,50 +34,37 @@ int check_int(char *str)
 }
 int	check_float(char *line)
 {
-	int	i;
-
-	i = 0;
-	if (check_minus(line) == 0 || count_dot(line) >= 2
-		|| line[0] == '.' || line[ft_strlen(line) - 1] == '.')
-		return (0);
-	else if (line[0] == '0' && line[1] != '\0' && line[1] != '.')
+	if (check_symbol(line) == 0 || str_digit(line) == 0)
 	{
-			return (0);
+		return (0);
 	}
 	else if (line[0] == '-')
 	{
-		i = 1;
-		while (line[i])
-		{
-			if (line[1] == '0' && line[2] != '\0')
-			{
-			printf("Hi\n");
-				return (0);
-			}
-			else if ((line[i] >= '0' && line[i] <= '9') || line[i] == '.')
-				i++;
-			else
-				return (0);
-		}
-		if (i <= 1)
-		{
-
-			return (0);
-		}
-		return (1);
+		return (check_float_minus(line));
 	}
-	i = check_floattwo(line);
-	return (i);
+	return (check_floattwo(line));
 }
 
-int	check_floattwo(char *line)
+int	str_digit(char *str)
 {
 	int	i;
-	int	dot;
 
 	i = 0;
+	while (str[i])
+	{
+		if (is_digit_or_symbol(str[i]) == 0)
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+int	check_floattwo(char *line)//0.2
+{
+	int	dot;
+
 	dot = 0;
-	while ((*line >= '0' && *line <= '9') || *line == '.'
+	while (ft_isdigit(*line) == 1 || *line == '.'
 		|| *line == '\0' || *line == ' ')
 	{
 		if (*line == '.')
@@ -86,13 +73,34 @@ int	check_floattwo(char *line)
 			if (dot >= 2)
 				return (0);
 		}
-		else if (*line == '\0' || *line == ' ')
-			return (i);
 		line++;
-		i++;
 	}
-	return (0);
+	return (1);
 }
+
+int	check_float_minus(char *line)
+{
+	int	i;
+
+	i = 1;
+	if (ft_strlen(line) == 1)
+		return (0);
+	while (line[i])
+	{
+		if (line[1] == '0' && line[2] == '\0')
+		{
+			return (0);
+		}
+		else if (ft_isdigit(line[i]) == 1 || line[i] == '.')
+		{
+			i++;
+		}
+		else
+			return (0);
+	}
+	return (1);
+}
+
 
 int	check_comment(char *str)
 {
@@ -113,16 +121,18 @@ int	check_number(char *str)
 	int	i;
 
 	i = 0;
+	// printf("check_float(str) == 0 && check_int(str) == 0 -> %d\n",check_float(str) == 0 && check_int(str) == 0);
 	if (count_dot(str) >= 2
 		|| str[0] == '.' || str[ft_strlen(str) - 1] == '.'
-		|| (check_float(str) == 0 && check_int(str) == 0))
+		|| (check_float(str) == 0 && check_int(str) == 0))//int = 0 ,float = 0
 		{
 		return (0);}
 	else if (str[0] == '-')
 	{
 		i = 1;
-		if (check_minus(str) == 0 || str[i] == '0')
+		if (check_minus(str) == 0)
 		{
+			printf("Hello\n");
 			return (0);
 		}
 		while (str[i])
@@ -145,5 +155,5 @@ int	check_number(char *str)
 	}
 	else if (check_float(str) != 0)
 		return (1);
-	return (0);
+	return (1);
 }

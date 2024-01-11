@@ -17,7 +17,9 @@ SRCS		= minirt.c \
 			o_count.c \
 			o_count2.c \
 			o_other.c \
-			o_pass.c
+			o_pass.c \
+			o_validate.c \
+			o_len.c
 
 LIBS		= mlx libft gnl
 
