@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:29:43 by tjukmong          #+#    #+#             */
-/*   Updated: 2024/01/12 04:26:20 by tsirirak         ###   ########.fr       */
+/*   Updated: 2024/01/12 04:37:33 by Tanawat J.       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,7 @@ int	main(int argc, char **argv)
 		return (1);
 	pass_element(argv, &g.world);
 	if (validate_normal(&g.world) == 1 || validate_cam(&g.world) == 1)
-		return (ev_destroy(&g));
+		return (free(g.world.objs), free(g.world.lights), 1);
 	if (init_canvas(&g.mlx, "MiniRT", 1000, 800) < 0)
 		ev_destroy(&g);
 
