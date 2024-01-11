@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:28:25 by tjukmong          #+#    #+#             */
-/*   Updated: 2024/01/08 11:32:36 by Tanawat J.       ###   ########.fr       */
+/*   Updated: 2024/01/11 20:00:09 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	check_file(int argc, char **argv, t_element *ele)
 {
 	int	fd;
-	
+
 	if (argc == 1)
 		return ( \
 		printf("Error\nNo argument passed.\nusage: ./miniRT <asset.rt>\n"), 0);
@@ -67,7 +67,7 @@ int	check_in_file(int fd, t_element *ele)
 		{
 			if (check_element(line, ele) == 0)
 			{
-				printf("Error\nInvalid element at line number %ld:\n", line_nbr++);
+				printf("Error\nInvalid element at line number %ld:\n", line_nbr);
 				printf("> %s\n", line);
 				free_gnl(fd, line);
 				return (0);
@@ -75,6 +75,7 @@ int	check_in_file(int fd, t_element *ele)
 		}
 		free(line);
 		line = get_next_line(fd);
+		line_nbr++;
 	}
 	free_gnl(fd, line);
 	if (count_element(ele) == 0)
