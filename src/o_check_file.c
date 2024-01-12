@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:28:25 by tjukmong          #+#    #+#             */
-/*   Updated: 2024/01/08 11:32:36 by Tanawat J.       ###   ########.fr       */
+/*   Updated: 2024/01/12 05:00:16 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 int	check_file(int argc, char **argv, t_element *ele)
 {
 	int	fd;
-	
+
 	if (argc == 1)
-		return ( \
+		return (\
 		printf("Error\nNo argument passed.\nusage: ./miniRT <asset.rt>\n"), 0);
 	if (argc != 2)
 		return (printf("Error\nInvalid number of arguments passed.\n"), 0);
 	if (checkdot_rt(argv[1]) == 0)
-		return ( \
+		return (\
 		printf("Error\nInvalid file extension. (expected .rt)\n"), 0);
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
@@ -48,6 +48,21 @@ void	set_ele(t_element *ele)
 	ele->sp = 0;
 }
 
+int	check_in_file_util(char *line, t_element *ele, size_t line_nbr, int fd)
+{
+	if (check_comment(line) != 1)
+	{
+		if (check_element(line, ele) == 0)
+		{
+			printf("Error\nInvalid element at line number %ld:\n", line_nbr);
+			printf("> %s\n", line);
+			free_gnl(fd, line);
+			return (0);
+		}
+	}
+	return (1);
+}
+
 int	check_in_file(int fd, t_element *ele)
 {
 	char	*line;
@@ -63,18 +78,11 @@ int	check_in_file(int fd, t_element *ele)
 	}
 	while (line)
 	{
-		if (check_comment(line) != 1)
-		{
-			if (check_element(line, ele) == 0)
-			{
-				printf("Error\nInvalid element at line number %ld:\n", line_nbr++);
-				printf("> %s\n", line);
-				free_gnl(fd, line);
-				return (0);
-			}
-		}
+		if (check_in_file_util(line, ele, line_nbr, fd) == 0)
+			return (0);
 		free(line);
 		line = get_next_line(fd);
+		line_nbr++;
 	}
 	free_gnl(fd, line);
 	if (count_element(ele) == 0)
@@ -111,7 +119,7 @@ int	check_element(char *line, t_element *ele)
 int	checkdot_rt(char *str)
 {
 	if (ft_strrchr(str, '.') == NULL
-			|| ft_strncmp(ft_strrchr(str, '.'), ".rt", 10))
+		|| ft_strncmp(ft_strrchr(str, '.'), ".rt", 10))
 		return (0);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:29:43 by tjukmong          #+#    #+#             */
-/*   Updated: 2024/01/08 09:43:57 by Tanawat J.       ###   ########.fr       */
+/*   Updated: 2024/01/12 10:35:01 by Tanawat J.       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	pass_element(char **argv, t_world *world)
 		free(line);
 		line = get_next_line(fd);
 	}
-	// remove_split_struct(world);
 	close(fd);
 }
 
@@ -41,35 +40,17 @@ void	add_element(char *line, t_world *world)
 	while ((*line >= '\t' && *line <= '\r') || *line == ' ')
 		line++;
 	if (*line == 'A')
-	{
-		line++;
-		add_element_a(line, world);
-	}
+		add_element_a(++line, world);
 	else if (*line == 'C')
-	{
-		line++;
-		add_element_c(line, world);
-	}
+		add_element_c(++line, world);
 	else if (*line == 'L')
-	{
-		line++;
-		add_element_l(line, world->light_count++, world);
-	}
+		add_element_l(++line, world->light_count++, world);
 	else if (ft_strncmp(line, "pl", 2) == 0)
-	{
-		line = line + 2;
-		add_element_pl(line, world->obj_count++, world);
-	}
+		add_element_pl(line + 2, world->obj_count++, world);
 	else if (ft_strncmp(line, "sp", 2) == 0)
-	{
-		line = line + 2;
-		add_element_sp(line, world->obj_count++, world);
-	}
+		add_element_sp(line + 2, world->obj_count++, world);
 	else if (ft_strncmp(line, "cy", 2) == 0)
-	{
-		line = line + 2;
-		add_element_cy(line, world->obj_count++, world);
-	}
+		add_element_cy(line + 2, world->obj_count++, world);
 }
 
 void	add_element_a(char *line, t_world *world)
@@ -183,12 +164,10 @@ void	add_element_cy(char *line, int i, t_world *world)
 	char	**split;
 	char	**xyz;
 	char	**normal;
-	char	**abs;
 
 	split = ft_split_space(line);
 	xyz = ft_split(split[0], ',');
 	normal = ft_split(split[1], ',');
-	abs = ft_split(split[4], ',');
 	world->objs[i].type = cylinder;
 	world->objs[i].pos.x = double_to_fixed(ft_atof(xyz[0]));
 	world->objs[i].pos.y = double_to_fixed(ft_atof(xyz[1]));
@@ -201,11 +180,19 @@ void	add_element_cy(char *line, int i, t_world *world)
 	remove_split(normal);
 	world->objs[i].size = double_to_fixed(ft_atof(split[2]));
 	world->objs[i].height = double_to_fixed(ft_atof(split[3]));
+	add_element_cytwo(split, i, world);
+	remove_split(split);
+}
+
+void	add_element_cytwo(char **sp, int i, t_world *world)
+{
+	char	**abs;
+
+	abs = ft_split(sp[4], ',');
 	world->objs[i].abs_color.r = double_to_fixed(ft_atof(abs[0]));
 	world->objs[i].abs_color.g = double_to_fixed(ft_atof(abs[1]));
 	world->objs[i].abs_color.b = double_to_fixed(ft_atof(abs[2]));
 	remove_split(abs);
-	remove_split(split);
 }
 
 void	remove_split(char **sp)
@@ -213,8 +200,6 @@ void	remove_split(char **sp)
 	int	i;
 
 	i = 0;
-	//if (sp == NULL)
-	//	return ;
 	while (sp[i] != NULL)
 	{
 		free(sp[i]);

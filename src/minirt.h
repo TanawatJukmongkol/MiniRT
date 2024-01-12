@@ -6,12 +6,25 @@
 /*   By: tjukmong <tjukmong@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:30:53 by tjukmong          #+#    #+#             */
+<<<<<<< HEAD
+/*   Updated: 2024/01/12 10:32:59 by Tanawat J.       ###   ########.fr       */
+=======
 /*   Updated: 2024/01/10 16:56:54 by tjukmong         ###   ########.fr       */
+>>>>>>> merge-final
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
+<<<<<<< HEAD
+# include "../include/math.h"
+# include "../include/graphics.h"
+# include "../include/static_def.h"
+# include "../include/world.h"
+# include "../lib/libft/libft.h"
+# include "../lib/gnl/get_next_line.h"
+
+=======
 
 # include "../include/math.h"
 # include "../include/graphics.h"
@@ -19,6 +32,7 @@
 # include "../include/world.h"
 # include "../lib/libft/libft.h"
 # include "../lib/gnl/get_next_line.h"
+>>>>>>> merge-final
 # include <stdio.h>
 # include <stdlib.h>
 # include <fcntl.h>
@@ -101,4 +115,21 @@ int		check_float(char *line);
 int		check_int(char *str);
 int		check_floattwo(char *line);
 
+//validate
+int validate_not_digit_or_symbol(char *str);
+int validate_int(char *num);
+int	validate_symbol(char *str);
+int is_digit_or_symbol(int c);
+
+//len
+int len_dot(char *str, char c);
+int len_size(char **str);
+int len_xyz(char *str);
+
+//
+int	str_digit(char *str);
+int	check_floattwo(char *line);
+int	check_float_minus(char *line);
+int	check_symbol(char *line);
+void	add_element_cytwo(char **sp, int i, t_world *world);
 #endif
