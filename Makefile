@@ -138,5 +138,5 @@ fclean: libft-fclean mlx-remove gnl-fclean
 
 re: fclean all
 
-.PHONY: all clean fclean re mlx mlx-clean libft libft-clean
+.PHONY: all clean fclean re mlx mlx-clean libft libft-clean libft-fclean mlx-remove gnl-fclean
 
