@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:29:43 by tjukmong          #+#    #+#             */
-/*   Updated: 2024/01/12 05:25:58 by tsirirak         ###   ########.fr       */
+/*   Updated: 2024/01/12 10:15:55 by Tanawat J.       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,9 @@ int	validate_normal(t_world *world)
 			if (round(vec_mag(world->objs[i].normal) * 100) / 100 != 1)
 			{
 				ret = 1;
-				printf("Error not unit vector.\n");
+				printf("Error\nNormal of type #%d %s",
+						world->objs[i].type,
+						"not using a unit vector. (magnitude does not equal 1)\n");
 			}
 		}
 		i++;

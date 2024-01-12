@@ -12,6 +12,8 @@ int	ev_destroy(t_glob *g)
 		mlx_destroy_window(g->mlx.mlx, g->mlx.win);
 	ft_destroy_display(g);
 	free(g->mlx.mlx);
+	free(g->world.objs);
+	free(g->world.lights);
 	return (exit(0), 0);
 }
 

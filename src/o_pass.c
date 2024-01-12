@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:29:43 by tjukmong          #+#    #+#             */
-/*   Updated: 2024/01/12 05:42:51 by tsirirak         ###   ########.fr       */
+/*   Updated: 2024/01/12 10:35:01 by Tanawat J.       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,15 +180,15 @@ void	add_element_cy(char *line, int i, t_world *world)
 	remove_split(normal);
 	world->objs[i].size = double_to_fixed(ft_atof(split[2]));
 	world->objs[i].height = double_to_fixed(ft_atof(split[3]));
-	add_element_cytwo(line, i, world);
+	add_element_cytwo(split, i, world);
 	remove_split(split);
 }
 
-void	add_element_cytwo(char *line, int i, t_world *world)
+void	add_element_cytwo(char **sp, int i, t_world *world)
 {
 	char	**abs;
 
-	abs = ft_split(line, ',');
+	abs = ft_split(sp[4], ',');
 	world->objs[i].abs_color.r = double_to_fixed(ft_atof(abs[0]));
 	world->objs[i].abs_color.g = double_to_fixed(ft_atof(abs[1]));
 	world->objs[i].abs_color.b = double_to_fixed(ft_atof(abs[2]));
