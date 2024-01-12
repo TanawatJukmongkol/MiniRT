@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:30:53 by tjukmong          #+#    #+#             */
-/*   Updated: 2024/01/12 13:15:04 by tsirirak         ###   ########.fr       */
+/*   Updated: 2024/01/12 13:24:06 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,4 +118,5 @@ int		check_floattwo(char *line);
 int		check_float_minus(char *line);
 int		check_symbol(char *line);
 void	add_element_cytwo(char **sp, int i, t_world *world);
+int		is_space(char c);
 #endif
