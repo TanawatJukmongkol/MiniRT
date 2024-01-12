@@ -1,50 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   o_count.c                                          :+:      :+:    :+:   */
+/*   o_remove.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/03 01:28:25 by tjukmong          #+#    #+#             */
-/*   Updated: 2024/01/12 09:56:47 by Tanawat J.       ###   ########.fr       */
+/*   Created: 2023/09/03 01:29:43 by tjukmong          #+#    #+#             */
+/*   Updated: 2024/01/12 12:57:07 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int	count_split(char **str)
+void	remove_split(char **sp)
 {
 	int	i;
 
 	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-
-int	count_comma(char *str)
-{
-	int	i;
-	int	comma;
-
-	i = 0;
-	comma = 0;
-	while (str[i])
+	while (sp[i] != NULL)
 	{
-		if (str[i] == ',')
-			comma++;
+		free(sp[i]);
 		i++;
 	}
-	return (comma);
+	free(sp);
 }
 
-int	count_element(t_element *ele)
+void	remove_split_struct(t_world *w)
 {
-	if (ele->c != 1 || ele->a != 1 || ele->l != 1)
+	if (w->objs != NULL)
 	{
-		printf("Error\nInvalid format: %s",
-			"more than one capital lettered element. (A, C, L)\n");
-		return (0);
+		free(w->objs);
+		w->objs = NULL;
 	}
-	return (1);
 }

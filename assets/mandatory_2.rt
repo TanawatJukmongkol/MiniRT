@@ -2,7 +2,7 @@
 # This is an example file:
 
 # Camera and ambient
-C	0,0,-5			0,0,1 90-
+C	0,0,-5			0,0,1 90
 A	0.7				200,200,255
 
 # Light source

@@ -1,70 +1,56 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   o_count2.c                                         :+:      :+:    :+:   */
+/*   o_len.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:28:25 by tjukmong          #+#    #+#             */
-/*   Updated: 2024/01/12 05:30:51 by tsirirak         ###   ########.fr       */
+/*   Updated: 2024/01/12 05:33:09 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int	count_dot(char *str)
+int	len_dot(char *str, char c)
 {
 	int	i;
-	int	dot;
+	int	len;
 
 	i = 0;
-	dot = 0;
+	len = 0;
 	while (str[i])
 	{
-		if (str[i] == '.')
-			dot++;
+		if (str[i] == c)
+			len++;
 		i++;
 	}
-	return (dot);
+	return (len);
 }
 
-int	check_minus(char *str)
+int	len_size(char **str)
 {
 	int	i;
-	int	minus;
 
 	i = 0;
-	minus = 0;
-	while (str[i])
-	{
-		if (str[i] == '-')
-			minus++;
+	while (str[i] != NULL)
 		i++;
-	}
-	if (minus >= 2)
-		return (0);
-	i = 1;
-	while (str[i])
-	{
-		if (str[i] == '-')
-			return (0);
-		i++;
-	}
-	return (1);
+	return (i);
 }
 
-int	count_minus(char *str)
+int	len_xyz(char *str)
 {
-	int	i;
-	int	minus;
+	char	**sp;
+	int		len;
 
-	i = 0;
-	minus = 0;
-	while (str[i])
+	len = 0;
+	sp = NULL;
+	sp = ft_split(str, ',');
+	while (sp[len])
 	{
-		if (str[i] == '-')
-			minus++;
-		i++;
+		free(sp[len]);
+		len++;
 	}
-	return (minus);
+	free(sp);
+	return (len);
 }
