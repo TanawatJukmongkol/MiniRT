@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:28:25 by tjukmong          #+#    #+#             */
-/*   Updated: 2024/01/12 05:00:16 by tsirirak         ###   ########.fr       */
+/*   Updated: 2024/01/12 12:50:05 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,13 +113,5 @@ int	check_element(char *line, t_element *ele)
 		else
 			return (0);
 	}
-	return (1);
-}
-
-int	checkdot_rt(char *str)
-{
-	if (ft_strrchr(str, '.') == NULL
-		|| ft_strncmp(ft_strrchr(str, '.'), ".rt", 10))
-		return (0);
 	return (1);
 }
