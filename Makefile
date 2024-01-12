@@ -18,14 +18,19 @@ SRCS		= minirt.c \
 			event_hooks.c \
 			o_check_file.c \
 			o_check_element.c \
+			o_check_elementutil.c \
 			o_check_inelement.c \
 			o_check_other.c \
+			o_check_other_util.c \
 			o_count.c \
 			o_count2.c \
 			o_other.c \
 			o_pass.c \
 			o_validate.c \
-			o_len.c
+			o_len.c \
+			o_add_element.c \
+			o_add_elementtwo.c \
+			o_remove.c
 
 LIBS		= mlx libft gnl
 
