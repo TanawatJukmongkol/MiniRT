@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   o_check_file.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tjukmong <tjukmong@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:28:25 by tjukmong          #+#    #+#             */
-/*   Updated: 2024/01/12 12:50:05 by tsirirak         ###   ########.fr       */
+/*   Updated: 2024/01/12 14:20:18 by tjukmong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	check_in_file(int fd, t_element *ele)
 	line_nbr = 1;
 	if (line == NULL)
 	{
-		printf("file empty\n");
+		printf("Error\nFile is empty.\n");
 		free_gnl(fd, line);
 		return (0);
 	}

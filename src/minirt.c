@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tjukmong <tjukmong@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:29:43 by tjukmong          #+#    #+#             */
-/*   Updated: 2024/01/12 13:14:00 by tsirirak         ###   ########.fr       */
+/*   Updated: 2024/01/12 14:22:35 by tjukmong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	validate_cam(t_world *world)
 	if (round(vec_mag(world->cam.normal) * 100) / 100 != 1)
 	{
 		ret = 1;
-		printf("Error not unit vector.");
+		printf("Error\nNormal not a unit vector.");
 	}
 	return (ret);
 }
