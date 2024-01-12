@@ -4,10 +4,16 @@ SRCS		= minirt.c \
 			fixed_point.c \
 			graphics.c \
 			graphics_util.c \
-			vec3_01.c \
+			graphics_util2.c \
+			vec3_1.c \
+			vec3_2.c \
+			vec3_3.c \
+			camera.c \
+			matrix.c \
 			ft_destroy_display.c \
 			ft_loop_end.c \
 			hittable.c \
+			hittable2.c \
 			lighting.c \
 			event_hooks.c \
 			o_check_file.c \

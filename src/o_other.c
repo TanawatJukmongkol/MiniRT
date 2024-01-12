@@ -6,7 +6,15 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:28:25 by tjukmong          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/01/12 12:55:42 by tsirirak         ###   ########.fr       */
+=======
+<<<<<<< HEAD
+/*   Updated: 2024/01/11 19:50:05 by tsirirak         ###   ########.fr       */
+=======
+/*   Updated: 2024/01/10 14:40:02 by Tanawat J.       ###   ########.fr       */
+>>>>>>> merge-final
+>>>>>>> 0624114a53171464102e3a49b613790c977bf3d9
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +79,8 @@ double	ft_atof(const char *str)
 		return (0);
 	num = 0;
 	n = 1;
+	if (str == NULL)
+		return (0);
 	if (*str == '-' || *str == '+')
 	{
 		if (*str == '-')
