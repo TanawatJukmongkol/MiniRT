@@ -53,9 +53,10 @@ double		vec_mag(t_vec3);
 t_vec3		vec_norm(t_vec3 v);
 double		vec_norm_theta(t_vec3 v, t_vec3 norm);
 int			vec_assert_equal(t_vec3 v1, t_vec3 v2);
-
-// Rays
 t_vec3		ray_at(t_ray ray, double t);
+t_vec3		matrx_rotatate_x(t_vec3 v, double theta);
+t_vec3		matrx_rotatate_y(t_vec3 v, double theta);
+t_vec3		matrx_rotatate_z(t_vec3 v, double theta);
 
 #endif
 
