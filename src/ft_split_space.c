@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 00:25:35 by tjukmong          #+#    #+#             */
-/*   Updated: 2024/01/13 22:50:39 by tsirirak         ###   ########.fr       */
+/*   Updated: 2024/01/14 00:02:41 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,13 @@ char	**ft_split_space(char *s)
 	j = 0;
 	i = 0;
 	if (!s)
-		return NULL;
+		return (NULL);
 	count = count_split_space(s);
 	str = malloc(sizeof(char *) * (count + 1));
 	while (i < count)
 	{
 		if (is_space(s[j]))
+
 			j++;
 		else
 		{
