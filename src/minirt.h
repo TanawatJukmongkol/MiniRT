@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:30:53 by tjukmong          #+#    #+#             */
-/*   Updated: 2024/01/12 13:24:06 by tsirirak         ###   ########.fr       */
+/*   Updated: 2024/01/13 23:01:55 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,4 +119,9 @@ int		check_float_minus(char *line);
 int		check_symbol(char *line);
 void	add_element_cytwo(char **sp, int i, t_world *world);
 int		is_space(char c);
+
+//ft_split_space
+int	count_split_space(char *s);
+int	count_word_space(char *str, int start);
+char	**ft_split_space(char *s);
 #endif
