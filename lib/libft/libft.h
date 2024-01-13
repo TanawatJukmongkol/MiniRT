@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 01:31:44 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/11/28 14:00:44 by tsirirak         ###   ########.fr       */
+/*   Updated: 2024/01/13 22:50:00 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,6 @@ void	ft_putstr_fd(char *c, int fd);
 void	ft_putendl_fd(char *c, int fd);
 void	ft_putnbr_fd(int n, int fd);
 void	ft_striteri(char *s, void (*f)(unsigned int, char *));
-
-//Opal
-char	**ft_split_space(char *s);
-int	ft_leen_space(char *s, int check);
 
 // Bonus
 t_list	*ft_lstnew(void *content);
