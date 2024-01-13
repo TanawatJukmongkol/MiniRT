@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 01:31:44 by tjukmong          #+#    #+#             */
-/*   Updated: 2024/01/13 23:12:32 by tsirirak         ###   ########.fr       */
+/*   Updated: 2024/01/14 04:29:00 by Tanawat J.       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,7 @@
 # define LIBFT_H
 # include <stdlib.h>
 # include <unistd.h>
-
-# ifndef SIZE_MAX
-/* Limit of `size_t' type.  */
-#  if __WORDSIZE == 64
-#   define SIZE_MAX                (18446744073709551615UL)
-#  else
-#   define SIZE_MAX                (4294967295U)
-#  endif
-# endif
+# include <stdint.h>
 
 typedef struct s_list
 {

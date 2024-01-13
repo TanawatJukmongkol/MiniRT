@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 00:25:35 by tjukmong          #+#    #+#             */
-/*   Updated: 2024/01/14 00:02:41 by tsirirak         ###   ########.fr       */
+/*   Updated: 2024/01/14 06:33:41 by Tanawat J.       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ int	count_split_space(char *s)
 		i++;
 	while (s[i])
 	{
-		if (is_space(s[i]))
-			i++;
+		//if (is_space(s[i]))
+		//	i++;
 		if (!is_space(s[i]) && s[i] && (is_space(s[i + 1]) == 1 || s[i + 1] == '\0'))
 			c++;
 		i++;
@@ -66,6 +66,7 @@ char	**ft_split_space(char *s)
 		else
 		{
 			str[i] = ft_substr(s, j, count_word_space(s, j));
+			// printf("%d: %s\n", count, str[i]);
 			j = j + count_word_space(s, j);
 			i++;
 		}
