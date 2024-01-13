@@ -4,21 +4,33 @@ SRCS		= minirt.c \
 			fixed_point.c \
 			graphics.c \
 			graphics_util.c \
-			vec3_01.c \
+			graphics_util2.c \
+			vec3_1.c \
+			vec3_2.c \
+			vec3_3.c \
+			camera.c \
 			matrix.c \
 			ft_destroy_display.c \
 			ft_loop_end.c \
 			hittable.c \
+			hittable2.c \
 			lighting.c \
 			event_hooks.c \
 			o_check_file.c \
 			o_check_element.c \
+			o_check_elementutil.c \
 			o_check_inelement.c \
 			o_check_other.c \
+			o_check_other_util.c \
 			o_count.c \
 			o_count2.c \
 			o_other.c \
-			o_pass.c
+			o_pass.c \
+			o_validate.c \
+			o_len.c \
+			o_add_element.c \
+			o_add_elementtwo.c \
+			o_remove.c
 
 LIBS		= mlx libft gnl
 

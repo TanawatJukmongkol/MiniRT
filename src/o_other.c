@@ -6,11 +6,33 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:28:25 by tjukmong          #+#    #+#             */
-/*   Updated: 2024/01/10 14:40:02 by Tanawat J.       ###   ########.fr       */
+/*   Updated: 2024/01/12 13:10:22 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+int	str_digit(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (is_digit_or_symbol(str[i]) == 0)
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+int	is_space(char c)
+{
+	if ((c >= 9 && c <= 13)
+		|| c == 32)
+		return (1);
+	return (0);
+}
 
 double	ft_atof_dot(const char *nptr, double nbr)
 {
@@ -45,6 +67,8 @@ double	ft_atof(const char *str)
 	double	num;
 	double	n;
 
+	if (str == NULL)
+		return (0);
 	num = 0;
 	n = 1;
 	if (str == NULL)

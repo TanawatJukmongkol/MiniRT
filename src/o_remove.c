@@ -1,30 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_destroy_display.c                               :+:      :+:    :+:   */
+/*   o_remove.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tjukmong <tjukmong@student.42bangkok.co    +#+  +:+       +#+        */
+/*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/10 16:36:57 by tjukmong          #+#    #+#             */
-/*   Updated: 2024/01/10 16:37:00 by tjukmong         ###   ########.fr       */
+/*   Created: 2023/09/03 01:29:43 by tjukmong          #+#    #+#             */
+/*   Updated: 2024/01/12 12:57:07 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-#ifndef __APPLE__
-
-int	ft_destroy_display(t_glob *g)
+void	remove_split(char **sp)
 {
-	return (mlx_destroy_display(g->mlx.mlx));
+	int	i;
+
+	i = 0;
+	while (sp[i] != NULL)
+	{
+		free(sp[i]);
+		i++;
+	}
+	free(sp);
 }
 
-#else
-
-int	ft_destroy_display(t_glob *g)
+void	remove_split_struct(t_world *w)
 {
-	(void)g;
-	return (0);
+	if (w->objs != NULL)
+	{
+		free(w->objs);
+		w->objs = NULL;
+	}
 }
-
-#endif
