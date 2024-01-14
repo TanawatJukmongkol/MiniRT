@@ -1,6 +1,7 @@
 {
 	"files.associations": {
 		"minirt.h": "c",
-		"get_next_line.h": "c"
+		"get_next_line.h": "c",
+		"sstream": "c"
 	}
 }

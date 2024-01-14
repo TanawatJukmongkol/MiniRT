@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:30:53 by tjukmong          #+#    #+#             */
-/*   Updated: 2024/01/13 23:01:55 by tsirirak         ###   ########.fr       */
+/*   Updated: 2024/01/14 15:36:28 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ int		count_minus(char *str);
 int		count_comma(char *str);
 int		count_element(t_element *ele);
 int		check_minus(char *str);
+int		count_len_number(char *str);
 
 //pass
 void	pass_element(char **argv, t_world *world);
@@ -121,7 +122,7 @@ void	add_element_cytwo(char **sp, int i, t_world *world);
 int		is_space(char c);
 
 //ft_split_space
-int	count_split_space(char *s);
-int	count_word_space(char *str, int start);
+int		count_split_space(char *s);
+int		count_word_space(char *str, int start);
 char	**ft_split_space(char *s);
 #endif

@@ -31,7 +31,8 @@ SRCS		= minirt.c \
 			o_add_element.c \
 			o_add_elementtwo.c \
 			o_remove.c \
-			ft_split_space.c
+			ft_split_space.c \
+			o_other_util.c
 
 LIBS		= mlx libft gnl
 

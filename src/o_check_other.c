@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:28:25 by tjukmong          #+#    #+#             */
-/*   Updated: 2024/01/12 12:52:36 by tsirirak         ###   ########.fr       */
+/*   Updated: 2024/01/14 15:31:27 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,12 @@ int	check_int(char *str)
 
 int	check_float(char *line)
 {
-	if (check_symbol(line) == 0 || str_digit(line) == 0)
-	{
+	if (count_len_number(line) == 0)
 		return (0);
-	}
-	else if (line[0] == '-')
-	{
+	if (check_symbol(line) == 0 || str_digit(line) == 0)
+		return (0);
+	if (line[0] == '-')
 		return (check_float_minus(line));
-	}
 	return (check_floattwo(line));
 }
 
