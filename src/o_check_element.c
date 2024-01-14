@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:28:25 by tjukmong          #+#    #+#             */
-/*   Updated: 2024/01/12 12:47:26 by tsirirak         ###   ########.fr       */
+/*   Updated: 2024/01/14 15:32:32 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,8 @@ int	check_element_c(char *line, int num_c)
 	str = ft_split_space(line);
 	while (str[i])
 		i++;
-	if (i >= 3 && str[3] != NULL)
-	{
-		if (is_space(str[3][0]) != 1)
-			re = 0;
-	}
+	if (i > 3)
+		re = 0;
 	if (check_spiltxyz(str[0]) == 0)
 		re = 0;
 	else if (check_spiltxyz_3d(str[1]) == 0)

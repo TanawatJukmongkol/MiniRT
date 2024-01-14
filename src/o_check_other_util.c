@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:28:25 by tjukmong          #+#    #+#             */
-/*   Updated: 2024/01/12 12:55:45 by tsirirak         ###   ########.fr       */
+/*   Updated: 2024/01/14 15:20:30 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	check_number(char *str)
 {
 	int	i;
 
-	if (check_number_util(str) == 0)
+	if (count_len_number(str) == 0 || check_number_util(str) == 0)
 		return (0);
 	else if (str[0] == '-')
 	{

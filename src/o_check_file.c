@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:28:25 by tjukmong          #+#    #+#             */
-/*   Updated: 2024/01/12 12:50:05 by tsirirak         ###   ########.fr       */
+/*   Updated: 2024/01/14 10:39:38 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,9 @@ int	check_element(char *line, t_element *ele)
 		else if (ft_strncmp(line, "pl", 2) == 0)
 			return (check_element_pl(line + 2, ++ele->pl));
 		else if (ft_strncmp(line, "sp", 2) == 0)
+		{
 			return (check_element_sp(line + 2, ++ele->sp));
+		}
 		else if (ft_strncmp(line, "cy", 2) == 0)
 			return (check_element_cy(line + 2, ++ele->cy));
 		else if (*line == '\t' || *line == ' ' || *line == '\n')

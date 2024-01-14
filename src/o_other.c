@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:28:25 by tjukmong          #+#    #+#             */
-/*   Updated: 2024/01/12 13:10:22 by tsirirak         ###   ########.fr       */
+/*   Updated: 2024/01/14 15:29:52 by tsirirak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,7 @@ int	str_digit(char *str)
 
 int	is_space(char c)
 {
-	if ((c >= 9 && c <= 13)
-		|| c == 32)
+	if ((c >= 9 && c <= 13) || c == 32)
 		return (1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 01:31:44 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/11/28 14:00:44 by tsirirak         ###   ########.fr       */
+/*   Updated: 2024/01/14 04:29:00 by Tanawat J.       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,7 @@
 # define LIBFT_H
 # include <stdlib.h>
 # include <unistd.h>
-
-# ifndef SIZE_MAX
-/* Limit of `size_t' type.  */
-#  if __WORDSIZE == 64
-#   define SIZE_MAX                (18446744073709551615UL)
-#  else
-#   define SIZE_MAX                (4294967295U)
-#  endif
-# endif
+# include <stdint.h>
 
 typedef struct s_list
 {
@@ -64,10 +56,6 @@ void	ft_putstr_fd(char *c, int fd);
 void	ft_putendl_fd(char *c, int fd);
 void	ft_putnbr_fd(int n, int fd);
 void	ft_striteri(char *s, void (*f)(unsigned int, char *));
-
-//Opal
-char	**ft_split_space(char *s);
-int	ft_leen_space(char *s, int check);
 
 // Bonus
 t_list	*ft_lstnew(void *content);
