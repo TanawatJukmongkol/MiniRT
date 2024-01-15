@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphics.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tjukmong <tjukmong@student.42bangkok.com>  +#+  +:+       +#+        */
+/*   By: tjukmong <tjukmong@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 17:55:04 by tjukmong          #+#    #+#             */
-/*   Updated: 2024/01/15 17:56:08 by tjukmong         ###   ########.fr       */
+/*   Updated: 2024/01/15 20:07:23 by tjukmong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

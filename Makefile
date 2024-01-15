@@ -1,5 +1,17 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: tjukmong <tjukmong@student.42bangkok.co    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/01/15 20:08:52 by tjukmong          #+#    #+#              #
+#    Updated: 2024/01/15 20:08:54 by tjukmong         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
 NAME		= miniRT
+INCLUDES	= graphics.h math.h static_def.h world.h
 SRCS		= minirt.c \
 			fixed_point.c \
 			graphics.c \
@@ -38,21 +50,23 @@ LIBS		= mlx libft gnl
 
 SRC_DIR		= ./src
 LIB_DIR		= ./lib
+INCLUDE_DIR	= ./include
 BUILD_DIR	= ./build
 
 MLX_REPO	= https://github.com/42Paris/minilibx-linux.git
 
-CC			= gcc
+CC			= cc
 CFLAGS		= -g -Wall -Werror -Wextra -Ofast
 
-SRC			= ${addprefix ${BUILD_DIR}/,${SRCS}}
-LIBS_DIR	= ${addprefix ${LIB_DIR}/,${LIBS}}
-OBJ			= ${SRC:.c=.o}
-UNAME_S		= $(shell uname -s)
+SRC				= ${addprefix ${BUILD_DIR}/,${SRCS}}
+LIBS_DIR		= ${addprefix ${LIB_DIR}/,${LIBS}}
+INCLUDES_DIR	= ${addprefix ${INCLUDE_DIR}/,${INCLUDES}}
+OBJ				= ${SRC:.c=.o}
+UNAME_S			= $(shell uname -s)
 
 all: ${NAME}
 
-${NAME}: $(LIB_DIR)/mlx ${BUILD_DIR} ${OBJ}
+${NAME}: $(LIB_DIR)/mlx ${BUILD_DIR} ${OBJ} ${INCLUDES_DIR}
 	@ echo -e "\x1b[35;1m--[ COMPILING MINIRT ]--\x1b[0m"
 	$(CC) ${OBJ} ${INCLUDE_SRC} -o ${NAME} $(CFLAGS)
 
@@ -127,7 +141,7 @@ ${BUILD_DIR}:
 	@ make mlx libft gnl
 	mkdir -p ${BUILD_DIR}
 
-${BUILD_DIR}/%.o:${SRC_DIR}/%.c
+${BUILD_DIR}/%.o: ${SRC_DIR}/%.c
 	$(CC) ${INCLUDE_OBJ} -c -o $@ $^ $(CFLAGS)
 
 clean: libft-clean mlx-clean gnl-clean
@@ -141,4 +155,3 @@ fclean: libft-fclean mlx-remove gnl-fclean
 re: fclean all
 
 .PHONY: all clean fclean re mlx mlx-clean libft libft-clean
-
