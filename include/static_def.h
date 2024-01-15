@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   keys.h                                             :+:      :+:    :+:   */
+/*   static_def.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tjukmong <tjukmong@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 13:55:55 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/11/24 23:29:15 by tjukmong         ###   ########.fr       */
+/*   Updated: 2024/01/15 17:58:04 by tjukmong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef KEYS_H
-# define KEYS_H
+#ifndef STATIC_DEF_H
+# define STATIC_DEF_H
 
 // Mask
 # define STATIC_DESTROY          17

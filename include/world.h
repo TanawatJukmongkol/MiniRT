@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   world.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tjukmong <tjukmong@student.42bangkok.com>  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/15 17:56:35 by tjukmong          #+#    #+#             */
+/*   Updated: 2024/01/15 17:57:12 by tjukmong         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef WORLD_H
 # define WORLD_H
@@ -72,4 +83,3 @@ void	hit_sphere(t_hittable *rec, t_object obj, t_ray r);
 void	lighting(t_world *w, t_hittable *rec, t_ray r);
 
 #endif
-

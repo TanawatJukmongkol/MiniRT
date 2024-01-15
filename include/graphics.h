@@ -1,11 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   graphics.h                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tjukmong <tjukmong@student.42bangkok.com>  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/15 17:55:04 by tjukmong          #+#    #+#             */
+/*   Updated: 2024/01/15 17:56:08 by tjukmong         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef GRAPHICS_H
 # define GRAPHICS_H
 
-// #include <OpenGL/gl.h>
-#include "../lib/mlx/mlx.h"
-// #include "../lib/mlx/mlx_int.h"
-#include "math.h"
+// #  include <OpenGL/gl.h>
+# include "../lib/mlx/mlx.h"
+// #  include "../lib/mlx/mlx_int.h"
+# include "math.h"
 
 typedef struct s_canvas
 {

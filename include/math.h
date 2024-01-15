@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   math.h                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tjukmong <tjukmong@student.42bangkok.com>  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/15 17:58:31 by tjukmong          #+#    #+#             */
+/*   Updated: 2024/01/15 17:59:39 by tjukmong         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef MATH_H
 # define MATH_H
@@ -12,9 +23,6 @@
 # define TAU		6.283185307
 # define HALF_PI	1.570796326
 # define ONE_RAD	0.017453292
-# define PI_FIX	double_to_fixed(PI)
-# define TAU_FIX	double_to_fixed(TAU)
-# define HPI_FIX	double_to_fixed(HALF_PI)
 
 typedef long long	t_fixed_pt;
 typedef union u_vec3
@@ -49,7 +57,7 @@ t_vec3		vec_sub(t_vec3 v1, t_vec3 v2);
 t_vec3		vec_mult(t_vec3 v, double num);
 t_fixed_pt	vec_dot(t_vec3 v1, t_vec3 v2);
 t_vec3		vec_cross(t_vec3 v1, t_vec3 v2);
-double		vec_mag(t_vec3);
+double		vec_mag(t_vec3 m);
 t_vec3		vec_norm(t_vec3 v);
 double		vec_norm_theta(t_vec3 v, t_vec3 norm);
 int			vec_assert_equal(t_vec3 v1, t_vec3 v2);
@@ -59,4 +67,3 @@ t_vec3		matrx_rotatate_y(t_vec3 v, double theta);
 t_vec3		matrx_rotatate_z(t_vec3 v, double theta);
 
 #endif
-
