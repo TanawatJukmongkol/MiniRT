@@ -1,0 +1,32 @@
+# Hello, world!
+# This is an example file:
+
+# Camera and ambient
+C	0,0,-5			0,0,1 90
+A	0.2				255,255,255
+#A	0				0,0,0
+
+# Light source
+# 	position    intensity	color
+L	2,2,1.5		0.7			100,255,255
+L	-2,2,1.5	0.7			255,255,100
+L	0,1.7,-1.5	0.7			255,100,255
+
+# Floor
+#	position		attribute				color
+pl	0,-0.6,0		0,1,0					255,255,225
+
+# Wall
+#	position		attribute				color
+pl	0,0,2			0,0,-1					255,255,225
+
+# Objects
+#	position		attribute				color
+sp	0.5,0,0			1.0						255,0,0
+cy	-0.5,0.4,0		0.4,0.6,-0.4 1 1		0,255,0
+
+# Attrbutes:
+# pl <normal>
+# sp <diameter>
+# cy <normal> <diameter> <height>
+

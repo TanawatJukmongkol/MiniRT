@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   o_check_element.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsirirak <tsirirak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tjukmong <tjukmong@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 01:28:25 by tjukmong          #+#    #+#             */
-/*   Updated: 2024/01/12 12:47:26 by tsirirak         ###   ########.fr       */
+/*   Updated: 2024/08/16 00:40:21 by tjukmong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
